@@ -46,7 +46,8 @@ float Math::GetRotation(const Vector2& A) {
       Degree = atan(-A.y / A.x);
       break;
     case 2:
-      __fallthrough case 3:
+      break;
+    case 3:
       Degree = PI + atan(-A.y / A.x);
       break;
     case 4:
