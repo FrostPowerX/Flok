@@ -244,7 +244,27 @@
     <Folder Include="res\" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\actors\PlayerClass.cpp" />
+    <ClCompile Include="src\engine\CloseUp.cpp" />
+    <ClCompile Include="src\engine\Collisions.cpp" />
+    <ClCompile Include="src\engine\Error.cpp" />
+    <ClCompile Include="src\engine\Math.cpp" />
+    <ClCompile Include="src\engine\ResManager.cpp" />
+    <ClCompile Include="src\engine\SceneManager.cpp" />
+    <ClCompile Include="src\engine\StartUp.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\scenes\Play.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\actors\PlayerClass.h" />
+    <ClInclude Include="src\engine\CloseUp.h" />
+    <ClInclude Include="src\engine\Collisions.h" />
+    <ClInclude Include="src\engine\Error.h" />
+    <ClInclude Include="src\engine\Math.h" />
+    <ClInclude Include="src\engine\ResManager.h" />
+    <ClInclude Include="src\engine\SceneManager.h" />
+    <ClInclude Include="src\engine\StartUp.h" />
+    <ClInclude Include="src\scenes\Play.h" />
   </ItemGroup>
 
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
