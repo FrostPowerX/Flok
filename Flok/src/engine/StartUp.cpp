@@ -5,16 +5,18 @@
 #include "raylib.h"
 
 #include "Constants.h"
+/*
 #include "ResManager.h"
+*/
 #include "SceneManager.h"
 
 namespace {
 
 void MakeRes() {
-  ResManager::MakeFonts();
+  /*ResManager::MakeFonts();
   ResManager::MakeTextures();
   ResManager::MakeSounds();
-  ResManager::MakeMusic();
+  ResManager::MakeMusic();*/
 }
 
 }
