@@ -9,8 +9,9 @@ PlayerClass::PlayerType Player;
 }
 
 void PlayerClass::Init() {
-  Player.f_BoundingBox = {51, g_ScreenHeight - 101, 100, 100};
-  Player.f_Direction = {1, 0};
+  Player.f_BoundingBox = {.x= 51, .y= g_ScreenHeight - 101, .width= 100, .height=
+                          100};
+  Player.f_Direction = {.x= 1, .y= 0};
 }
 
 void PlayerClass::Push(const Vector2& Direction, const float Force) {
@@ -29,13 +30,13 @@ void PlayerClass::Update() {
           Player.f_BoundingBox.y + Player.f_BoundingBox.height / 2.0F,
           g_ScreenHeight)) {
         Player.f_Speed = 0;
-        Player.f_Direction = {1, 0};
-          }
+        Player.f_Direction = {.x= 1, .y= 0};
+  }
 }
 
 void PlayerClass::Draw() {
   DrawRectanglePro(Player.f_BoundingBox,
-                   {Player.f_BoundingBox.width / 2.0F,
-                    Player.f_BoundingBox.height / 2.0F},
+                   {.x = Player.f_BoundingBox.width / 2.0F,
+                    .y = Player.f_BoundingBox.height / 2.0F},
                    Math::GetRotation(Player.f_Direction), GREEN);
 }
