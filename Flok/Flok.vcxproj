@@ -245,6 +245,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\actors\PlayerClass.cpp" />
+    <ClCompile Include="src\actors\WallClass.cpp" />
     <ClCompile Include="src\engine\CloseUp.cpp" />
     <ClCompile Include="src\engine\Collisions.cpp" />
     <ClCompile Include="src\engine\Error.cpp" />
@@ -256,6 +257,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\actors\PlayerClass.h" />
+    <ClInclude Include="src\actors\WallClass.h" />
     <ClInclude Include="src\Constants.h" />
     <ClInclude Include="src\engine\CloseUp.h" />
     <ClInclude Include="src\engine\Collisions.h" />
