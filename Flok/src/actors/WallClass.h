@@ -9,6 +9,7 @@ struct WallType {
   float f_Speed;
   bool f_IsHidden;
   int f_UniqueId;
+  float f_WallWidth;
 };
 
 WallType Make(float Speed);

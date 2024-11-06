@@ -34,7 +34,8 @@ Wall::WallType Wall::Make(float Speed) {
           .f_GapSize = GetRandomGapHeight(),
           .f_Speed = Speed,
           .f_IsHidden = true,
-          .f_UniqueId = UniqueId++};
+          .f_UniqueId = UniqueId++,
+          .f_WallWidth = k_WallWidth};
 }
 
 
@@ -45,7 +46,8 @@ void Wall::Reset(WallType& Wall, const float Speed) {
           .f_GapSize = GetRandomGapHeight(),
           .f_Speed = Speed,
           .f_IsHidden = true,
-          .f_UniqueId = Wall.f_UniqueId};
+          .f_UniqueId = Wall.f_UniqueId,
+          .f_WallWidth = k_WallWidth};
 }
 
 
