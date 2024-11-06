@@ -13,9 +13,9 @@ struct WallType {
 
 WallType Make(float Speed);
 
-void Reset(WallType Wall&Wall, float Speed);
+void Reset(WallType& Wall, float Speed);
 
-void Update(WallType Wall&Wall);
+void Update(WallType& Wall);
 
-void Draw(const WallType Wall&Wall);
+void Draw(const WallType& Wall);
 };
