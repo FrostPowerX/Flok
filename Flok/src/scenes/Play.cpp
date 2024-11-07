@@ -3,8 +3,9 @@
 #include <list>
 #include <stack>
 
-#include "Constants.h"
 #include "raylib.h"
+
+#include "Constants.h"
 #include "actors/PlayerClass.h"
 #include "actors/WallClass.h"
 #include "engine/Collisions.h"
@@ -21,9 +22,8 @@ float WallTime = 0;
 
 
 
-void WallManager(std::list<Wall::WallType*>& Walls,
-                 std::stack<Wall::WallType*>& HiddenWalls) {
-  //TODO
+void WallManager(std::list<Wall::WallType*>& Walls, std::stack<Wall::WallType*>& HiddenWalls) {
+  // TODO
   //  logic to manage level and speed of walls
 
   Wall::WallType* NewWall = nullptr;
@@ -78,19 +78,15 @@ bool CheckForPlayerWallCollision(const std::list<Wall::WallType*>& Walls) {
   bool Collided = false;
   for (const auto Wall : Walls) {
     if (Wall) {
-      Rectangle Bb = PlayerClass::GetBoundingBox();
+      Rectangle const Bb = PlayerClass::GetBoundingBox();
       Collided = Collisions::IsRectRect(Bb, {.x = Wall->f_Position,
                                              .y = 0,
                                              .width = Wall->f_WallWidth,
-                                             .height = Wall->f_GapStart}) ||
-                 Collisions::IsRectRect(Bb, {.x = Wall->f_Position,
-                                             .y = Wall->f_GapStart + Wall->
-                                                  f_GapSize,
-                                             .width = Wall->f_WallWidth,
-                                             .height =
-                                             g_ScreenHeight - (
-                                               Wall->f_GapStart + Wall->
-                                               f_GapSize)});
+                                             .height = Wall->f_GapStart}) || Collisions::IsRectRect(
+                     Bb, {.x = Wall->f_Position,
+                          .y = Wall->f_GapStart + Wall->f_GapSize,
+                          .width = Wall->f_WallWidth,
+                          .height = g_ScreenHeight - (Wall->f_GapStart + Wall->f_GapSize)});
     }
   }
   return Collided;
@@ -98,8 +94,7 @@ bool CheckForPlayerWallCollision(const std::list<Wall::WallType*>& Walls) {
 
 
 
-void Update(std::list<Wall::WallType*>& Walls,
-            std::stack<Wall::WallType*>& HiddenWalls) {
+void Update(std::list<Wall::WallType*>& Walls, std::stack<Wall::WallType*>& HiddenWalls) {
 
   bool HitsBorder = false;
   bool HitsWall = false;
@@ -112,8 +107,7 @@ void Update(std::list<Wall::WallType*>& Walls,
 
   //in case it hits roof
   if (HitsBorder) {
-    if (PlayerClass::GetBoundingBox().y < PlayerClass::GetBoundingBox().
-        height) {
+    if (PlayerClass::GetBoundingBox().y < PlayerClass::GetBoundingBox().height) {
       PlayerClass::MovePlayer(10);
     } else {
       Exit = true;
@@ -161,7 +155,7 @@ void Play::Play() {
     Draw(Walls);
   }
 
-  for (auto Wall : Walls) {
+  for (const auto Wall : Walls) {
     delete Wall;
   }
   for (size_t I = 0; I < HiddenWalls.size(); I++) {
