@@ -1,6 +1,7 @@
 ﻿#include "PlayerClass.h"
 
 #include "Constants.h"
+#include "engine/Collisions.h"
 #include "engine/Math.h"
 
 namespace {
@@ -8,11 +9,17 @@ PlayerClass::PlayerType Player;
 
 }
 
+
+
 void PlayerClass::Init() {
-  Player.f_BoundingBox = {.x= 51, .y= g_ScreenHeight - 101, .width= 100, .height=
-                          100};
-  Player.f_Direction = {.x= 1, .y= 0};
+  Player.f_BoundingBox = {.x = 51,
+                          .y = g_ScreenHeight - 101,
+                          .width = 100,
+                          .height = 100};
+  Player.f_Direction = {.x = 1, .y = 0};
 }
+
+
 
 void PlayerClass::Push(const Vector2& Direction, const float Force) {
   Vector2 Temp = Math::Multiply(Direction, Force * GetFrameTime());
@@ -21,18 +28,16 @@ void PlayerClass::Push(const Vector2& Direction, const float Force) {
   Player.f_Speed += Force * GetFrameTime();
 }
 
+
+
 void PlayerClass::Update() {
   //add gravity
-  if (Player.f_BoundingBox.y > Player.f_BoundingBox.height / 2.0F && Player.
-      f_BoundingBox.y < g_ScreenHeight - Player.f_BoundingBox.height / 2.0F) {
+  if (!Collisions::IsRectBorder(Player.f_BoundingBox)) {
     Player.f_BoundingBox.y += Player.f_Direction.y * Player.f_Speed;
-      } else if (Math::IsEqual(
-          Player.f_BoundingBox.y + Player.f_BoundingBox.height / 2.0F,
-          g_ScreenHeight)) {
-        Player.f_Speed = 0;
-        Player.f_Direction = {.x= 1, .y= 0};
   }
 }
+
+
 
 void PlayerClass::Draw() {
   DrawRectanglePro(Player.f_BoundingBox,

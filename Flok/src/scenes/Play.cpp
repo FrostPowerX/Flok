@@ -105,7 +105,7 @@ bool Update(std::list<Wall::WallType*>& Walls,
             std::stack<Wall::WallType*>& HiddenWalls) {
   PlayerClass::Update();
   WallManager(Walls, HiddenWalls);
-  return CheckForPlayerWallCollision(Walls);
+  return CheckForPlayerWallCollision(Walls) || Collisions::IsRectBorder(PlayerClass::GetBoundingBox());
 }
 
 

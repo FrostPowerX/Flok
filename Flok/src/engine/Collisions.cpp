@@ -90,9 +90,9 @@ bool Collisions::IsRectRect(const Rectangle& A, const Rectangle& B) {
 bool Collisions::IsRectBorder(const Rectangle& A) {
   //TODO REMOVE
   //@formatter:off
-  return Math::IsEqual(A.x, 0) ||
-          Math::IsEqual(A.x + A.width, static_cast<float>(g_ScreenWidth)) ||
-          Math::IsEqual(A.y, 0) ||
-          Math::IsEqual(A.y + A.height, static_cast<float>(g_ScreenHeight));
+  return (A.x <= 0) ||
+         (A.x + A.width >= static_cast<float>(g_ScreenWidth)) ||
+         (A.y <= 0) ||
+         (A.y + A.height >= static_cast<float>(g_ScreenHeight));
   //@formatter:on
 }
