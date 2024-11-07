@@ -9,6 +9,9 @@
 
 namespace {
 
+constexpr float k_Gamever = 0.1F;
+
+
 bool Exit = false;
 constexpr float k_PlayerUpwardPush = 300.0F;
 constexpr float k_WallTimer = 3.0F;
@@ -83,16 +86,20 @@ void Update(std::list<Wall::WallType*>& Walls,
 
 
 
-void Draw(std::list<Wall::WallType*> Walls) {
+void Draw(const std::list<Wall::WallType*>& Walls) {
   BeginDrawing();
   {
     ClearBackground(RAYWHITE);
-    PlayerClass::Draw();
-    for (auto Wall : Walls) {
+
+    for (const auto Wall : Walls) {
       if (Wall) {
         Wall::Draw(*Wall);
       }
     }
+
+    PlayerClass::Draw();
+
+    DrawText(TextFormat("%.1f", k_Gamever), 10, 10, 10, BLACK);
   }
   EndDrawing();
 }

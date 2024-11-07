@@ -5,22 +5,22 @@
 namespace {
 
 constexpr float k_WallWidth = 100;
-constexpr float k_MaxGapH = 300;
-constexpr float k_MinGapH = 50;
+constexpr int k_MaxGapH = 300;
+constexpr int k_MinGapH = 100; // todo replace with player width
 
 int UniqueId = 0;
 
 
 
 float GetRandomGapStart() {
-  return static_cast<float>(GetRandomValue(0, g_ScreenHeight));
+  return static_cast<float>(GetRandomValue(0, g_ScreenHeight - k_MaxGapH));
 }
 
 
 
 float GetRandomGapHeight() {
-  return static_cast<float>(GetRandomValue(static_cast<int>(k_MinGapH),
-                                           static_cast<int>(k_MaxGapH)));
+  return static_cast<float>(GetRandomValue(k_MinGapH,
+                                           k_MaxGapH));
 }
 
 };
