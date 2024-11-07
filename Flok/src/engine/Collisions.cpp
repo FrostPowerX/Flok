@@ -73,6 +73,11 @@ bool Collisions::IsDotBorder(const Vector2& Position,
 
 
 
-bool Collisions::IsAABB(const Rectangle& A, const Rectangle& B) {
+bool Collisions::IsRectRect(const Rectangle& A, const Rectangle& B) {
+  if ((A.x < B.x && A.x + A.width > B.x) || (A.x > B.x && A.x < B.x + B.width)) {
+    if ((A.y < B.y && A.y + A.height > B.y) || (A.y > B.y && A.y < B.y + B.width)) {
+      return true;
+    }
+  }
   return false;
 }
