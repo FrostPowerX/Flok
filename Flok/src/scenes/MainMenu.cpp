@@ -100,4 +100,16 @@ void Draw() {
 }
 
 
+void MainMenu::Menu() {
+  Init();
+
+  while (!Exit && !WindowShouldClose()) {
+    Input();
+    Update();
+    Draw();
+  }
+
+  Unload();
+  ChangeScene(SelectedScene);
+}
 
