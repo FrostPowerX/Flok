@@ -84,12 +84,12 @@ bool CheckForPlayerWallCollision(const std::list<Wall::WallType*>& Walls) {
   for (const auto Wall : Walls) {
     if (Wall) {
       Rectangle Bb = PlayerClass::GetBoundingBox();
-      Collided = Collisions::IsAABB(Bb,
+      Collided = Collisions::IsRectRect(Bb,
                                     {.x = Wall->f_Position,
                                      .y = 0,
                                      .width = Wall->f_WallWidth,
                                      .height = Wall->f_GapStart}) ||
-                 Collisions::IsAABB(Bb,
+                 Collisions::IsRectRect(Bb,
                                     {.x = Wall->f_Position,
                                      .y = Wall->f_GapStart + Wall->f_GapSize,
                                      .width = Wall->f_WallWidth,
@@ -144,4 +144,13 @@ void Play::Play() {
     Exit = Update(Walls, HiddenWalls);
     Draw(Walls);
   }
+
+  for ( auto Wall : Walls) {
+    delete Wall;
+  }
+  for (size_t I = 0; I < HiddenWalls.size(); I++) {
+    delete HiddenWalls.top();
+    HiddenWalls.pop();
+  }
+ 
 }
