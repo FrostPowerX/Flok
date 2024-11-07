@@ -28,6 +28,14 @@ void PlayerClass::Init() {
 
 
 
+void PlayerClass::Unload() {
+  if (IsTextureReady(Player.f_Sprite)) {
+    UnloadTexture(Player.f_Sprite);
+  }
+}
+
+
+
 void PlayerClass::Push(const Vector2& Direction, const float Force) {
 
   Vector2 Temp = Math::Multiply(Direction, Force * GetFrameTime());

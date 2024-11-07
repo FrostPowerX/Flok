@@ -12,6 +12,7 @@ struct PlayerType {
 };
 
 void Init();
+void Unload();
 void Push(const Vector2& Direction, float Force);
 void Update();
 void Draw();

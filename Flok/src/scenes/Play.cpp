@@ -155,13 +155,10 @@ void Play::Play() {
 
   PlayerClass::Init();
 
-  //WaitTime(3);
-
   while (!Exit && !WindowShouldClose()) {
     Input();
     Update(Walls, HiddenWalls);
     Draw(Walls);
-    //WaitTime(1);
   }
 
   for (auto Wall : Walls) {
@@ -172,4 +169,5 @@ void Play::Play() {
     HiddenWalls.pop();
   }
 
+  PlayerClass::Unload();
 }
