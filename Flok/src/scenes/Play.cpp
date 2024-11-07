@@ -160,6 +160,7 @@ void Play::Play() {
     Input();
     Update(Walls, HiddenWalls);
     Draw(Walls);
+    //WaitTime(1);
   }
 
   for (auto Wall : Walls) {

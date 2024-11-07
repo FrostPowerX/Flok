@@ -6,7 +6,9 @@ struct PlayerType {
   Rectangle f_BoundingBox;
   Vector2 f_Direction;
   float f_Speed;
-  //Texture2D f_Sprite;
+  float f_FrameTimer;
+  float f_Frame;
+  Texture2D f_Sprite;
 };
 
 void Init();
