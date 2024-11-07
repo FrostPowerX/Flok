@@ -2,10 +2,6 @@
 
 #include "raylib.h"
 
-/*
-#include "ResManager.h"
-*/
-
 
 
 void CloseUp::Close() {
