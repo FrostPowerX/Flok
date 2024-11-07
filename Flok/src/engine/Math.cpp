@@ -79,8 +79,7 @@ Vector2 Math::Rotate(const Vector2& A, float Angle) {
   OgAngle += Angle;
 
   //rotation Matrix
-  return {A.x * cos(OgAngle) - A.y * sin(OgAngle),
-          A.x * sin(OgAngle) + A.y * cos(OgAngle)};
+  return {A.x * cos(OgAngle) - A.y * sin(OgAngle), A.x * sin(OgAngle) + A.y * cos(OgAngle)};
 }
 
 
@@ -128,6 +127,5 @@ bool Math::IsEqual(const float A, const float B) {
 
 
 bool Math::IsInRect(const Rectangle& Rect, const Vector2 Pos) {
-  return Pos.x > Rect.x && Pos.x <= Rect.width + Rect.x && Pos.y > Rect.y && Pos
-         .y < Rect.y + Rect.height;
+  return Pos.x > Rect.x && Pos.x <= Rect.width + Rect.x && Pos.y > Rect.y && Pos.y < Rect.y + Rect.height;
 }

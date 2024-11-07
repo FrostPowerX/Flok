@@ -3,7 +3,6 @@
 #include "raylib.h"
 
 #include "Constants.h"
-#include "Math.h"
 
 
 
@@ -11,8 +10,7 @@ bool Collisions::IsCircleCircle(const Vector2& APosition,
                                 const float ARadius,
                                 const Vector2& BPosition,
                                 const float BRadius) {
-  const float k_Dist = (APosition.x - BPosition.x) * (APosition.x - BPosition.x)
-                       + (APosition.y - BPosition.y) * (
+  const float k_Dist = (APosition.x - BPosition.x) * (APosition.x - BPosition.x) + (APosition.y - BPosition.y) * (
                          APosition.y - BPosition.y);
   const float k_Radii = (ARadius + BRadius) * (ARadius + BRadius);
 
@@ -23,9 +21,7 @@ bool Collisions::IsCircleCircle(const Vector2& APosition,
 
 
 
-bool Collisions::IsBorderCircle(const Vector2& Position,
-                                const float Radius,
-                                WhereCollides& CollisionPlace) {
+bool Collisions::IsBorderCircle(const Vector2& Position, const float Radius, WhereCollides& CollisionPlace) {
 
   bool Collides = false;
 
@@ -50,8 +46,7 @@ bool Collisions::IsBorderCircle(const Vector2& Position,
 
 
 
-bool Collisions::IsDotBorder(const Vector2& Position,
-                             WhereCollides& CollisionPlace) {
+bool Collisions::IsDotBorder(const Vector2& Position, WhereCollides& CollisionPlace) {
   bool Collides = false;
 
   if (Position.x >= g_ScreenWidth) {
@@ -75,10 +70,8 @@ bool Collisions::IsDotBorder(const Vector2& Position,
 
 
 bool Collisions::IsRectRect(const Rectangle& A, const Rectangle& B) {
-  if ((A.x < B.x && A.x + A.width > B.x) || (
-        A.x > B.x && A.x < B.x + B.width)) {
-    if ((A.y < B.y && A.y + A.height > B.y) || (
-          A.y > B.y && A.y < B.y + B.width)) {
+  if ((A.x < B.x && A.x + A.width > B.x) || (A.x > B.x && A.x < B.x + B.width)) {
+    if ((A.y < B.y && A.y + A.height > B.y) || (A.y > B.y && A.y < B.y + B.width)) {
       return true;
     }
   }
@@ -88,12 +81,11 @@ bool Collisions::IsRectRect(const Rectangle& A, const Rectangle& B) {
 
 
 bool Collisions::IsRectBorder(const Rectangle& A) {
-  //TODO
   //  REMOVE
   //@formatter:off
-  return (A.x <= 0) ||
-         (A.x + A.width >= static_cast<float>(g_ScreenWidth)) ||
-         (A.y <= 0) ||
-         (A.y + A.height >= static_cast<float>(g_ScreenHeight));
+  return A.x <= 0 ||
+         A.x + A.width >= static_cast<float>(g_ScreenWidth) ||
+         A.y <= 0 ||
+         A.y + A.height >= static_cast<float>(g_ScreenHeight);
   //@formatter:on
 }

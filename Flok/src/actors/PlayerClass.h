@@ -11,11 +11,19 @@ struct PlayerType {
   Texture2D f_Sprite;
 };
 
+
+
 void Init();
+
 void Unload();
+
 void Push(const Vector2& Direction, float Force);
+
 void Update();
+
 void Draw();
+
 Rectangle GetBoundingBox();
+
 void MovePlayer(float Height);
 };

@@ -5,7 +5,7 @@
 
 
 void CloseUp::Close() {
-  
+
   CloseAudioDevice();
   CloseWindow();
 }

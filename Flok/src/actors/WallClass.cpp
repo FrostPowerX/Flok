@@ -1,5 +1,7 @@
 ﻿#include "WallClass.h"
 
+#include "raylib.h"
+
 #include "Constants.h"
 
 namespace {
@@ -22,15 +24,14 @@ float GetRandomGapStart() {
 
 
 float GetRandomGapHeight() {
-  return static_cast<float>(GetRandomValue(k_MinGapH,
-                                           k_MaxGapH));
+  return static_cast<float>(GetRandomValue(k_MinGapH, k_MaxGapH));
 }
 
 };
 
 
 
-Wall::WallType Wall::Make(float Speed) {
+Wall::WallType Wall::Make(const float Speed) {
 
   return {.f_Position = g_ScreenWidth,
           .f_GapStart = GetRandomGapStart(),
@@ -63,12 +64,10 @@ void Wall::Update(WallType& Wall) {
 
 void Wall::Draw(const WallType& Wall) {
   //Change to draw Texture
-  DrawRectangle(static_cast<int>(Wall.f_Position), 0,
-                static_cast<int>(k_WallWidth),
-                static_cast<int>(Wall.f_GapStart), GREEN);
+  DrawRectangle(static_cast<int>(Wall.f_Position), 0, static_cast<int>(k_WallWidth), static_cast<int>(Wall.f_GapStart),
+                GREEN);
 
-  DrawRectangle(static_cast<int>(Wall.f_Position),
-                static_cast<int>(Wall.f_GapStart + Wall.f_GapSize),
+  DrawRectangle(static_cast<int>(Wall.f_Position), static_cast<int>(Wall.f_GapStart + Wall.f_GapSize),
                 static_cast<int>(k_WallWidth), g_ScreenHeight, GREEN);
 
 }

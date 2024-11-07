@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include "raylib.h"
 
 namespace Wall {
 struct WallType {
@@ -11,6 +10,8 @@ struct WallType {
   int f_UniqueId;
   float f_WallWidth;
 };
+
+
 
 WallType Make(float Speed);
 
