@@ -25,4 +25,8 @@ bool IsBorderCircle(const Vector2& Position,
                     WhereCollides& CollisionPlace);
 
 bool IsDotBorder(const Vector2& Position, WhereCollides& CollisionPlace);
+
+bool IsAABB(const Rectangle& A, const Rectangle& B);
+
+//TODO DELETE UNNECESARY
 };

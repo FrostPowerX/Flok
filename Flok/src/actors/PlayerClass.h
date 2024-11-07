@@ -13,5 +13,5 @@ void Init();
 void Push(const Vector2& Direction, float Force);
 void Update();
 void Draw();
-
+Rectangle GetBoundingBox();
 };

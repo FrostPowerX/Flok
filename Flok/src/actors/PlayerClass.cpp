@@ -40,3 +40,9 @@ void PlayerClass::Draw() {
                     .y = Player.f_BoundingBox.height / 2.0F},
                    Math::GetRotation(Player.f_Direction), GREEN);
 }
+
+
+
+Rectangle PlayerClass::GetBoundingBox() {
+  return Player.f_BoundingBox;
+}

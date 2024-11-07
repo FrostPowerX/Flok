@@ -3,14 +3,15 @@
 #include <list>
 #include <stack>
 
+#include "Constants.h"
 #include "raylib.h"
 #include "actors/PlayerClass.h"
 #include "actors/WallClass.h"
+#include "engine/Collisions.h"
 
 namespace {
 
-constexpr float k_Gamever = 0.1F;
-
+constexpr float k_GameVer = 0.1F;
 
 bool Exit = false;
 constexpr float k_PlayerUpwardPush = 300.0F;
@@ -44,7 +45,7 @@ void WallManager(std::list<Wall::WallType*>& Walls,
 
     if (NewWall && !Wall) {
       Wall = NewWall;
-      Wall->f_IsHidden=false;
+      Wall->f_IsHidden = false;
       //exhaust NewWall*
       NewWall = nullptr;
     } else {
@@ -78,10 +79,33 @@ void Input() {
 
 
 
-void Update(std::list<Wall::WallType*>& Walls,
+bool CheckForPlayerWallCollision(const std::list<Wall::WallType*>& Walls) {
+  bool Collided = false;
+  for (const auto Wall : Walls) {
+    if (Wall) {
+      Rectangle Bb = PlayerClass::GetBoundingBox();
+      Collided = Collisions::IsAABB(Bb,
+                                    {.x = Wall->f_Position,
+                                     .y = 0,
+                                     .width = Wall->f_WallWidth,
+                                     .height = Wall->f_GapStart}) ||
+                 Collisions::IsAABB(Bb,
+                                    {.x = Wall->f_Position,
+                                     .y = Wall->f_GapStart + Wall->f_GapSize,
+                                     .width = Wall->f_WallWidth,
+                                     .height = g_ScreenHeight - (Wall->f_GapStart + Wall->f_GapSize)});
+    }
+  }
+  return Collided;
+}
+
+
+
+bool Update(std::list<Wall::WallType*>& Walls,
             std::stack<Wall::WallType*>& HiddenWalls) {
   PlayerClass::Update();
   WallManager(Walls, HiddenWalls);
+  return CheckForPlayerWallCollision(Walls);
 }
 
 
@@ -99,7 +123,7 @@ void Draw(const std::list<Wall::WallType*>& Walls) {
 
     PlayerClass::Draw();
 
-    DrawText(TextFormat("%.1f", k_Gamever), 10, 10, 10, BLACK);
+    DrawText(TextFormat("v%.1f", k_GameVer), 10, 10, 10, BLACK);
   }
   EndDrawing();
 }
@@ -117,7 +141,7 @@ void Play::Play() {
 
   while (!Exit && !WindowShouldClose()) {
     Input();
-    Update(Walls, HiddenWalls);
+    Exit = Update(Walls, HiddenWalls);
     Draw(Walls);
   }
 }

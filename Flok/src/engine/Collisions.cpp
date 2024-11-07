@@ -70,3 +70,9 @@ bool Collisions::IsDotBorder(const Vector2& Position,
   return Collides;
 
 }
+
+
+
+bool Collisions::IsAABB(const Rectangle& A, const Rectangle& B) {
+  return false;
+}
