@@ -51,3 +51,9 @@ void PlayerClass::Draw() {
 Rectangle PlayerClass::GetBoundingBox() {
   return Player.f_BoundingBox;
 }
+
+
+
+void PlayerClass::MovePlayer(const float Height) {
+  Player.f_BoundingBox.y +=  Height;
+}

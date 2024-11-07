@@ -84,16 +84,18 @@ bool CheckForPlayerWallCollision(const std::list<Wall::WallType*>& Walls) {
   for (const auto Wall : Walls) {
     if (Wall) {
       Rectangle Bb = PlayerClass::GetBoundingBox();
-      Collided = Collisions::IsRectRect(Bb,
-                                    {.x = Wall->f_Position,
-                                     .y = 0,
-                                     .width = Wall->f_WallWidth,
-                                     .height = Wall->f_GapStart}) ||
-                 Collisions::IsRectRect(Bb,
-                                    {.x = Wall->f_Position,
-                                     .y = Wall->f_GapStart + Wall->f_GapSize,
-                                     .width = Wall->f_WallWidth,
-                                     .height = g_ScreenHeight - (Wall->f_GapStart + Wall->f_GapSize)});
+      Collided = Collisions::IsRectRect(Bb, {.x = Wall->f_Position,
+                                             .y = 0,
+                                             .width = Wall->f_WallWidth,
+                                             .height = Wall->f_GapStart}) ||
+                 Collisions::IsRectRect(Bb, {.x = Wall->f_Position,
+                                             .y = Wall->f_GapStart + Wall->
+                                                  f_GapSize,
+                                             .width = Wall->f_WallWidth,
+                                             .height =
+                                             g_ScreenHeight - (
+                                               Wall->f_GapStart + Wall->
+                                               f_GapSize)});
     }
   }
   return Collided;
@@ -101,11 +103,22 @@ bool CheckForPlayerWallCollision(const std::list<Wall::WallType*>& Walls) {
 
 
 
-bool Update(std::list<Wall::WallType*>& Walls,
+void Update(std::list<Wall::WallType*>& Walls,
             std::stack<Wall::WallType*>& HiddenWalls) {
+
   PlayerClass::Update();
   WallManager(Walls, HiddenWalls);
-  return CheckForPlayerWallCollision(Walls) || Collisions::IsRectBorder(PlayerClass::GetBoundingBox());
+
+  Exit = CheckForPlayerWallCollision(Walls) || Collisions::IsRectBorder(
+             PlayerClass::GetBoundingBox());
+
+  //in case it hits roof
+  if (Exit && PlayerClass::GetBoundingBox().y < PlayerClass::GetBoundingBox().
+      height) {
+    Exit = false;
+    PlayerClass::MovePlayer(10);
+  }
+
 }
 
 
@@ -141,16 +154,16 @@ void Play::Play() {
 
   while (!Exit && !WindowShouldClose()) {
     Input();
-    Exit = Update(Walls, HiddenWalls);
+    Update(Walls, HiddenWalls);
     Draw(Walls);
   }
 
-  for ( auto Wall : Walls) {
+  for (auto Wall : Walls) {
     delete Wall;
   }
   for (size_t I = 0; I < HiddenWalls.size(); I++) {
     delete HiddenWalls.top();
     HiddenWalls.pop();
   }
- 
+
 }
