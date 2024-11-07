@@ -1,6 +1,7 @@
 ﻿#pragma once
-#include <raylib.h>
 #include <string>
+
+#include "raylib.h"
 
 #include "Layout.h"
 
@@ -21,6 +22,7 @@ struct Button {
   Font f_Font;
   int f_FontSize;
   bool f_IsHover;
+  bool f_IsTextCenter;
 };
 
 

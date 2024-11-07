@@ -1,5 +1,7 @@
 ﻿#include "Buttons.h"
 
+#include "raylib.h"
+
 
 
 void Buttons::RenderButtons(Button Buttons[], const int Amount) {
@@ -11,11 +13,18 @@ void Buttons::RenderButtons(Button Buttons[], const int Amount) {
       DrawRectangleRec(Buttons[I].f_BoundingBox, BLACK);
     }
     //DrawTextPro();
+
     DrawText(Buttons[I].f_Text.c_str(),
-             static_cast<int>(Buttons[I].f_BoundingBox.x + Buttons[I].f_Padding.
-                              f_Left),
-             static_cast<int>(Buttons[I].f_BoundingBox.y + Buttons[I].f_Padding.
-                              f_Top), Buttons[I].f_FontSize, WHITE);
+             static_cast<int>(Buttons[I].f_BoundingBox.x + Buttons[I].f_Padding.f_Left + (
+                                Buttons[I].f_IsTextCenter
+                                  ? Buttons[I].f_BoundingBox.x - static_cast<float>(
+                                      MeasureText(Buttons[I].f_Text.c_str(), Buttons[I].f_FontSize)) / 2.0F
+                                  : 0)),
+             static_cast<int>(Buttons[I].f_BoundingBox.y + Buttons[I].f_Padding.f_Top + (Buttons[I].f_IsTextCenter
+                                ? Buttons[I].f_BoundingBox.x - static_cast<float>(MeasureText(
+                                      Buttons[I].f_Text.c_str(), Buttons[I].f_FontSize)) / 2.0F
+                                : 0)), Buttons[I].f_FontSize, WHITE);
+
   }
 }
 
