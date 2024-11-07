@@ -6,7 +6,10 @@ namespace {
 
 constexpr float k_WallWidth = 100;
 constexpr int k_MaxGapH = 300;
-constexpr int k_MinGapH = 100; // todo replace with player width
+
+// TODO
+//  Replace with player width
+constexpr int k_MinGapH = 100;
 
 int UniqueId = 0;
 

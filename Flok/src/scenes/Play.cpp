@@ -23,7 +23,8 @@ float WallTime = 0;
 
 void WallManager(std::list<Wall::WallType*>& Walls,
                  std::stack<Wall::WallType*>& HiddenWalls) {
-  //todo logic to manage level and speed of walls
+  //TODO
+  //  logic to manage level and speed of walls
 
   Wall::WallType* NewWall = nullptr;
   WallTime += GetFrameTime();

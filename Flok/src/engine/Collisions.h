@@ -30,5 +30,6 @@ bool IsRectRect(const Rectangle& A, const Rectangle& B);
 
 bool IsRectBorder(const Rectangle& A);
 
-//TODO DELETE UNNECESARY
+//TODO
+//  DELETE UNNECESARY
 };

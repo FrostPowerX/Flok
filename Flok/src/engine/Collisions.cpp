@@ -88,7 +88,8 @@ bool Collisions::IsRectRect(const Rectangle& A, const Rectangle& B) {
 
 
 bool Collisions::IsRectBorder(const Rectangle& A) {
-  //TODO REMOVE
+  //TODO
+  //  REMOVE
   //@formatter:off
   return (A.x <= 0) ||
          (A.x + A.width >= static_cast<float>(g_ScreenWidth)) ||
