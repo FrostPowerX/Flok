@@ -14,7 +14,7 @@ namespace {
 constexpr float k_GameVer = 0.1F;
 
 bool Exit = false;
-constexpr float k_PlayerUpwardPush = 300.0F;
+constexpr float k_PlayerUpwardPush = 500.0F;
 constexpr float k_WallTimer = 3.0F;
 constexpr float k_WallSpeed = 800.0F;
 float WallTime = 0;
@@ -26,7 +26,6 @@ void WallManager(std::list<Wall::WallType*>& Walls,
   //todo logic to manage level and speed of walls
 
   Wall::WallType* NewWall = nullptr;
-
   WallTime += GetFrameTime();
 
   if (WallTime >= k_WallTimer) {
@@ -67,13 +66,8 @@ void WallManager(std::list<Wall::WallType*>& Walls,
 
 
 void Input() {
-  /*if (IsKeyPressed(KEY_SPACE)) {
-    PlayerClass::Push({0,-1}, k_PlayerUpwardPush);
-  }*/
-  if (IsKeyPressed(KEY_W)) {
+  if (IsKeyPressed(KEY_SPACE)) {
     PlayerClass::Push({0, -1}, k_PlayerUpwardPush);
-  } else if (IsKeyPressed(KEY_S)) {
-    PlayerClass::Push({0, 1}, k_PlayerUpwardPush);
   }
 }
 
@@ -106,17 +100,25 @@ bool CheckForPlayerWallCollision(const std::list<Wall::WallType*>& Walls) {
 void Update(std::list<Wall::WallType*>& Walls,
             std::stack<Wall::WallType*>& HiddenWalls) {
 
+  bool HitsBorder = false;
+  bool HitsWall = false;
+
   PlayerClass::Update();
   WallManager(Walls, HiddenWalls);
 
-  Exit = CheckForPlayerWallCollision(Walls) || Collisions::IsRectBorder(
-             PlayerClass::GetBoundingBox());
+  HitsWall = CheckForPlayerWallCollision(Walls);
+  HitsBorder = Collisions::IsRectBorder(PlayerClass::GetBoundingBox());
 
   //in case it hits roof
-  if (Exit && PlayerClass::GetBoundingBox().y < PlayerClass::GetBoundingBox().
-      height) {
-    Exit = false;
-    PlayerClass::MovePlayer(10);
+  if (HitsBorder) {
+    if (PlayerClass::GetBoundingBox().y < PlayerClass::GetBoundingBox().
+        height) {
+      PlayerClass::MovePlayer(10);
+    } else {
+      Exit = true;
+    }
+  } else if (HitsWall) {
+    Exit = true;
   }
 
 }
@@ -151,6 +153,8 @@ void Play::Play() {
   std::stack<Wall::WallType*> HiddenWalls;
 
   PlayerClass::Init();
+
+  //WaitTime(3);
 
   while (!Exit && !WindowShouldClose()) {
     Input();
