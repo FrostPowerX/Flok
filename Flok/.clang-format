@@ -29,14 +29,22 @@ BraceWrapping:
   SplitEmptyRecord: true
   SplitEmptyNamespace: true
 BreakBeforeBraces: Custom
+ColumnLimit: 120
 IncludeBlocks: Regroup
 IncludeCategories: 
   - Regex: '^<.*'
     Priority: 1
-  - Regex: '^".*'
+  - Regex: '\".*lib.*\.h"'
     Priority: 2
-  - Regex: '.*'
+  - Regex: '\".*Lib.*\.h"'
+    Priority: 2
+    SortPriority: 3
+  - Regex: '^".*'
     Priority: 3
+    SortPriority: 4
+  - Regex: '.*'
+    Priority: 4
+    SortPriority: 5
 IncludeIsMainRegex: '([-_](test|unittest))?$'
 IndentCaseLabels: true
 InsertNewlineAtEOF: true
