@@ -73,7 +73,27 @@ void Init() {
   }
 }
 
+void Unload() {
 
+}
+
+
+
+void Input() {
+
+}
+
+
+
+void Update() {
+
+}
+
+
+
+void Draw() {
+
+}
 
 
 
