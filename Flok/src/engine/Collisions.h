@@ -28,5 +28,7 @@ bool IsDotBorder(const Vector2& Position, WhereCollides& CollisionPlace);
 
 bool IsRectRect(const Rectangle& A, const Rectangle& B);
 
+bool IsRectBorder(const Rectangle& A);
+
 //TODO DELETE UNNECESARY
 };

@@ -3,6 +3,7 @@
 #include "raylib.h"
 
 #include "Constants.h"
+#include "Math.h"
 
 
 
@@ -74,10 +75,24 @@ bool Collisions::IsDotBorder(const Vector2& Position,
 
 
 bool Collisions::IsRectRect(const Rectangle& A, const Rectangle& B) {
-  if ((A.x < B.x && A.x + A.width > B.x) || (A.x > B.x && A.x < B.x + B.width)) {
-    if ((A.y < B.y && A.y + A.height > B.y) || (A.y > B.y && A.y < B.y + B.width)) {
+  if ((A.x < B.x && A.x + A.width > B.x) || (
+        A.x > B.x && A.x < B.x + B.width)) {
+    if ((A.y < B.y && A.y + A.height > B.y) || (
+          A.y > B.y && A.y < B.y + B.width)) {
       return true;
     }
   }
   return false;
+}
+
+
+
+bool Collisions::IsRectBorder(const Rectangle& A) {
+  //TODO REMOVE
+  //@formatter:off
+  return Math::IsEqual(A.x, 0) ||
+          Math::IsEqual(A.x + A.width, static_cast<float>(g_ScreenWidth)) ||
+          Math::IsEqual(A.y, 0) ||
+          Math::IsEqual(A.y + A.height, static_cast<float>(g_ScreenHeight));
+  //@formatter:on
 }
