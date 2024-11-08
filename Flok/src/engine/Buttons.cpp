@@ -15,15 +15,14 @@ void Buttons::RenderButtons(Button Buttons[], const int Amount) {
     //DrawTextPro();
 
     DrawText(Buttons[I].f_Text.c_str(),
-             static_cast<int>(Buttons[I].f_BoundingBox.x + Buttons[I].f_Padding.f_Left + (
+             static_cast<int>(Buttons[I].f_BoundingBox.x + Buttons[I].f_Padding.f_Left + Buttons[I].f_BoundingBox.width / 2 - (
                                 Buttons[I].f_IsTextCenter
-                                  ? Buttons[I].f_BoundingBox.x - static_cast<float>(
-                                      MeasureText(Buttons[I].f_Text.c_str(), Buttons[I].f_FontSize)) / 2.0F
+                                  ? static_cast<float>(MeasureText(Buttons[I].f_Text.c_str(), Buttons[I].f_FontSize)) /
+                                    2.0F
                                   : 0)),
-             static_cast<int>(Buttons[I].f_BoundingBox.y + Buttons[I].f_Padding.f_Top + (Buttons[I].f_IsTextCenter
-                                ? Buttons[I].f_BoundingBox.x - static_cast<float>(MeasureText(
-                                      Buttons[I].f_Text.c_str(), Buttons[I].f_FontSize)) / 2.0F
-                                : 0)), Buttons[I].f_FontSize, WHITE);
+             static_cast<int>(Buttons[I].f_BoundingBox.y + Buttons[I].f_Padding.f_Top + Buttons[I].f_BoundingBox.height / 2 + Buttons[I].f_Margin.f_Top - (Buttons[I].f_IsTextCenter
+                                  ? static_cast<float>(Buttons[I].f_FontSize)
+                                  : 0)), Buttons[I].f_FontSize, Buttons[I].f_TextColor);
 
   }
 }
@@ -31,21 +30,21 @@ void Buttons::RenderButtons(Button Buttons[], const int Amount) {
 
 
 void Buttons::Input(Button Buttons[], int& Hovering, const int Amount) {
-  Buttons[Hovering].f_IsHover = false;
+  Buttons[Hovering - 1].f_IsHover = false;
 
   if (IsKeyReleased(KEY_DOWN)) {
-    if (Hovering == Amount - 1) {
-      Hovering = 0;
+    if (Hovering == Amount) {
+      Hovering = 1;
     } else {
       Hovering++;
     }
   } else if (IsKeyReleased(KEY_UP)) {
-    if (Hovering == 0) {
-      Hovering = Amount - 1;
+    if (Hovering == 1) {
+      Hovering = Amount;
     } else {
       Hovering--;
     }
   }
 
-  Buttons[Hovering].f_IsHover = true;
+  Buttons[Hovering - 1].f_IsHover = true;
 }

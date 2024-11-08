@@ -9,10 +9,10 @@
 #include "actors/PlayerClass.h"
 #include "actors/WallClass.h"
 #include "engine/Collisions.h"
+#include "engine/SceneManager.h"
 
 namespace {
 
-constexpr float k_GameVer = 0.1F;
 
 bool Exit = false;
 constexpr float k_PlayerUpwardPush = 500.0F;
@@ -133,7 +133,7 @@ void Draw(const std::list<Wall::WallType*>& Walls) {
 
     PlayerClass::Draw();
 
-    DrawText(TextFormat("v%.1f", k_GameVer), 10, 10, 10, BLACK);
+
   }
   EndDrawing();
 }
@@ -143,6 +143,8 @@ void Draw(const std::list<Wall::WallType*>& Walls) {
 
 
 void Play::Play() {
+//BUG:
+  // it feels awful and the collision is very imprecise
 
   std::list<Wall::WallType*> Walls;
   std::stack<Wall::WallType*> HiddenWalls;
@@ -164,4 +166,5 @@ void Play::Play() {
   }
 
   PlayerClass::Unload();
+  ChangeScene(SceneManager::Scenes::MainMenu);
 }

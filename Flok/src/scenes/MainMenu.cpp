@@ -14,13 +14,14 @@ namespace {
 
 using namespace Buttons;
 
+const std::string k_GameVer = "v0.2.0";
 constexpr int k_Amount = 3;
 constexpr int k_Fontsize = 32;
 
 Button MainMenuButtons[k_Amount];
 bool Exit;
 auto SelectedScene = SceneManager::Scenes::Exit;
-int Hovering = 0;
+int Hovering = 1;
 
 
 
@@ -37,7 +38,7 @@ void Init() {
                               .recs = nullptr,
                               .glyphs = nullptr};
 
-  constexpr Margin k_Margin = {.f_Top = 20, .f_Bottom = 0, .f_Left = 0, .f_Right = 0};
+  constexpr Margin k_Margin = {.f_Top = 40, .f_Bottom = 0, .f_Left = 0, .f_Right = 0};
   constexpr Padding k_Padding = {.f_Top = 10, .f_Bottom = 0, .f_Left = 0, .f_Right = 0};
   std::string Text;
   for (int I = 0; I < k_Amount; I++) {
@@ -57,9 +58,9 @@ void Init() {
     }
 
     MainMenuButtons[I] = {
-        .f_BoundingBox = {.x = g_ScreenWidth / 2.0F,
-                          .y = g_ScreenHeight / 2.0F + k_Margin.f_Top * static_cast<float>(I),
-                          .width = static_cast<float>(MeasureText(Text.c_str(), k_Fontsize)),
+        .f_BoundingBox = {.x = (g_ScreenWidth - static_cast<float>(MeasureText(Text.c_str(), k_Fontsize))) / 2.0F ,
+                          .y = g_ScreenHeight / 2.0F + k_Margin.f_Top * static_cast<float>(I + 1 ),
+                          .width = static_cast<float>(MeasureText(Text.c_str(), k_Fontsize)) + k_Padding.f_Top,
                           .height = k_Fontsize},
         .f_Padding = k_Padding,
         .f_Margin = k_Padding,
@@ -84,15 +85,12 @@ void Unload() {
 
 void Input() {
   Buttons::Input(MainMenuButtons, Hovering, k_Amount);
+
+  if(IsKeyReleased(KEY_ENTER)) {
+    SelectedScene = static_cast<SceneManager::Scenes>(Hovering);
+    Exit = true;
+  }
 }
-
-
-
-void Update() {
-  SelectedScene = static_cast<SceneManager::Scenes>(Hovering);
-}
-
-
 
 void Draw() {
 
@@ -104,7 +102,9 @@ void Draw() {
 
   DrawText("Flok", (g_ScreenWidth - MeasureText("Flok", k_FontSizeTitle)) / 2, 64, k_FontSizeTitle, BLACK);
 
-  RenderButtons(MainMenuButtons, Hovering);
+  RenderButtons(MainMenuButtons, k_Amount);
+
+  DrawText(k_GameVer.c_str(), 10, 10, 10, BLACK);
 
   EndDrawing();
 }
@@ -119,7 +119,6 @@ void MainMenu::Menu() {
 
   while (!Exit && !WindowShouldClose()) {
     Input();
-    Update();
     Draw();
   }
 

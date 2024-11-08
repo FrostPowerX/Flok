@@ -2,7 +2,7 @@
 namespace SceneManager {
 
 enum class Scenes {
-  MainMenu = 1,
+  MainMenu = 0,
   Play,
   Credits,
   Exit
