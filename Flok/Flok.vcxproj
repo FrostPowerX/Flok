@@ -255,6 +255,7 @@
     <ClCompile Include="src\engine\SceneManager.cpp" />
     <ClCompile Include="src\engine\StartUp.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\scenes\Credits.cpp" />
     <ClCompile Include="src\scenes\MainMenu.cpp" />
     <ClCompile Include="src\scenes\Play.cpp" />
   </ItemGroup>
@@ -270,6 +271,7 @@
     <ClInclude Include="src\engine\Math.h" />
     <ClInclude Include="src\engine\SceneManager.h" />
     <ClInclude Include="src\engine\StartUp.h" />
+    <ClInclude Include="src\scenes\Credits.h" />
     <ClInclude Include="src\scenes\MainMenu.h" />
     <ClInclude Include="src\scenes\Play.h" />
   </ItemGroup>
