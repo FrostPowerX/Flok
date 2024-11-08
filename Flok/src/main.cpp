@@ -6,5 +6,4 @@
 
 int main() {
   StartUp::Load();
-  SceneManager::ChangeScene();
 }

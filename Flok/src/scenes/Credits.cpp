@@ -21,10 +21,10 @@ void Draw() {
   {
     ClearBackground(RAYWHITE);
 
-    DrawText("Made by Nicolas Gallardo", 100, 100, 20, LIGHTGRAY);
-    DrawText("Art by Eduardo Scarpato (https://im-dagon.itch.io/)", 140, 200, 20, LIGHTGRAY);
-    DrawText("\t Toxic Frog https://tinyurl.com/toxic-frog", 180, 200, 20, LIGHTGRAY);
-    DrawText("\t Forest Tileset https://tinyurl.com/ForestTitleSet", 180, 200, 20, LIGHTGRAY);
+    DrawText("Made by Nicolas Gallardo", 100, 140, 20, LIGHTGRAY);
+    DrawText("Art by Eduardo Scarpato (https://im-dagon.itch.io/)", 100, 200, 20, LIGHTGRAY);
+    DrawText("\t Toxic Frog https://tinyurl.com/toxic-frog", 100, 260, 20, LIGHTGRAY);
+    DrawText("\t Forest Tileset https://tinyurl.com/ForestTitleSet", 100, 320, 20, LIGHTGRAY);
   }
   EndDrawing();
 }

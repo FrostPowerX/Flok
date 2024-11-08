@@ -14,7 +14,7 @@ namespace {
 
 using namespace Buttons;
 
-const std::string k_GameVer = "v0.2.0";
+const std::string k_GameVer = "v0.2.1";
 constexpr int k_Amount = 3;
 constexpr int k_Fontsize = 32;
 
@@ -26,6 +26,8 @@ int Hovering = 1;
 
 
 void Init() {
+  SelectedScene = SceneManager::Scenes::Exit;
+  Exit = false;
   //TODO
   // Add textures and fonts and edit accordingly
 
