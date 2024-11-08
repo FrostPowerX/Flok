@@ -17,9 +17,10 @@ using namespace Buttons;
 constexpr int k_Amount = 3;
 constexpr int k_Fontsize = 32;
 
-std::array<Button, k_Amount> MainMenuButtons;
+Button MainMenuButtons[k_Amount];
 bool Exit;
 auto SelectedScene = SceneManager::Scenes::Exit;
+int Hovering = 0;
 
 
 
@@ -39,7 +40,7 @@ void Init() {
   constexpr Margin k_Margin = {.f_Top = 20, .f_Bottom = 0, .f_Left = 0, .f_Right = 0};
   constexpr Padding k_Padding = {.f_Top = 10, .f_Bottom = 0, .f_Left = 0, .f_Right = 0};
   std::string Text;
-  for (int I = 0; I < static_cast<int>(MainMenuButtons.size()); I++) {
+  for (int I = 0; I < k_Amount; I++) {
 
     switch (I) {
       case 0:
@@ -55,7 +56,7 @@ void Init() {
         Text = "NULL";
     }
 
-    MainMenuButtons.at(I) = {
+    MainMenuButtons[I] = {
         .f_BoundingBox = {.x = g_ScreenWidth / 2.0F,
                           .y = g_ScreenHeight / 2.0F + k_Margin.f_Top * static_cast<float>(I),
                           .width = static_cast<float>(MeasureText(Text.c_str(), k_Fontsize)),
@@ -73,31 +74,44 @@ void Init() {
   }
 }
 
-void Unload() {
 
+
+void Unload() {
+  // TODO
 }
 
 
 
 void Input() {
-
+  Buttons::Input(MainMenuButtons, Hovering, k_Amount);
 }
 
 
 
 void Update() {
-
+  SelectedScene = static_cast<SceneManager::Scenes>(Hovering);
 }
 
 
 
 void Draw() {
 
+  constexpr int k_FontSizeTitle = 32;
+
+  BeginDrawing();
+
+  ClearBackground(RAYWHITE);
+
+  DrawText("Flok", (g_ScreenWidth - MeasureText("Flok", k_FontSizeTitle)) / 2, 64, k_FontSizeTitle, BLACK);
+
+  RenderButtons(MainMenuButtons, Hovering);
+
+  EndDrawing();
 }
 
 
-
 }
+
 
 
 void MainMenu::Menu() {
@@ -112,4 +126,3 @@ void MainMenu::Menu() {
   Unload();
   ChangeScene(SelectedScene);
 }
-

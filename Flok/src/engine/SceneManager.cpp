@@ -5,6 +5,7 @@
 /*#include "scenes/Credits.h"
 #include "scenes/Instructions.h"
 #include "scenes/MainMenu.h"*/
+#include "scenes/MainMenu.h"
 #include "scenes/Play.h"
 
 namespace {
@@ -13,16 +14,13 @@ void SceneLoop(const SceneManager::Scenes SelectedScene) {
 
   switch (SelectedScene) {
     case SceneManager::Scenes::MainMenu:
-      //MainMenu::Menu();
+      MainMenu::Menu();
       break;
     case SceneManager::Scenes::Play:
       Play::Play();
       break;
     case SceneManager::Scenes::Credits:
       //Credits::Credits();
-      break;
-    case SceneManager::Scenes::Instruccions:
-      //Instructions::Instructions();
       break;
     case SceneManager::Scenes::Exit:
       CloseUp::Close();

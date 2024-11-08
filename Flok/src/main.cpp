@@ -1,9 +1,10 @@
-﻿#include "engine/StartUp.h"
+﻿#include "engine/SceneManager.h"
+#include "engine/StartUp.h"
 #include "scenes/Play.h"
 
 
 
 int main() {
   StartUp::Load();
-  Play::Play();
+  SceneManager::ChangeScene();
 }
