@@ -14,7 +14,7 @@ namespace {
 
 using namespace Buttons;
 
-const std::string k_GameVer = "v0.2.1";
+const std::string k_GameVer = "v0.3";
 constexpr int k_Amount = 3;
 constexpr int k_Fontsize = 32;
 
