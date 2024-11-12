@@ -13,14 +13,11 @@
 
 namespace {
 
-
 bool Exit = false;
 constexpr float k_PlayerUpwardPush = 500.0F;
 constexpr float k_WallTimer = 3.0F;
 constexpr float k_WallSpeed = 800.0F;
 float WallTime = 0;
-
-
 
 void WallManager(std::list<Wall::WallType*>& Walls, std::stack<Wall::WallType*>& HiddenWalls) {
   // TODO
@@ -38,7 +35,6 @@ void WallManager(std::list<Wall::WallType*>& Walls, std::stack<Wall::WallType*>&
     } else {
       NewWall = new Wall::WallType(Wall::Make(k_WallSpeed));
     }
-
   }
 
   for (auto& Wall : Walls) {
@@ -46,7 +42,7 @@ void WallManager(std::list<Wall::WallType*>& Walls, std::stack<Wall::WallType*>&
     if (NewWall && !Wall) {
       Wall = NewWall;
       Wall->f_IsHidden = false;
-      //exhaust NewWall*
+      // exhaust NewWall*
       NewWall = nullptr;
     } else {
       if (Wall && Wall->f_Position <= -Wall->f_WallWidth) {
@@ -64,35 +60,27 @@ void WallManager(std::list<Wall::WallType*>& Walls, std::stack<Wall::WallType*>&
   }
 }
 
-
-
 void Input() {
   if (IsKeyPressed(KEY_SPACE)) {
     PlayerClass::Push({0, -1}, k_PlayerUpwardPush);
   }
 }
 
-
-
 bool CheckForPlayerWallCollision(const std::list<Wall::WallType*>& Walls) {
   bool Collided = false;
   for (const auto Wall : Walls) {
     if (Wall) {
       Rectangle const Bb = PlayerClass::GetBoundingBox();
-      Collided = Collisions::IsRectRect(Bb, {.x = Wall->f_Position,
-                                             .y = 0,
+      Collided = Collisions::IsRectRect(
+                     Bb, {.x = Wall->f_Position, .y = 0, .width = Wall->f_WallWidth, .height = Wall->f_GapStart}) ||
+                 Collisions::IsRectRect(Bb, {.x = Wall->f_Position,
+                                             .y = Wall->f_GapStart + Wall->f_GapSize,
                                              .width = Wall->f_WallWidth,
-                                             .height = Wall->f_GapStart}) || Collisions::IsRectRect(
-                     Bb, {.x = Wall->f_Position,
-                          .y = Wall->f_GapStart + Wall->f_GapSize,
-                          .width = Wall->f_WallWidth,
-                          .height = g_ScreenHeight - (Wall->f_GapStart + Wall->f_GapSize)});
+                                             .height = g_ScreenHeight - (Wall->f_GapStart + Wall->f_GapSize)});
     }
   }
   return Collided;
 }
-
-
 
 void Update(std::list<Wall::WallType*>& Walls, std::stack<Wall::WallType*>& HiddenWalls) {
 
@@ -105,7 +93,7 @@ void Update(std::list<Wall::WallType*>& Walls, std::stack<Wall::WallType*>& Hidd
   HitsWall = CheckForPlayerWallCollision(Walls);
   HitsBorder = Collisions::IsRectBorder(PlayerClass::GetBoundingBox());
 
-  //in case it hits roof
+  // in case it hits roof
   if (HitsBorder) {
     if (PlayerClass::GetBoundingBox().y < PlayerClass::GetBoundingBox().height) {
       PlayerClass::MovePlayer(10);
@@ -115,10 +103,7 @@ void Update(std::list<Wall::WallType*>& Walls, std::stack<Wall::WallType*>& Hidd
   } else if (HitsWall) {
     Exit = true;
   }
-
 }
-
-
 
 void Draw(const std::list<Wall::WallType*>& Walls) {
   BeginDrawing();
@@ -132,19 +117,15 @@ void Draw(const std::list<Wall::WallType*>& Walls) {
     }
 
     PlayerClass::Draw();
-
-
   }
   EndDrawing();
 }
 
-}
-
-
+} // namespace
 
 void Play::Play() {
-//BUG:
-  // it feels awful and the collision is very imprecise
+  // BUG:
+  //  it feels awful and the collision is very imprecise
 
   std::list<Wall::WallType*> Walls;
   std::stack<Wall::WallType*> HiddenWalls;
@@ -165,6 +146,7 @@ void Play::Play() {
     HiddenWalls.pop();
   }
 
+  Exit = false;
   PlayerClass::Unload();
   ChangeScene(SceneManager::Scenes::MainMenu);
 }

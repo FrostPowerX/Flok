@@ -37,5 +37,6 @@ void Credits::Credits() {
     Input();
     Draw();
   }
+  Exit = false;
   ChangeScene(SceneManager::Scenes::MainMenu);
 }

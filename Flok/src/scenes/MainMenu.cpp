@@ -28,7 +28,8 @@ int Hovering = 1;
 void Init() {
   SelectedScene = SceneManager::Scenes::Exit;
   Exit = false;
-  //TODO
+  Hovering = 1;
+  // TODO
   // Add textures and fonts and edit accordingly
 
   //REMOVE
