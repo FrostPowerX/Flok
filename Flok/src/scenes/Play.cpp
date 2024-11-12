@@ -14,7 +14,7 @@
 namespace {
 
 bool Exit = false;
-constexpr float k_PlayerUpwardPush = 500.0F;
+constexpr float k_PlayerUpwardPush = 5.0F;
 constexpr float k_WallTimer = 3.0F;
 constexpr float k_WallSpeed = 800.0F;
 float WallTime = 0;
@@ -62,7 +62,8 @@ void WallManager(std::list<Wall::WallType*>& Walls, std::stack<Wall::WallType*>&
 
 void Input() {
   if (IsKeyPressed(KEY_SPACE)) {
-    PlayerClass::Push({0, -1}, k_PlayerUpwardPush);
+    //PlayerClass::Push({0, -1}, k_PlayerUpwardPush + PlayerClass::GetSpeed());
+    PlayerClass::Jump(k_PlayerUpwardPush);
   }
 }
 
