@@ -142,9 +142,7 @@
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)lib\raylib-5.0_win32_msvc16\lib\*.dll" "$(OutDir)" /y
-                xcopy "$(SolutionDir)res\" "$(OutDir)res\" /i/y/s
-            </Command>
+      <Command>"$(SolutionDir)scripts/ForRelease.bat" "$(SolutionDir)Release\" "$(TargetDir)Release\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -232,9 +230,7 @@
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);raylib.lib;winmm.lib;opengl32.lib;kernel32.lib;gdi32.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)lib\raylib-5.0_win32_msvc16\lib\*.dll" "$(OutDir)" /y
-                xcopy "$(SolutionDir)res\" "$(OutDir)res\" /i/y/s
-            </Command>
+      <Command>"$(SolutionDir)scripts/ForRelease.bat" "$(SolutionDir)Release\" "$(TargetDir)Release\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -275,7 +271,6 @@
     <ClInclude Include="src\scenes\MainMenu.h" />
     <ClInclude Include="src\scenes\Play.h" />
   </ItemGroup>
-
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
