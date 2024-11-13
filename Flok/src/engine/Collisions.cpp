@@ -63,26 +63,12 @@ bool Collisions::IsDotBorder(const Vector2& Position, WhereCollides& CollisionPl
 }
 
 bool Collisions::IsRectRect(const Rectangle& A, const Rectangle& B) {
-
-  float halfWA = A.width / 2.f;
-  float halfHA = A.height / 2.f;
-
-  float halfWB = B.width / 2.f;
-  float halfHB = B.height / 2.f;
-
-  float centerAX = A.x + halfWA;
-  float centerAY = A.y + halfHA;
-
-  float centerBX = B.x + halfWB;
-  float centerBY = B.y + halfHB;
-
-  float distanceX = abs(centerAX - centerBX);
-  float distanceY = abs(centerAY - centerBY);
-
-  distanceX -= halfWA + halfWB;
-  distanceY -= halfHA + halfHB;
-
-  return (distanceX <= 0 && distanceY <= 0);
+  if ((A.x + A.width >= B.x && A.x <= B.x + B.width)) {
+    if ((A.y + A.height >= B.y && A.y <= B.y + B.height)) {
+      return true;
+    }
+  }
+  return false;
 }
 
 bool Collisions::IsRectBorder(const Rectangle& A) {
