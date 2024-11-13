@@ -34,7 +34,7 @@ float k_Scrollingmid2 = 0.0f;
 float k_Scrollingfront = 0.0f;
 
 bool Exit = false;
-constexpr float k_PlayerUpwardPush = 5.0F;
+constexpr float k_PlayerUpwardPush = 500.0F;
 constexpr float k_WallTimer = 3.0F;
 constexpr float k_WallSpeed = 400.0F;
 float WallTime = 0;
