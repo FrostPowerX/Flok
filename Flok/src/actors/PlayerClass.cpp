@@ -29,34 +29,25 @@ void PlayerClass::Unload() {
   }
 }
 
-// void PlayerClass::Push(const Vector2& Direction, float Force) {
-//
-//   Vector2 Temp = Math::Multiply(Direction, Force * GetFrameTime());
-//   Temp = Math::Add(Player.f_Direction, Temp);
-//
-//   // TODO
-//   //  Fix rotation so if it is aiming down, it remains looking forward
-//   //  Maybe use Player.f_Direction.x *= -1 if y is positive
-//   Player.f_Direction = Math::Normalize(Temp, Math::GetMag(Temp));
-//
-//   if (Player.f_Speed < k_SpeedLimit) {
-//     Player.f_Speed += Force;
-//   } else {
-//     Player.f_Speed = k_SpeedLimit;
-//   }
-// }
+ void PlayerClass::Push(const Vector2& Direction, float Force) {
 
-void PlayerClass::Jump(float force) {
+   Vector2 Temp = Math::Multiply(Direction, Force * GetFrameTime());
+   Temp = Math::Add(Player.f_Direction, Temp);
 
-  Player.f_Speed = -force;
-}
+   // TODO
+   //  Fix rotation so if it is aiming down, it remains looking forward
+   //  Maybe use Player.f_Direction.x *= -1 if y is positive
+   Player.f_Direction = Math::Normalize(Temp, Math::GetMag(Temp));
+
+   if (Player.f_Speed < k_SpeedLimit) {
+     Player.f_Speed += Force;
+   } else {
+     Player.f_Speed = k_SpeedLimit;
+   }
+ }
 
 void PlayerClass::Update() {
-  // Push({.x = 0, .y = 1}, g_Gravity);
-
-  Player.f_Speed += g_Gravity * GetFrameTime();
-
-  Player.f_BoundingBox.y += Player.f_Speed;
+   Push({.x = 0, .y = 1}, g_Gravity);
 
   if (!Collisions::IsRectBorder(Player.f_BoundingBox)) {
     Player.f_BoundingBox.y += Player.f_Direction.y * Player.f_Speed * GetFrameTime();

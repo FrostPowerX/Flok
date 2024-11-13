@@ -17,7 +17,7 @@ void Init();
 
 void Unload();
 
-//void Push(const Vector2& Direction, float Force);
+void Push(const Vector2& Direction, float Force);
 
 void Jump(float force);
 
