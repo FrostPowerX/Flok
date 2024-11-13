@@ -25,13 +25,13 @@ Texture2D frontGround;
 
 Button pauseMenu[maxButtons];
 
-constexpr int fontSize = 32;
-int hover = 1;
+constexpr int k_Fontsize = 32;
+int Hovering = 1;
 
-float scrollingBack = 0.0f;
-float scrollingMid = 0.0f;
-float scrollingMid2 = 0.0f;
-float scrollingFore = 0.0f;
+float k_Scrollingback = 0.0f;
+float k_Scrollingmid = 0.0f;
+float k_Scrollingmid2 = 0.0f;
+float k_Scrollingfront = 0.0f;
 
 bool Exit = false;
 constexpr float k_PlayerUpwardPush = 5.0F;
@@ -83,7 +83,7 @@ void WallManager(std::list<Wall::WallType*>& Walls, std::stack<Wall::WallType*>&
 }
 
 void Init() {
-  hover = 1;
+  Hovering = 1;
 
   backGround = LoadTexture("res/JungleTileset/ParallaxBackground/Back.png");
   midGround = LoadTexture("res/JungleTileset/ParallaxBackground/Back2.png");
@@ -102,38 +102,38 @@ void Init() {
   frontGround.height = g_ScreenHeight;
   frontGround.width = g_ScreenWidth;
 
-  Texture2D k_Def = {.id = 0, .width = 0, .height = 0, .mipmaps = 0, .format = 0};
-  Font k_DefFont = {
+  constexpr Texture2D k_Def = {.id = 0, .width = 0, .height = 0, .mipmaps = 0, .format = 0};
+  constexpr Font k_DefFont = {
       .baseSize = 0, .glyphCount = 0, .glyphPadding = 0, .texture = k_Def, .recs = nullptr, .glyphs = nullptr};
 
-  Margin k_Margin = {.f_Top = 40, .f_Bottom = 0, .f_Left = 0, .f_Right = 0};
-  Padding k_Padding = {.f_Top = 10, .f_Bottom = 0, .f_Left = 0, .f_Right = 0};
+  constexpr Margin k_Margin = {.f_Top = 40, .f_Bottom = 0, .f_Left = 0, .f_Right = 0};
+  constexpr Padding k_Padding = {.f_Top = 10, .f_Bottom = 0, .f_Left = 0, .f_Right = 0};
 
-  std::string text;
+  std::string Text;
 
   for (int I = 0; I < maxButtons; I++) {
 
     switch (I) {
       case 0:
-        text = "Continue";
+        Text = "Continue";
         break;
       case 1:
-        text = "Menu";
+        Text = "Menu";
     }
 
     pauseMenu[I] = {
-        .f_BoundingBox = {.x = (g_ScreenWidth - static_cast<float>(MeasureText(text.c_str(), fontSize))) / 2.0F,
+        .f_BoundingBox = {.x = (g_ScreenWidth - static_cast<float>(MeasureText(Text.c_str(), k_Fontsize))) / 2.0F,
                           .y = g_ScreenHeight / 2.0F + k_Margin.f_Top * static_cast<float>(I + 1),
-                          .width = static_cast<float>(MeasureText(text.c_str(), fontSize)) + k_Padding.f_Top,
-                          .height = fontSize},
+                          .width = static_cast<float>(MeasureText(Text.c_str(), k_Fontsize)) + k_Padding.f_Top,
+                          .height = k_Fontsize},
         .f_Padding = k_Padding,
         .f_Margin = k_Padding,
         .f_Sprite = k_Def,
         .f_HoverTint = WHITE,
         .f_TextColor = WHITE,
-        .f_Text = text,
+        .f_Text = Text,
         .f_Font = k_DefFont,
-        .f_FontSize = fontSize,
+        .f_FontSize = k_Fontsize,
         .f_IsHover = false,
         .f_IsTextCenter = true};
   }
@@ -145,10 +145,10 @@ void Input() {
     pause = !pause;
 
   if (pause) {
-    Buttons::Input(pauseMenu, hover, maxButtons);
+    Buttons::Input(pauseMenu, Hovering, maxButtons);
 
     if (IsKeyReleased(KEY_ENTER)) {
-      switch (hover) {
+      switch (Hovering) {
 
         case 1:
           pause = !pause;
@@ -163,8 +163,7 @@ void Input() {
 
   } else {
     if (IsKeyPressed(KEY_SPACE)) {
-      // PlayerClass::Push({0, -1}, k_PlayerUpwardPush + PlayerClass::GetSpeed());
-      PlayerClass::Jump(k_PlayerUpwardPush);
+       PlayerClass::Push({0, -1}, k_PlayerUpwardPush + PlayerClass::GetSpeed());
     }
   }
 }
@@ -192,19 +191,19 @@ void Update(std::list<Wall::WallType*>& Walls, std::stack<Wall::WallType*>& Hidd
     bool HitsBorder = false;
     bool HitsWall = false;
 
-    scrollingBack -= 0.0f;
-    scrollingMid -= k_WallSpeed * 0.25f * GetFrameTime();
-    scrollingMid2 -= k_WallSpeed * 0.5f * GetFrameTime();
-    scrollingFore -= k_WallSpeed * GetFrameTime();
+    k_Scrollingback -= 0.0f;
+    k_Scrollingmid -= k_WallSpeed * 0.25f * GetFrameTime();
+    k_Scrollingmid2 -= k_WallSpeed * 0.5f * GetFrameTime();
+    k_Scrollingfront -= k_WallSpeed * GetFrameTime();
 
-    if (scrollingBack <= -backGround.width)
-      scrollingBack = 0;
-    if (scrollingMid <= -midGround.width)
-      scrollingMid = 0;
-    if (scrollingMid2 <= -midGround2.width)
-      scrollingMid2 = 0;
-    if (scrollingFore <= -frontGround.width)
-      scrollingFore = 0;
+    if (k_Scrollingback <= -backGround.width)
+      k_Scrollingback = 0;
+    if (k_Scrollingmid <= -midGround.width)
+      k_Scrollingmid = 0;
+    if (k_Scrollingmid2 <= -midGround2.width)
+      k_Scrollingmid2 = 0;
+    if (k_Scrollingfront <= -frontGround.width)
+      k_Scrollingfront = 0;
 
     PlayerClass::Update();
     WallManager(Walls, HiddenWalls);
@@ -226,14 +225,14 @@ void Update(std::list<Wall::WallType*>& Walls, std::stack<Wall::WallType*>& Hidd
 }
 
 void Draw(const std::list<Wall::WallType*>& Walls) {
-  DrawTextureEx(backGround, Vector2(scrollingBack, 0), 0.0f, 1.0f, WHITE);
-  DrawTextureEx(backGround, Vector2(backGround.width + scrollingBack, 0), 0.0f, 1.0f, WHITE);
+  DrawTextureEx(backGround, Vector2(k_Scrollingback, 0), 0.0f, 1.0f, WHITE);
+  DrawTextureEx(backGround, Vector2(backGround.width + k_Scrollingback, 0), 0.0f, 1.0f, WHITE);
 
-  DrawTextureEx(midGround, Vector2(scrollingMid, 0), 0.0f, 1.0f, WHITE);
-  DrawTextureEx(midGround, Vector2(midGround.width + scrollingMid, 0), 0.0f, 1.0f, WHITE);
+  DrawTextureEx(midGround, Vector2(k_Scrollingmid, 0), 0.0f, 1.0f, WHITE);
+  DrawTextureEx(midGround, Vector2(midGround.width + k_Scrollingmid, 0), 0.0f, 1.0f, WHITE);
 
-  DrawTextureEx(midGround2, Vector2(scrollingMid2, 0), 0.0f, 1.0f, WHITE);
-  DrawTextureEx(midGround2, Vector2{midGround2.width + scrollingMid2, 0}, 0.0f, 1.0f, WHITE);
+  DrawTextureEx(midGround2, Vector2(k_Scrollingmid2, 0), 0.0f, 1.0f, WHITE);
+  DrawTextureEx(midGround2, Vector2{midGround2.width + k_Scrollingmid2, 0}, 0.0f, 1.0f, WHITE);
 
   BeginDrawing();
   {
@@ -247,8 +246,8 @@ void Draw(const std::list<Wall::WallType*>& Walls) {
 
     PlayerClass::Draw();
 
-    DrawTextureEx(frontGround, Vector2(scrollingFore, 0), 0.0f, 1.0f, WHITE);
-    DrawTextureEx(frontGround, Vector2(frontGround.width + scrollingFore, 0), 0.0f, 1.0f, WHITE);
+    DrawTextureEx(frontGround, Vector2(k_Scrollingfront, 0), 0.0f, 1.0f, WHITE);
+    DrawTextureEx(frontGround, Vector2(frontGround.width + k_Scrollingfront, 0), 0.0f, 1.0f, WHITE);
   }
 
   if (pause)
@@ -260,6 +259,9 @@ void Draw(const std::list<Wall::WallType*>& Walls) {
 } // namespace
 
 void DeInit() {
+  Exit = false;
+  PlayerClass::Unload();
+
   UnloadTexture(backGround);
   UnloadTexture(midGround);
   UnloadTexture(midGround2);
@@ -292,7 +294,5 @@ void Play::Play() {
 
   DeInit();
 
-  Exit = false;
-  PlayerClass::Unload();
   ChangeScene(SceneManager::Scenes::MainMenu);
 }
