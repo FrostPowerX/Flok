@@ -41,6 +41,12 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\scenes\PlayMP.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\actors\PlayerClass2.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\actors\PlayerClass.h">
@@ -84,6 +90,12 @@
     </ClInclude>
     <ClInclude Include="src\engine\StartUp.h">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\PlayMP.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\actors\PlayerClass2.h">
+      <Filter>Actors</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

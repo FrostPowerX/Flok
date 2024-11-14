@@ -163,7 +163,7 @@ void Input() {
 
   } else {
     if (IsKeyPressed(KEY_SPACE)) {
-       PlayerClass::Push({0, -1}, k_PlayerUpwardPush + PlayerClass::GetSpeed());
+      PlayerClass::Push({0, -1}, k_PlayerUpwardPush + PlayerClass::GetSpeed());
     }
   }
 }
@@ -256,8 +256,6 @@ void Draw(const std::list<Wall::WallType*>& Walls) {
   EndDrawing();
 }
 
-} // namespace
-
 void DeInit() {
   Exit = false;
   PlayerClass::Unload();
@@ -267,6 +265,8 @@ void DeInit() {
   UnloadTexture(midGround2);
   UnloadTexture(frontGround);
 }
+
+} // namespace
 
 void Play::Play() {
   // BUG:
