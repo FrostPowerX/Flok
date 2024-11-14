@@ -5,6 +5,7 @@
 #include "scenes/Credits.h"
 #include "scenes/MainMenu.h"
 #include "scenes/Play.h"
+#include "scenes/PlayMP.h"
 
 namespace {
 
@@ -16,6 +17,9 @@ void SceneLoop(const SceneManager::Scenes SelectedScene) {
       break;
     case SceneManager::Scenes::Play:
       Play::Play();
+      break;
+    case SceneManager::Scenes::Multiplayer:
+      PlayMP::Play();
       break;
     case SceneManager::Scenes::Credits:
       Credits::Credits();

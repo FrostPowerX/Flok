@@ -3,7 +3,8 @@ namespace SceneManager {
 
 enum class Scenes {
   MainMenu = 0,
-  Play,
+  Play, 
+  Multiplayer,
   Credits,
   Exit
 };
