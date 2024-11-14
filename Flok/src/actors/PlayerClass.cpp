@@ -81,6 +81,11 @@ Rectangle PlayerClass::GetBoundingBox() {
   return Player.f_BoundingBox;
 }
 
+void PlayerClass::SetPosition(const int x, const int y) {
+  Player.f_BoundingBox.x = x;
+  Player.f_BoundingBox.y = y;
+}
+
 void PlayerClass::MovePlayer(const float Height) {
   Player.f_BoundingBox.y += Height;
 }

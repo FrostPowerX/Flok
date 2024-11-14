@@ -19,13 +19,13 @@ void Unload();
 
 void Push(const Vector2& Direction, float Force);
 
-void Jump(float force);
-
 void Update();
 
 void Draw();
 
 Rectangle GetBoundingBox();
+
+void SetPosition(int x, int y);
 
 void MovePlayer(float Height);
 
