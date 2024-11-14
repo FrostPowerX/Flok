@@ -15,7 +15,7 @@ namespace {
 using namespace Buttons;
 
 const std::string k_GameVer = "v0.3";
-constexpr int k_Amount = 3;
+constexpr int k_Amount = 4;
 constexpr int k_Fontsize = 32;
 
 Button MainMenuButtons[k_Amount];
@@ -51,9 +51,12 @@ void Init() {
         Text = "Play";
         break;
       case 1:
-        Text = "Credits";
+        Text = "Multiplayer";
         break;
       case 2:
+        Text = "Credits";
+        break;
+      case 3:
         Text = "Exit";
         break;
       default:
