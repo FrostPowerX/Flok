@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\actors\PlayerClass.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\actors\WallClass.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\Play.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\MainMenu.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\Credits.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\Buttons.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\CloseUp.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\Collisions.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\Error.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\Layout.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\Math.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\SceneManager.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\StartUp.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\actors\PlayerClass.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\actors\WallClass.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\Play.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\MainMenu.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\Credits.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\Buttons.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\CloseUp.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\Collisions.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Constants.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\Error.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\Layout.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\Math.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\SceneManager.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\StartUp.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Actors">
+      <UniqueIdentifier>{7a0a90e1-c491-4a15-a92c-49c7c7e13c83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{b3af33f2-a2ac-4490-b508-a882727b1339}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{62a6ebe7-9bab-4a16-9551-8ef1e7d74f09}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
