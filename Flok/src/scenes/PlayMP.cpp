@@ -194,6 +194,8 @@ void Update(std::list<Wall::WallType*>& Walls, std::stack<Wall::WallType*>& Hidd
 
     bool HitsBorder = false;
     bool HitsWall = false;
+    bool HitsBorder2 = false;
+
 
     k_Scrollingback -= 0.0f;
     k_Scrollingmid -= k_WallSpeed * 0.25f * GetFrameTime();
@@ -215,11 +217,22 @@ void Update(std::list<Wall::WallType*>& Walls, std::stack<Wall::WallType*>& Hidd
 
     HitsWall = CheckForPlayerWallCollision(Walls);
     HitsBorder = Collisions::IsRectBorder(PlayerClass::GetBoundingBox());
+    HitsBorder2 = Collisions::IsRectBorder(PlayerClass2::GetBoundingBox());
 
     // in case it hits roof
     if (HitsBorder) {
       if (PlayerClass::GetBoundingBox().y < PlayerClass::GetBoundingBox().height) {
         PlayerClass::MovePlayer(10);
+      } else {
+        Exit = true;
+      }
+    } else if (HitsWall) {
+      Exit = true;
+    }
+
+    if (HitsBorder2) {
+      if (PlayerClass2::GetBoundingBox().y < PlayerClass2::GetBoundingBox().height) {
+        PlayerClass2::MovePlayer(10);
       } else {
         Exit = true;
       }
