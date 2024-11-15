@@ -241,14 +241,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\actors\PlayerClass.cpp" />
-    <ClCompile Include="src\actors\PlayerClass2.cpp" />
     <ClCompile Include="src\actors\WallClass.cpp" />
     <ClCompile Include="src\engine\Buttons.cpp" />
     <ClCompile Include="src\engine\CloseUp.cpp" />
     <ClCompile Include="src\engine\Collisions.cpp" />
     <ClCompile Include="src\engine\Error.cpp" />
-    <ClCompile Include="src\engine\Layout.cpp" />
     <ClCompile Include="src\engine\Math.cpp" />
+    <ClCompile Include="src\engine\Parallax.cpp" />
     <ClCompile Include="src\engine\SceneManager.cpp" />
     <ClCompile Include="src\engine\StartUp.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -259,7 +258,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\actors\PlayerClass.h" />
-    <ClInclude Include="src\actors\PlayerClass2.h" />
     <ClInclude Include="src\actors\WallClass.h" />
     <ClInclude Include="src\Constants.h" />
     <ClInclude Include="src\engine\Buttons.h" />
@@ -268,6 +266,7 @@
     <ClInclude Include="src\engine\Error.h" />
     <ClInclude Include="src\engine\Layout.h" />
     <ClInclude Include="src\engine\Math.h" />
+    <ClInclude Include="src\engine\Parallax.h" />
     <ClInclude Include="src\engine\SceneManager.h" />
     <ClInclude Include="src\engine\StartUp.h" />
     <ClInclude Include="src\scenes\Credits.h" />

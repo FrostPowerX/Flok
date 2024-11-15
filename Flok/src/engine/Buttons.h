@@ -9,8 +9,6 @@ namespace Buttons {
 
 using namespace Layout;
 
-
-
 struct Button {
   Rectangle f_BoundingBox;
   Padding f_Padding;
@@ -25,10 +23,15 @@ struct Button {
   bool f_IsTextCenter;
 };
 
-
+void Create(Button& f_Button,
+			std::string Text, 
+			Margin k_Margin,
+			Padding k_Padding, 
+			int k_Fontsize, 
+			int Index);
 
 void RenderButtons(Button Buttons[], int Amount);
 
 void Input(Button Buttons[], int& Hovering, int Amount);
 
-};
+}; // namespace Buttons

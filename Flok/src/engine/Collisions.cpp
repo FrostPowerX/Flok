@@ -2,8 +2,6 @@
 
 #include <iostream>
 
-#include "raylib.h"
-
 #include "Constants.h"
 
 bool Collisions::IsCircleCircle(const Vector2& APosition,

@@ -1,5 +1,5 @@
 ﻿#pragma once
 
-namespace MainMenu {
+namespace scenes {
 void Menu();
 };

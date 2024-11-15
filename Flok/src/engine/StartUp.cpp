@@ -5,9 +5,7 @@
 #include "raylib.h"
 
 #include "Constants.h"
-/*
-#include "ResManager.h"
-*/
+
 #include "SceneManager.h"
 
 namespace {
@@ -23,6 +21,7 @@ void StartUp::Load() {
   SetWindowState(FLAG_VSYNC_HINT);
 
   InitAudioDevice();
+
 
   if (!IsAudioDeviceReady()) {
     std::cerr << "Error setting up Audio device" << '\n';

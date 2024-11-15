@@ -1,35 +1,29 @@
 ﻿#include "PlayerClass.h"
 
-#include "raylib.h"
-
 #include "Constants.h"
 #include "engine/Collisions.h"
 #include "engine/Math.h"
 
-namespace {
-
+namespace Actors {
 constexpr float k_SpeedLimit = 50000.0F;
 constexpr float k_FramesHop = 7.0F;
 constexpr int k_Scale = 2;
 
-PlayerClass::PlayerType Player;
-} // namespace
-
-void PlayerClass::Init() {
+void InitPlayer(PlayerType& Player, std::string TextPath) {
   Player.f_BoundingBox = {.x = 51.0F, .y = g_ScreenHeight / 2.0F, .width = 48.0F, .height = 48.0F};
   Player.f_Direction = {.x = 1, .y = 0};
-  Player.f_Sprite = LoadTexture("res/ToxicFrog/BlueBlue/ToxicFrogBlueBlue_Hop.png");
+  Player.f_Sprite = LoadTexture(TextPath.c_str());
   Player.f_FrameTimer = 0;
   Player.f_Speed = 0;
 }
 
-void PlayerClass::Unload() {
+void UnloadPlayer(PlayerType& Player) {
   if (IsTextureReady(Player.f_Sprite)) {
     UnloadTexture(Player.f_Sprite);
   }
 }
 
-void PlayerClass::Push(const Vector2& Direction, float Force) {
+void PushPlayer(PlayerType& Player, const Vector2& Direction, float Force) {
 
   Vector2 Temp = Math::Multiply(Direction, Force * GetFrameTime());
   Temp = Math::Add(Player.f_Direction, Temp);
@@ -48,8 +42,8 @@ void PlayerClass::Push(const Vector2& Direction, float Force) {
   }
 }
 
-void PlayerClass::Update() {
-  Push({.x = 0, .y = 1}, g_Gravity);
+void UpdatePlayer(PlayerType& Player) {
+  PushPlayer(Player, {.x = 0, .y = 1}, g_Gravity);
 
   if (!Collisions::IsRectBorder(Player.f_BoundingBox)) {
     Player.f_BoundingBox.y += Player.f_Direction.y * Player.f_Speed * GetFrameTime();
@@ -66,7 +60,7 @@ void PlayerClass::Update() {
   }
 }
 
-void PlayerClass::Draw() {
+void DrawPlayer(PlayerType& Player) {
   DrawRectangleLinesEx(Player.f_BoundingBox, 2, GREEN);
   DrawTexturePro(Player.f_Sprite, {.x = 48 * (Player.f_Frame * 2 + 1), .y = 8, .width = 48, .height = 32},
                  {.x = Player.f_BoundingBox.x + Player.f_BoundingBox.width / 2.0F,
@@ -77,19 +71,21 @@ void PlayerClass::Draw() {
                  0.0F, WHITE);
 }
 
-Rectangle PlayerClass::GetBoundingBox() {
+Rectangle GetBoundingBoxPlayer(PlayerType& Player) {
   return Player.f_BoundingBox;
 }
 
-void PlayerClass::SetPosition(const int x, const int y) {
-  Player.f_BoundingBox.x = x;
-  Player.f_BoundingBox.y = y;
+void SetPositionPlayer(PlayerType& Player, float X, float Y) {
+  Player.f_BoundingBox.x = X;
+  Player.f_BoundingBox.y = Y;
 }
 
-void PlayerClass::MovePlayer(const float Height) {
+void MovePlayer(PlayerType& Player, float Height) {
   Player.f_BoundingBox.y += Height;
 }
 
-float PlayerClass::GetSpeed() {
+float GetSpeedPlayer(PlayerType& Player) {
   return Player.f_Speed;
 }
+
+} // namespace Actors

@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-namespace Wall {
+namespace Actors {
 struct WallType {
   float f_Position;
   float f_GapStart;
@@ -11,13 +11,11 @@ struct WallType {
   float f_WallWidth;
 };
 
+WallType MakeWall(float Speed);
 
+void ResetWall(WallType& Wall, float Speed);
 
-WallType Make(float Speed);
+void UpdateWalls(WallType& Wall);
 
-void Reset(WallType& Wall, float Speed);
-
-void Update(WallType& Wall);
-
-void Draw(const WallType& Wall);
+void DrawWalls(const WallType& Wall);
 };

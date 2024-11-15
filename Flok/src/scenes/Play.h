@@ -1,7 +1,10 @@
 ﻿#pragma once
 
-namespace Play {
+namespace game {
+
+namespace scenes {
 
 void Play();
 
-};
+}
+} // namespace game

@@ -10,7 +10,9 @@
 #include "engine/Layout.h"
 #include "engine/SceneManager.h"
 
-namespace {
+namespace game {
+
+namespace scenes {
 
 using namespace Buttons;
 
@@ -23,27 +25,16 @@ bool Exit;
 auto SelectedScene = SceneManager::Scenes::Exit;
 int Hovering = 1;
 
-
-
 void Init() {
   SelectedScene = SceneManager::Scenes::Exit;
   Exit = false;
   Hovering = 1;
-  // TODO
-  // Add textures and fonts and edit accordingly
-
-  //REMOVE
-  constexpr Texture2D k_Def = {.id = 0, .width = 0, .height = 0, .mipmaps = 0, .format = 0};
-  constexpr Font k_DefFont = {.baseSize = 0,
-                              .glyphCount = 0,
-                              .glyphPadding = 0,
-                              .texture = k_Def,
-                              .recs = nullptr,
-                              .glyphs = nullptr};
 
   constexpr Margin k_Margin = {.f_Top = 40, .f_Bottom = 0, .f_Left = 0, .f_Right = 0};
   constexpr Padding k_Padding = {.f_Top = 10, .f_Bottom = 0, .f_Left = 0, .f_Right = 0};
+
   std::string Text;
+
   for (int I = 0; I < k_Amount; I++) {
 
     switch (I) {
@@ -63,36 +54,18 @@ void Init() {
         Text = "NULL";
     }
 
-    MainMenuButtons[I] = {
-        .f_BoundingBox = {.x = (g_ScreenWidth - static_cast<float>(MeasureText(Text.c_str(), k_Fontsize))) / 2.0F ,
-                          .y = g_ScreenHeight / 2.0F + k_Margin.f_Top * static_cast<float>(I + 1 ),
-                          .width = static_cast<float>(MeasureText(Text.c_str(), k_Fontsize)) + k_Padding.f_Top,
-                          .height = k_Fontsize},
-        .f_Padding = k_Padding,
-        .f_Margin = k_Padding,
-        .f_Sprite = k_Def,
-        .f_HoverTint = WHITE,
-        .f_TextColor = WHITE,
-        .f_Text = Text,
-        .f_Font = k_DefFont,
-        .f_FontSize = k_Fontsize,
-        .f_IsHover = false,
-        .f_IsTextCenter = true};
+    Buttons::Create(MainMenuButtons[I], Text, k_Margin, k_Padding, k_Fontsize, I);
   }
 }
-
-
 
 void Unload() {
   // TODO
 }
 
-
-
 void Input() {
   Buttons::Input(MainMenuButtons, Hovering, k_Amount);
 
-  if(IsKeyReleased(KEY_ENTER)) {
+  if (IsKeyReleased(KEY_ENTER)) {
     SelectedScene = static_cast<SceneManager::Scenes>(Hovering);
     Exit = true;
   }
@@ -115,12 +88,7 @@ void Draw() {
   EndDrawing();
 }
 
-
-}
-
-
-
-void MainMenu::Menu() {
+void Menu() {
   Init();
 
   while (!Exit && !WindowShouldClose()) {
@@ -131,3 +99,6 @@ void MainMenu::Menu() {
   Unload();
   ChangeScene(SelectedScene);
 }
+
+} // namespace scenes
+} // namespace game

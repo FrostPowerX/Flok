@@ -10,28 +10,24 @@
 #include "actors/WallClass.h"
 #include "engine/Buttons.h"
 #include "engine/Collisions.h"
+#include "engine/Parallax.h"
 #include "engine/SceneManager.h"
 
-namespace {
+namespace game {
+
+namespace scenes {
 
 using namespace Buttons;
+using namespace Actors;
 
-const int maxButtons = 2;
+const int k_maxButtons = 2;
 
-Texture2D backGround;
-Texture2D midGround;
-Texture2D midGround2;
-Texture2D frontGround;
+PlayerType f_Player1;
 
-Button pauseMenu[maxButtons];
+Button PauseMenu[k_maxButtons];
 
 constexpr int k_Fontsize = 32;
 int Hovering = 1;
-
-float k_Scrollingback = 0.0f;
-float k_Scrollingmid = 0.0f;
-float k_Scrollingmid2 = 0.0f;
-float k_Scrollingfront = 0.0f;
 
 bool Exit = false;
 constexpr float k_PlayerUpwardPush = 500.0F;
@@ -39,13 +35,13 @@ constexpr float k_WallTimer = 3.0F;
 constexpr float k_WallSpeed = 400.0F;
 float WallTime = 0;
 
-bool pause = false;
+bool Pause = false;
 
-void WallManager(std::list<Wall::WallType*>& Walls, std::stack<Wall::WallType*>& HiddenWalls) {
+void WallManager(std::list<WallType*>& Walls, std::stack<WallType*>& HiddenWalls) {
   // TODO
   //  logic to manage level and speed of walls
 
-  Wall::WallType* NewWall = nullptr;
+  WallType* NewWall = nullptr;
   WallTime += GetFrameTime();
 
   if (WallTime >= k_WallTimer) {
@@ -55,7 +51,7 @@ void WallManager(std::list<Wall::WallType*>& Walls, std::stack<Wall::WallType*>&
       NewWall = HiddenWalls.top();
       HiddenWalls.pop();
     } else {
-      NewWall = new Wall::WallType(Wall::Make(k_WallSpeed));
+      NewWall = new WallType(MakeWall(k_WallSpeed));
     }
   }
 
@@ -64,15 +60,14 @@ void WallManager(std::list<Wall::WallType*>& Walls, std::stack<Wall::WallType*>&
     if (NewWall && !Wall) {
       Wall = NewWall;
       Wall->f_IsHidden = false;
-      // exhaust NewWall*
       NewWall = nullptr;
     } else {
       if (Wall && Wall->f_Position <= -Wall->f_WallWidth) {
-        Reset(*Wall, k_WallSpeed);
+        ResetWall(*Wall, k_WallSpeed);
         HiddenWalls.push(Wall);
         Wall = nullptr;
       } else if (Wall) {
-        Update(*Wall);
+        UpdateWalls(*Wall);
       }
     }
   }
@@ -85,33 +80,14 @@ void WallManager(std::list<Wall::WallType*>& Walls, std::stack<Wall::WallType*>&
 void Init() {
   Hovering = 1;
 
-  backGround = LoadTexture("res/JungleTileset/ParallaxBackground/Back.png");
-  midGround = LoadTexture("res/JungleTileset/ParallaxBackground/Back2.png");
-  midGround2 = LoadTexture("res/JungleTileset/ParallaxBackground/Back3.png");
-  frontGround = LoadTexture("res/JungleTileset/ParallaxBackground/BushFront.png");
-
-  backGround.height = g_ScreenHeight;
-  backGround.width = g_ScreenWidth;
-
-  midGround.height = g_ScreenHeight;
-  midGround.width = g_ScreenWidth;
-
-  midGround2.height = g_ScreenHeight;
-  midGround2.width = g_ScreenWidth;
-
-  frontGround.height = g_ScreenHeight;
-  frontGround.width = g_ScreenWidth;
-
-  constexpr Texture2D k_Def = {.id = 0, .width = 0, .height = 0, .mipmaps = 0, .format = 0};
-  constexpr Font k_DefFont = {
-      .baseSize = 0, .glyphCount = 0, .glyphPadding = 0, .texture = k_Def, .recs = nullptr, .glyphs = nullptr};
+  Parallax::InitParallax();
 
   constexpr Margin k_Margin = {.f_Top = 40, .f_Bottom = 0, .f_Left = 0, .f_Right = 0};
   constexpr Padding k_Padding = {.f_Top = 10, .f_Bottom = 0, .f_Left = 0, .f_Right = 0};
 
   std::string Text;
 
-  for (int I = 0; I < maxButtons; I++) {
+  for (int I = 0; I < k_maxButtons; I++) {
 
     switch (I) {
       case 0:
@@ -121,58 +97,44 @@ void Init() {
         Text = "Menu";
     }
 
-    pauseMenu[I] = {
-        .f_BoundingBox = {.x = (g_ScreenWidth - static_cast<float>(MeasureText(Text.c_str(), k_Fontsize))) / 2.0F,
-                          .y = g_ScreenHeight / 2.0F + k_Margin.f_Top * static_cast<float>(I + 1),
-                          .width = static_cast<float>(MeasureText(Text.c_str(), k_Fontsize)) + k_Padding.f_Top,
-                          .height = k_Fontsize},
-        .f_Padding = k_Padding,
-        .f_Margin = k_Padding,
-        .f_Sprite = k_Def,
-        .f_HoverTint = WHITE,
-        .f_TextColor = WHITE,
-        .f_Text = Text,
-        .f_Font = k_DefFont,
-        .f_FontSize = k_Fontsize,
-        .f_IsHover = false,
-        .f_IsTextCenter = true};
+    Buttons::Create(PauseMenu[I], Text, k_Margin, k_Padding, k_Fontsize, I);
   }
 }
 
 void Input() {
 
   if (IsKeyPressed(KEY_ESCAPE))
-    pause = !pause;
+    Pause = !Pause;
 
-  if (pause) {
-    Buttons::Input(pauseMenu, Hovering, maxButtons);
+  if (Pause) {
+    Buttons::Input(PauseMenu, Hovering, k_maxButtons);
 
     if (IsKeyReleased(KEY_ENTER)) {
       switch (Hovering) {
 
         case 1:
-          pause = !pause;
+          Pause = !Pause;
           break;
 
         case 2:
           Exit = true;
-          pause = !pause;
+          Pause = !Pause;
           break;
       }
     }
 
   } else {
     if (IsKeyPressed(KEY_SPACE)) {
-      PlayerClass::Push({0, -1}, k_PlayerUpwardPush + PlayerClass::GetSpeed());
+      PushPlayer(f_Player1, {0, -1}, k_PlayerUpwardPush + GetSpeedPlayer(f_Player1));
     }
   }
 }
 
-bool CheckForPlayerWallCollision(const std::list<Wall::WallType*>& Walls) {
+bool CheckForPlayerWallCollision(const std::list<WallType*>& Walls) {
   bool Collided = false;
   for (const auto Wall : Walls) {
     if (Wall) {
-      Rectangle const Bb = PlayerClass::GetBoundingBox();
+      Rectangle const Bb = GetBoundingBoxPlayer(f_Player1);
       Collided = Collisions::IsRectRect(
                      Bb, {.x = Wall->f_Position, .y = 0, .width = Wall->f_WallWidth, .height = Wall->f_GapStart}) ||
                  Collisions::IsRectRect(Bb, {.x = Wall->f_Position,
@@ -184,55 +146,41 @@ bool CheckForPlayerWallCollision(const std::list<Wall::WallType*>& Walls) {
   return Collided;
 }
 
-void Update(std::list<Wall::WallType*>& Walls, std::stack<Wall::WallType*>& HiddenWalls) {
+void CheckLoseCondition(PlayerType Player, std::list<WallType*>& Walls) {
 
-  if (!pause) {
+  bool HitsWall = CheckForPlayerWallCollision(Walls);
+  bool HitsBorder = Collisions::IsRectBorder(GetBoundingBoxPlayer(Player));
 
-    bool HitsBorder = false;
-    bool HitsWall = false;
-
-    k_Scrollingback -= 0.0f;
-    k_Scrollingmid -= k_WallSpeed * 0.25f * GetFrameTime();
-    k_Scrollingmid2 -= k_WallSpeed * 0.5f * GetFrameTime();
-    k_Scrollingfront -= k_WallSpeed * GetFrameTime();
-
-    if (k_Scrollingback <= -backGround.width)
-      k_Scrollingback = 0;
-    if (k_Scrollingmid <= -midGround.width)
-      k_Scrollingmid = 0;
-    if (k_Scrollingmid2 <= -midGround2.width)
-      k_Scrollingmid2 = 0;
-    if (k_Scrollingfront <= -frontGround.width)
-      k_Scrollingfront = 0;
-
-    PlayerClass::Update();
-    WallManager(Walls, HiddenWalls);
-
-    HitsWall = CheckForPlayerWallCollision(Walls);
-    HitsBorder = Collisions::IsRectBorder(PlayerClass::GetBoundingBox());
-
-    // in case it hits roof
-    if (HitsBorder) {
-      if (PlayerClass::GetBoundingBox().y < PlayerClass::GetBoundingBox().height) {
-        PlayerClass::MovePlayer(10);
-      } else {
-        Exit = true;
-      }
-    } else if (HitsWall) {
+  // in case it hits roof
+  if (HitsBorder) {
+    if (GetBoundingBoxPlayer(Player).y < GetBoundingBoxPlayer(Player).height) {
+      MovePlayer(Player, 10);
+    } else {
       Exit = true;
     }
+  } else if (HitsWall) {
+    Exit = true;
   }
 }
 
-void Draw(const std::list<Wall::WallType*>& Walls) {
-  DrawTextureEx(backGround, Vector2(k_Scrollingback, 0), 0.0f, 1.0f, WHITE);
-  DrawTextureEx(backGround, Vector2(backGround.width + k_Scrollingback, 0), 0.0f, 1.0f, WHITE);
+void Update(std::list<WallType*>& Walls, std::stack<WallType*>& HiddenWalls) {
 
-  DrawTextureEx(midGround, Vector2(k_Scrollingmid, 0), 0.0f, 1.0f, WHITE);
-  DrawTextureEx(midGround, Vector2(midGround.width + k_Scrollingmid, 0), 0.0f, 1.0f, WHITE);
+  if (!Pause) {
 
-  DrawTextureEx(midGround2, Vector2(k_Scrollingmid2, 0), 0.0f, 1.0f, WHITE);
-  DrawTextureEx(midGround2, Vector2{midGround2.width + k_Scrollingmid2, 0}, 0.0f, 1.0f, WHITE);
+    Parallax::UpdateParallax(k_WallSpeed);
+
+    UpdatePlayer(f_Player1);
+    WallManager(Walls, HiddenWalls);
+
+    CheckLoseCondition(f_Player1, Walls);
+  }
+}
+
+void Draw(const std::list<WallType*>& Walls) {
+
+  Parallax::DrawBackground();
+  Parallax::DrawMidground();
+  Parallax::DrawMidground2();
 
   BeginDrawing();
   {
@@ -240,43 +188,36 @@ void Draw(const std::list<Wall::WallType*>& Walls) {
 
     for (const auto Wall : Walls) {
       if (Wall) {
-        Wall::Draw(*Wall);
+        DrawWalls(*Wall);
       }
     }
 
-    PlayerClass::Draw();
-
-    DrawTextureEx(frontGround, Vector2(k_Scrollingfront, 0), 0.0f, 1.0f, WHITE);
-    DrawTextureEx(frontGround, Vector2(frontGround.width + k_Scrollingfront, 0), 0.0f, 1.0f, WHITE);
+    DrawPlayer(f_Player1);
   }
 
-  if (pause)
-    RenderButtons(pauseMenu, maxButtons);
+  if (Pause)
+    RenderButtons(PauseMenu, k_maxButtons);
+
+  Parallax::DrawFrontground();
 
   EndDrawing();
 }
 
-void DeInit() {
+void Unload() {
   Exit = false;
-  PlayerClass::Unload();
-
-  UnloadTexture(backGround);
-  UnloadTexture(midGround);
-  UnloadTexture(midGround2);
-  UnloadTexture(frontGround);
+  UnloadPlayer(f_Player1);
+  Parallax::UnloadParallax();
 }
 
-} // namespace
-
-void Play::Play() {
+void Play() {
   // BUG:
   //  it feels awful and the collision is very imprecise
 
-  std::list<Wall::WallType*> Walls;
-  std::stack<Wall::WallType*> HiddenWalls;
+  std::list<WallType*> Walls;
+  std::stack<WallType*> HiddenWalls;
 
   Init();
-  PlayerClass::Init();
+  InitPlayer(f_Player1, "res/ToxicFrog/BlueBlue/ToxicFrogBlueBlue_Hop.png");
 
   while (!Exit && !WindowShouldClose()) {
     Input();
@@ -292,7 +233,10 @@ void Play::Play() {
     HiddenWalls.pop();
   }
 
-  DeInit();
+  Unload();
 
   ChangeScene(SceneManager::Scenes::MainMenu);
 }
+
+} // namespace scenes
+} // namespace game

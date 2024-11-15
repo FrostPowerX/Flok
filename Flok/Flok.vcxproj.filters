@@ -28,9 +28,6 @@
     <ClCompile Include="src\engine\Error.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\Layout.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="src\engine\Math.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -44,8 +41,8 @@
     <ClCompile Include="src\scenes\PlayMP.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="src\actors\PlayerClass2.cpp">
-      <Filter>Actors</Filter>
+    <ClCompile Include="src\engine\Parallax.cpp">
+      <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -94,8 +91,8 @@
     <ClInclude Include="src\scenes\PlayMP.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="src\actors\PlayerClass2.h">
-      <Filter>Actors</Filter>
+    <ClInclude Include="src\engine\Parallax.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
