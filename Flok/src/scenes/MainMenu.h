@@ -1,5 +1,12 @@
 ﻿#pragma once
 
-namespace scenes {
+namespace Game {
+
+namespace Scene {
+
 void Menu();
-};
+
+}
+
+}
+

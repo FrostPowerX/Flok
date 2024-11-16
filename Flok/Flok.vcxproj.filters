@@ -44,6 +44,9 @@
     <ClCompile Include="src\engine\Parallax.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="src\scenes\Controls.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\actors\PlayerClass.h">
@@ -93,6 +96,9 @@
     </ClInclude>
     <ClInclude Include="src\engine\Parallax.h">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\Controls.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

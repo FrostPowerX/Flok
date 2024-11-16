@@ -5,6 +5,7 @@
 #include "engine/Math.h"
 
 namespace Actors {
+
 constexpr float k_SpeedLimit = 50000.0F;
 constexpr float k_FramesHop = 7.0F;
 constexpr int k_Scale = 2;
@@ -43,6 +44,7 @@ void PushPlayer(PlayerType& Player, const Vector2& Direction, float Force) {
 }
 
 void UpdatePlayer(PlayerType& Player) {
+
   PushPlayer(Player, {.x = 0, .y = 1}, g_Gravity);
 
   if (!Collisions::IsRectBorder(Player.f_BoundingBox)) {
@@ -50,7 +52,9 @@ void UpdatePlayer(PlayerType& Player) {
   }
 
   Player.f_FrameTimer += GetFrameTime();
+
   if (Player.f_FrameTimer >= g_Second / k_FramesHop) {
+
     Player.f_FrameTimer = 0;
     Player.f_Frame++;
 
@@ -58,10 +62,13 @@ void UpdatePlayer(PlayerType& Player) {
       Player.f_Frame = 0;
     }
   }
+
 }
 
 void DrawPlayer(PlayerType& Player) {
+
   DrawRectangleLinesEx(Player.f_BoundingBox, 2, GREEN);
+
   DrawTexturePro(Player.f_Sprite, {.x = 48 * (Player.f_Frame * 2 + 1), .y = 8, .width = 48, .height = 32},
                  {.x = Player.f_BoundingBox.x + Player.f_BoundingBox.width / 2.0F,
                   .y = Player.f_BoundingBox.y + Player.f_BoundingBox.height / 2.0F,
@@ -69,23 +76,32 @@ void DrawPlayer(PlayerType& Player) {
                   .height = Player.f_BoundingBox.height * k_Scale},
                  {.x = Player.f_BoundingBox.width * k_Scale / 2.0F, .y = Player.f_BoundingBox.height * k_Scale / 2.0F},
                  0.0F, WHITE);
+
 }
 
 Rectangle GetBoundingBoxPlayer(PlayerType& Player) {
+
   return Player.f_BoundingBox;
+
 }
 
 void SetPositionPlayer(PlayerType& Player, float X, float Y) {
+
   Player.f_BoundingBox.x = X;
   Player.f_BoundingBox.y = Y;
+
 }
 
 void MovePlayer(PlayerType& Player, float Height) {
+
   Player.f_BoundingBox.y += Height;
+
 }
 
 float GetSpeedPlayer(PlayerType& Player) {
+
   return Player.f_Speed;
+
 }
 
 } // namespace Actors

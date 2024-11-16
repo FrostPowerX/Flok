@@ -6,6 +6,7 @@
 
 
 namespace Actors {
+
 struct PlayerType {
   Rectangle f_BoundingBox;
   Vector2 f_Direction;
@@ -14,8 +15,6 @@ struct PlayerType {
   float f_Frame;
   Texture2D f_Sprite;
 };
-
-
 
 void InitPlayer(PlayerType& Player, std::string TextPath);
 
@@ -34,4 +33,5 @@ void SetPositionPlayer(PlayerType& Player, float x, float y);
 void MovePlayer(PlayerType& Player, float Height);
 
 float GetSpeedPlayer(PlayerType& Player);
+
 }

@@ -2,10 +2,12 @@
 
 #include "raylib.h"
 
+namespace Game {
 
-
-void CloseUp::Close() {
+void Close() {
 
   CloseAudioDevice();
   CloseWindow();
+}
+
 }

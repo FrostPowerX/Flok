@@ -2,43 +2,49 @@
 
 #include "CloseUp.h"
 #include "Error.h"
+
+#include "scenes/Controls.h"
 #include "scenes/Credits.h"
 #include "scenes/MainMenu.h"
 #include "scenes/Play.h"
 #include "scenes/PlayMP.h"
 
-namespace {
+namespace Game {
 
-void SceneLoop(const SceneManager::Scenes SelectedScene) {
+namespace SceneManager {
+
+static void SceneLoop(const Scenes SelectedScene) {
 
   switch (SelectedScene) {
-    case SceneManager::Scenes::MainMenu:
-      MainMenu::Menu();
+    case Scenes::MainMenu:
+      Scene::Menu();
       break;
-    case SceneManager::Scenes::Play:
-      Play::Play();
+    case Scenes::Play:
+      Scene::Play();
       break;
-    case SceneManager::Scenes::Multiplayer:
-      PlayMP::Play();
+    case Scenes::Multiplayer:
+      Scene::PlayMP();
       break;
-    case SceneManager::Scenes::Credits:
-      Credits::Credits();
+    case Scenes::Controls:
+      Scene::Controls();
       break;
-    case SceneManager::Scenes::Exit:
-      CloseUp::Close();
+    case Scenes::Credits:
+      Scene::Credits();
+      break;
+    case Scenes::Exit:
+      Close();
       break;
     default:
-      CloseUp::Close();
+      Close();
       Error::Unhandled(__LINE__, __FILE__);
       break;
   }
-
 }
 
-}
-
-
-
-void SceneManager::ChangeScene(const Scenes SelectedScene) {
+void ChangeScene(const Scenes SelectedScene) {
   SceneLoop(SelectedScene);
 }
+
+} // namespace SceneManager
+
+} // namespace Game

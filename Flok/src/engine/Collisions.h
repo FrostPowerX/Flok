@@ -1,4 +1,5 @@
 ﻿#pragma once
+
 #include "raylib.h"
 
 namespace Collisions {
@@ -10,11 +11,6 @@ enum class WhereCollides {
   Right
 };
 
-
-
-/**
- *
- */
 bool IsCircleCircle(const Vector2& APosition, float ARadius, const Vector2& BPosition, float BRadius);
 
 bool IsBorderCircle(const Vector2& Position, float Radius, WhereCollides& CollisionPlace);
@@ -25,6 +21,4 @@ bool IsRectRect(const Rectangle& A, const Rectangle& B);
 
 bool IsRectBorder(const Rectangle& A);
 
-// TODO
-//  DELETE UNNECESARY
-};
+}

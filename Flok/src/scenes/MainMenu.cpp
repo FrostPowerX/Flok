@@ -10,22 +10,22 @@
 #include "engine/Layout.h"
 #include "engine/SceneManager.h"
 
-namespace game {
+namespace Game {
 
-namespace scenes {
+namespace Scene {
 
-using namespace Buttons;
+using namespace UI;
 
-const std::string k_GameVer = "v0.4";
-constexpr int k_Amount = 4;
-constexpr int k_Fontsize = 32;
+static const std::string k_GameVer = "v0.4";
+static constexpr int k_Amount = 5;
+static constexpr int k_Fontsize = 32;
 
-Button MainMenuButtons[k_Amount];
-bool Exit;
-auto SelectedScene = SceneManager::Scenes::Exit;
-int Hovering = 1;
+static Button MainMenuButtons[k_Amount];
+static bool Exit;
+static auto SelectedScene = SceneManager::Scenes::Exit;
+static int Hovering = 1;
 
-void Init() {
+static void Init() {
   SelectedScene = SceneManager::Scenes::Exit;
   Exit = false;
   Hovering = 1;
@@ -45,25 +45,28 @@ void Init() {
         Text = "Multiplayer";
         break;
       case 2:
-        Text = "Credits";
+        Text = "Controls";
         break;
       case 3:
+        Text = "Credits";
+        break;
+      case 4:
         Text = "Exit";
         break;
       default:
         Text = "NULL";
     }
 
-    Buttons::Create(MainMenuButtons[I], Text, k_Margin, k_Padding, k_Fontsize, I);
+    UI::CreateButton(MainMenuButtons[I], Text, k_Margin, k_Padding, k_Fontsize, I);
   }
 }
 
-void Unload() {
+static void Unload() {
   // TODO
 }
 
-void Input() {
-  Buttons::Input(MainMenuButtons, Hovering, k_Amount);
+static void InputButton() {
+  UI::InputButton(MainMenuButtons, Hovering, k_Amount);
 
   if (IsKeyReleased(KEY_ENTER)) {
     SelectedScene = static_cast<SceneManager::Scenes>(Hovering);
@@ -71,7 +74,7 @@ void Input() {
   }
 }
 
-void Draw() {
+static void Draw() {
 
   constexpr int k_FontSizeTitle = 32;
 
@@ -92,7 +95,7 @@ void Menu() {
   Init();
 
   while (!Exit && !WindowShouldClose()) {
-    Input();
+    InputButton();
     Draw();
   }
 
@@ -100,5 +103,5 @@ void Menu() {
   ChangeScene(SelectedScene);
 }
 
-} // namespace scenes
-} // namespace game
+} // namespace Scene
+} // namespace Game

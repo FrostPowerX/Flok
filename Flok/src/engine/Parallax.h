@@ -3,6 +3,7 @@
 #include "raylib.h"
 
 namespace Parallax {
+
 void InitParallax();
 
 void UnloadParallax();
@@ -16,4 +17,5 @@ void DrawMidground();
 void DrawMidground2();
 
 void DrawFrontground();
+
 } // namespace Parallax

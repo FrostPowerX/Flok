@@ -1,5 +1,7 @@
 ﻿#pragma once
 
-namespace CloseUp {
+namespace Game {
+
 void Close();
+
 };

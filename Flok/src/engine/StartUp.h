@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-namespace StartUp {
+namespace Game {
 
 void Load();
 

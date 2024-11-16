@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+namespace Error {
+
 void Error::Unhandled(const int Line, const std::string& File) {
   std::cerr << "Something went wrong at " << File << ":" << Line << '\n';
 
@@ -25,4 +27,6 @@ void Error::UnknownResource(const std::string& Name) {
 #ifdef _DEBUG
   abort();
 #endif
+}
+
 }

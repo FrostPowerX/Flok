@@ -1143,10 +1143,10 @@ RLAPI void StopAutomationEventRecording(void);                                  
 RLAPI void PlayAutomationEvent(AutomationEvent event);                                  // Play a recorded automation event
 
 //------------------------------------------------------------------------------------
-// Input Handling Functions (Module: core)
+// InputButton Handling Functions (Module: core)
 //------------------------------------------------------------------------------------
 
-// Input-related functions: keyboard
+// InputButton-related functions: keyboard
 RLAPI bool IsKeyPressed(int key);                             // Check if a key has been pressed once
 RLAPI bool IsKeyPressedRepeat(int key);                       // Check if a key has been pressed again (Only PLATFORM_DESKTOP)
 RLAPI bool IsKeyDown(int key);                                // Check if a key is being pressed
@@ -1156,7 +1156,7 @@ RLAPI int GetKeyPressed(void);                                // Get key pressed
 RLAPI int GetCharPressed(void);                               // Get char pressed (unicode), call it multiple times for chars queued, returns 0 when the queue is empty
 RLAPI void SetExitKey(int key);                               // Set a custom key to exit program (default is ESC)
 
-// Input-related functions: gamepads
+// InputButton-related functions: gamepads
 RLAPI bool IsGamepadAvailable(int gamepad);                   // Check if a gamepad is available
 RLAPI const char *GetGamepadName(int gamepad);                // Get gamepad internal name id
 RLAPI bool IsGamepadButtonPressed(int gamepad, int button);   // Check if a gamepad button has been pressed once
@@ -1168,7 +1168,7 @@ RLAPI int GetGamepadAxisCount(int gamepad);                   // Get gamepad axi
 RLAPI float GetGamepadAxisMovement(int gamepad, int axis);    // Get axis movement value for a gamepad axis
 RLAPI int SetGamepadMappings(const char *mappings);           // Set internal gamepad mappings (SDL_GameControllerDB)
 
-// Input-related functions: mouse
+// InputButton-related functions: mouse
 RLAPI bool IsMouseButtonPressed(int button);                  // Check if a mouse button has been pressed once
 RLAPI bool IsMouseButtonDown(int button);                     // Check if a mouse button is being pressed
 RLAPI bool IsMouseButtonReleased(int button);                 // Check if a mouse button has been released once
@@ -1184,7 +1184,7 @@ RLAPI float GetMouseWheelMove(void);                          // Get mouse wheel
 RLAPI Vector2 GetMouseWheelMoveV(void);                       // Get mouse wheel movement for both X and Y
 RLAPI void SetMouseCursor(int cursor);                        // Set mouse cursor
 
-// Input-related functions: touch
+// InputButton-related functions: touch
 RLAPI int GetTouchX(void);                                    // Get touch position X for touch point 0 (relative to screen size)
 RLAPI int GetTouchY(void);                                    // Get touch position Y for touch point 0 (relative to screen size)
 RLAPI Vector2 GetTouchPosition(int index);                    // Get touch position XY for a touch point index (relative to screen size)
@@ -1317,10 +1317,10 @@ RLAPI Image GenImageCellular(int width, int height, int tileSize);              
 RLAPI Image GenImageText(int width, int height, const char *text);                                       // Generate image: grayscale image from text data
 
 // Image manipulation functions
-RLAPI Image ImageCopy(Image image);                                                                      // Create an image duplicate (useful for transformations)
-RLAPI Image ImageFromImage(Image image, Rectangle rec);                                                  // Create an image from another image piece
-RLAPI Image ImageText(const char *text, int k_Fontsize, Color color);                                      // Create an image from text (default font)
-RLAPI Image ImageTextEx(Font font, const char *text, float k_Fontsize, float spacing, Color tint);         // Create an image from text (custom sprite font)
+RLAPI Image ImageCopy(Image image);                                                                      // CreateButton an image duplicate (useful for transformations)
+RLAPI Image ImageFromImage(Image image, Rectangle rec);                                                  // CreateButton an image from another image piece
+RLAPI Image ImageText(const char *text, int k_Fontsize, Color color);                                      // CreateButton an image from text (default font)
+RLAPI Image ImageTextEx(Font font, const char *text, float k_Fontsize, float spacing, Color tint);         // CreateButton an image from text (custom sprite font)
 RLAPI void ImageFormat(Image *image, int newFormat);                                                     // Convert image data to desired format
 RLAPI void ImageToPOT(Image *image, Color fill);                                                         // Convert image to POT (power-of-two)
 RLAPI void ImageCrop(Image *image, Rectangle crop);                                                      // Crop an image to a defined rectangle
@@ -1590,7 +1590,7 @@ RLAPI Wave LoadWaveFromMemory(const char *fileType, const unsigned char *fileDat
 RLAPI bool IsWaveReady(Wave wave);                                    // Checks if wave data is ready
 RLAPI Sound LoadSound(const char *fileName);                          // Load sound from file
 RLAPI Sound LoadSoundFromWave(Wave wave);                             // Load sound from wave data
-RLAPI Sound LoadSoundAlias(Sound source);                             // Create a new sound that shares the same sample data as the source sound, does not own the sound data
+RLAPI Sound LoadSoundAlias(Sound source);                             // CreateButton a new sound that shares the same sample data as the source sound, does not own the sound data
 RLAPI bool IsSoundReady(Sound sound);                                 // Checks if a sound is ready
 RLAPI void UpdateSound(Sound sound, const void *data, int sampleCount); // Update sound buffer with new data
 RLAPI void UnloadWave(Wave wave);                                     // Unload wave data

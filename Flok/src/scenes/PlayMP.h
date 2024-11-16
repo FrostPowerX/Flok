@@ -1,7 +1,12 @@
 ﻿#pragma once
 
-namespace PlayMP {
+namespace Game {
 
-void Play();
+namespace Scene {
 
-};
+void PlayMP();
+
+}
+
+}
+

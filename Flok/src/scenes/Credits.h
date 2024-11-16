@@ -1,5 +1,11 @@
 #pragma once
 
-namespace Credits {
+namespace Game {
+
+namespace Scene {
+
 void Credits();
-};
+
+}
+
+} // namespace Game

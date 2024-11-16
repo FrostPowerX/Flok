@@ -13,30 +13,32 @@
 #include "engine/Parallax.h"
 #include "engine/SceneManager.h"
 
-namespace game {
-namespace scenes {
-using namespace Buttons;
+namespace Game {
+
+namespace Scene {
+
+using namespace UI;
 using namespace Actors;
 
-const int k_maxButtons = 2;
+static const int k_maxButtons = 2;
 
-PlayerType f_Player1;
-PlayerType f_Player2;
+static PlayerType f_Player1;
+static PlayerType f_Player2;
 
-Button PauseMenu[k_maxButtons];
+static Button PauseMenu[k_maxButtons];
 
-constexpr int k_Fontsize = 32;
-int Hovering = 1;
+static constexpr int k_Fontsize = 32;
+static int Hovering = 1;
 
-bool Exit = false;
-constexpr float k_PlayerUpwardPush = 500.0F;
-constexpr float k_WallTimer = 3.0F;
-constexpr float k_WallSpeed = 400.0F;
-float WallTime = 0;
+static bool Exit = false;
+static constexpr float k_PlayerUpwardPush = 500.0F;
+static constexpr float k_WallTimer = 3.0F;
+static constexpr float k_WallSpeed = 400.0F;
+static float WallTime = 0;
 
-bool Pause = false;
+static bool Pause = false;
 
-void WallManager(std::list<WallType*>& Walls, std::stack<WallType*>& HiddenWalls) {
+static void WallManager(std::list<WallType*>& Walls, std::stack<WallType*>& HiddenWalls) {
   // TODO
   //  logic to manage level and speed of walls
 
@@ -77,7 +79,7 @@ void WallManager(std::list<WallType*>& Walls, std::stack<WallType*>& HiddenWalls
   }
 }
 
-void Init() {
+static void Init() {
   Hovering = 1;
 
   Parallax::InitParallax();
@@ -97,17 +99,17 @@ void Init() {
         Text = "Menu";
     }
 
-    Buttons::Create(PauseMenu[I], Text, k_Margin, k_Padding, k_Fontsize, I);
+    UI::CreateButton(PauseMenu[I], Text, k_Margin, k_Padding, k_Fontsize, I);
   }
 }
 
-void Input() {
+static void InputButton() {
 
   if (IsKeyPressed(KEY_ESCAPE))
     Pause = !Pause;
 
   if (Pause) {
-    Buttons::Input(PauseMenu, Hovering, k_maxButtons);
+    UI::InputButton(PauseMenu, Hovering, k_maxButtons);
 
     if (IsKeyReleased(KEY_ENTER)) {
       switch (Hovering) {
@@ -133,7 +135,7 @@ void Input() {
   }
 }
 
-bool CheckForPlayerWallCollision(const std::list<WallType*>& Walls) {
+static bool CheckForPlayerWallCollision(const std::list<WallType*>& Walls) {
   bool Collided = false;
   for (const auto Wall : Walls) {
     if (Wall) {
@@ -156,7 +158,7 @@ bool CheckForPlayerWallCollision(const std::list<WallType*>& Walls) {
   return Collided;
 }
 
-void CheckLoseCondition(PlayerType Player, std::list<WallType*>& Walls) {
+static void CheckLoseCondition(PlayerType Player, std::list<WallType*>& Walls) {
 
   bool HitsWall = CheckForPlayerWallCollision(Walls);
   bool HitsBorder = Collisions::IsRectBorder(GetBoundingBoxPlayer(Player));
@@ -173,7 +175,7 @@ void CheckLoseCondition(PlayerType Player, std::list<WallType*>& Walls) {
   }
 }
 
-void Update(std::list<WallType*>& Walls, std::stack<WallType*>& HiddenWalls) {
+static void Update(std::list<WallType*>& Walls, std::stack<WallType*>& HiddenWalls) {
 
   if (!Pause) {
 
@@ -188,7 +190,7 @@ void Update(std::list<WallType*>& Walls, std::stack<WallType*>& HiddenWalls) {
   }
 }
 
-void Draw(const std::list<WallType*>& Walls) {
+static void Draw(const std::list<WallType*>& Walls) {
   Parallax::DrawBackground();
   Parallax::DrawMidground();
   Parallax::DrawMidground2();
@@ -215,7 +217,7 @@ void Draw(const std::list<WallType*>& Walls) {
   EndDrawing();
 }
 
-void DeInit() {
+static void DeInit() {
   Exit = false;
   UnloadPlayer(f_Player1);
   UnloadPlayer(f_Player2);
@@ -223,7 +225,7 @@ void DeInit() {
   Parallax::UnloadParallax();
 }
 
-void Play() {
+void PlayMP() {
   // BUG:
   //  it feels awful and the collision is very imprecise
 
@@ -241,7 +243,7 @@ void Play() {
   SetPositionPlayer(f_Player2, x2, GetBoundingBoxPlayer(f_Player2).y);
 
   while (!Exit && !WindowShouldClose()) {
-    Input();
+    InputButton();
     Update(Walls, HiddenWalls);
     Draw(Walls);
   }
@@ -259,5 +261,6 @@ void Play() {
   ChangeScene(SceneManager::Scenes::MainMenu);
 }
 
-} // namespace scenes
-} // namespace game
+} // namespace Scene
+
+} // namespace Game

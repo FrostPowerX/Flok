@@ -8,20 +8,15 @@
 
 #include "SceneManager.h"
 
-namespace {
+namespace Game {
 
-}
-
-
-
-void StartUp::Load() {
+void Load() {
 
   InitWindow(g_ScreenWidth, g_ScreenHeight, "Flok");
 
   SetWindowState(FLAG_VSYNC_HINT);
 
   InitAudioDevice();
-
 
   if (!IsAudioDeviceReady()) {
     std::cerr << "Error setting up Audio device" << '\n';
@@ -31,3 +26,5 @@ void StartUp::Load() {
 
   SceneManager::ChangeScene();
 }
+
+} // namespace Game

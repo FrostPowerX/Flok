@@ -23,4 +23,5 @@ bool IsEqual(const Vector2& A, const Vector2& B);
 bool IsEqual(float A, float B);
 
 bool IsInRect(const Rectangle& Rect, Vector2 Pos);
+
 } // namespace Math
