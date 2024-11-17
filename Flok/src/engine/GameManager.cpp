@@ -1,5 +1,6 @@
 #include "GameManager.h"
 
+#include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -172,6 +173,11 @@ void AddLose(bool isMP) {
 
     f_TotalLose++;
   }
+}
+
+int GetScore(bool isMP) {
+
+  return (isMP) ? f_CurrentScoreMP : f_CurrentScore;
 }
 
 int GetMaxScore(bool isMP) {
