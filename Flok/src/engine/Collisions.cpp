@@ -50,12 +50,15 @@ bool IsDotBorder(const Vector2& Position, WhereCollides& CollisionPlace) {
   if (Position.x >= g_ScreenWidth) {
     Collides = true;
     CollisionPlace = WhereCollides::Right;
+
   } else if (Position.x <= 0) {
     Collides = true;
     CollisionPlace = WhereCollides::Left;
+
   } else if (Position.y >= g_ScreenHeight) {
     Collides = true;
     CollisionPlace = WhereCollides::Down;
+
   } else if (Position.y <= 0) {
     Collides = true;
     CollisionPlace = WhereCollides::Up;

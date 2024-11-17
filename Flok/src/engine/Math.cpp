@@ -40,14 +40,18 @@ float GetRotation(const Vector2& A) {
     case 1:
       Degree = atan(-A.y / A.x);
       break;
+
     case 2:
       break;
+
     case 3:
       Degree = PI + atan(-A.y / A.x);
       break;
+
     case 4:
       Degree = 2 * PI + atan(-A.y / A.x);
       break;
+
     default:
       cerr << "Err Math.cpp:54" << "\n";
       break;
