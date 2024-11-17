@@ -10,6 +10,7 @@
 #include "actors/WallClass.h"
 #include "engine/Buttons.h"
 #include "engine/Collisions.h"
+#include "engine/GameManager.h"
 #include "engine/Parallax.h"
 #include "engine/SceneManager.h"
 
@@ -44,40 +45,40 @@ static void WallManager(std::list<WallType*>& Walls, std::stack<WallType*>& Hidd
   // TODO
   //  logic to manage level and speed of walls
   for (int i = 0; i < k_MaxWalls; i++) {
-  WallType* NewWall = nullptr;
-  WallTime += GetFrameTime();
+    WallType* NewWall = nullptr;
+    WallTime += GetFrameTime();
 
-  if (WallTime >= k_WallTimer) {
-    WallTime = 0;
+    if (WallTime >= k_WallTimer) {
+      WallTime = 0;
 
-    if (!HiddenWalls.empty()) {
-      NewWall = HiddenWalls.top();
-      HiddenWalls.pop();
-    } else {
-      NewWall = new WallType(MakeWall(k_WallSpeed / k_MaxWalls));
-    }
-  }
-
-  for (auto& Wall : Walls) {
-
-    if (NewWall && !Wall) {
-      Wall = NewWall;
-      Wall->f_IsHidden = false;
-      NewWall = nullptr;
-    } else {
-      if (Wall && Wall->f_Position <= -Wall->f_WallWidth) {
-        ResetWall(*Wall, k_WallSpeed / k_MaxWalls);
-        HiddenWalls.push(Wall);
-        Wall = nullptr;
-      } else if (Wall) {
-        UpdateWalls(*Wall);
+      if (!HiddenWalls.empty()) {
+        NewWall = HiddenWalls.top();
+        HiddenWalls.pop();
+      } else {
+        NewWall = new WallType(MakeWall(k_WallSpeed / k_MaxWalls));
       }
     }
-  }
 
-  if (NewWall) {
-    Walls.push_back(NewWall);
-  }
+    for (auto& Wall : Walls) {
+
+      if (NewWall && !Wall) {
+        Wall = NewWall;
+        Wall->f_IsHidden = false;
+        NewWall = nullptr;
+      } else {
+        if (Wall && Wall->f_Position <= -Wall->f_WallWidth) {
+          ResetWall(*Wall, k_WallSpeed / k_MaxWalls);
+          HiddenWalls.push(Wall);
+          Wall = nullptr;
+        } else if (Wall) {
+          UpdateWalls(*Wall);
+        }
+      }
+    }
+
+    if (NewWall) {
+      Walls.push_back(NewWall);
+    }
   }
 }
 
@@ -95,7 +96,6 @@ static void Init() {
     InitPlayer(f_Player2, "res/ToxicFrog/GreenBlue/ToxicFrogGreenBlue_Hop.png");
     x = GetBoundingBoxPlayer(f_Player2).x + GetBoundingBoxPlayer(f_Player2).width * 0.5f;
     SetPositionPlayer(f_Player2, x, GetBoundingBoxPlayer(f_Player2).y);
-
   }
 
   constexpr Margin k_Margin = {.f_Top = 40, .f_Bottom = 0, .f_Left = 0, .f_Right = 0};
@@ -141,10 +141,14 @@ static void InputButton() {
 
   } else {
     if (IsKeyPressed(KEY_SPACE)) {
+
+      AddJump(Multiplayer);
       PushPlayer(f_Player1, {0, -1}, k_PlayerUpwardPush + GetSpeedPlayer(f_Player1));
     }
 
     if (IsKeyPressed(KEY_UP) && Multiplayer) {
+
+      AddJump(Multiplayer);
       PushPlayer(f_Player2, {0, -1}, k_PlayerUpwardPush + GetSpeedPlayer(f_Player2));
     }
   }
@@ -181,10 +185,32 @@ static void CheckLoseCondition(PlayerType Player, std::list<WallType*>& Walls) {
     if (GetBoundingBoxPlayer(Player).y < GetBoundingBoxPlayer(Player).height) {
       MovePlayer(Player, 10);
     } else {
+
+      AddLose(Multiplayer);
       Exit = true;
     }
   } else if (HitsWall) {
+
+    AddLose(Multiplayer);
     Exit = true;
+  }
+}
+
+static void CheckPointOnPassWall(PlayerType Player, std::list<WallType*>& Walls) {
+
+  for (const auto Wall : Walls) {
+    if (Wall) {
+      Rectangle const Bb = GetBoundingBoxPlayer(Player);
+
+      if (!Wall->f_checked) {
+
+        if (Wall->f_Position < Bb.y) {
+
+          AddScore();
+          Wall->f_checked = true;
+        }
+      }
+    }
   }
 }
 
@@ -207,6 +233,8 @@ static void Update(std::list<WallType*>& Walls, std::stack<WallType*>& HiddenWal
     if (Multiplayer) {
       CheckLoseCondition(f_Player2, Walls);
     }
+
+    CheckPointOnPassWall(f_Player1, Walls);
   }
 }
 
@@ -249,6 +277,9 @@ static void Unload() {
   if (Multiplayer) {
     UnloadPlayer(f_Player2);
   }
+
+  ResetScore(Multiplayer);
+  UnloadGManager();
 
   Parallax::UnloadParallax();
 }

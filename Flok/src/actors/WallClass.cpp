@@ -18,13 +18,11 @@ int UniqueId = 0;
 float GetRandomGapStart() {
 
   return static_cast<float>(GetRandomValue(0, g_ScreenHeight - k_MaxGapH));
-
 }
 
 float GetRandomGapHeight() {
 
   return static_cast<float>(GetRandomValue(k_MinGapH, k_MaxGapH));
-
 }
 
 WallType MakeWall(const float Speed) {
@@ -35,8 +33,8 @@ WallType MakeWall(const float Speed) {
           .f_Speed = Speed,
           .f_IsHidden = true,
           .f_UniqueId = UniqueId++,
-          .f_WallWidth = k_WallWidth};
-
+          .f_WallWidth = k_WallWidth,
+          .f_checked = false};
 }
 
 void ResetWall(WallType& Wall, const float Speed) {
@@ -47,14 +45,13 @@ void ResetWall(WallType& Wall, const float Speed) {
           .f_Speed = Speed,
           .f_IsHidden = true,
           .f_UniqueId = Wall.f_UniqueId,
-          .f_WallWidth = k_WallWidth};
-
+          .f_WallWidth = k_WallWidth,
+          .f_checked = false};
 }
 
 void UpdateWalls(WallType& Wall) {
 
   Wall.f_Position -= Wall.f_Speed * GetFrameTime();
-
 }
 
 void DrawWalls(const WallType& Wall) {
@@ -65,7 +62,6 @@ void DrawWalls(const WallType& Wall) {
 
   DrawRectangle(static_cast<int>(Wall.f_Position), static_cast<int>(Wall.f_GapStart + Wall.f_GapSize),
                 static_cast<int>(k_WallWidth), g_ScreenHeight, GREEN);
-
 }
 
-} // namespace
+} // namespace Actors

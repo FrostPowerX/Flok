@@ -7,6 +7,8 @@
 #include "Constants.h"
 #include "SceneManager.h"
 
+#include "engine/GameManager.h"
+
 namespace Game {
 
 void Load() {
@@ -18,6 +20,8 @@ void Load() {
   InitAudioDevice();
 
   HideCursor();
+
+  InitGManager();
 
   if (!IsAudioDeviceReady()) {
     std::cerr << "Error setting up Audio device" << '\n';

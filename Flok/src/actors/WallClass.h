@@ -10,6 +10,7 @@ struct WallType {
   bool f_IsHidden;
   int f_UniqueId;
   float f_WallWidth;
+  bool f_checked;
 };
 
 WallType MakeWall(float Speed);

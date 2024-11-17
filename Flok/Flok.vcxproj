@@ -246,6 +246,7 @@
     <ClCompile Include="src\engine\CloseUp.cpp" />
     <ClCompile Include="src\engine\Collisions.cpp" />
     <ClCompile Include="src\engine\Error.cpp" />
+    <ClCompile Include="src\engine\GameManager.cpp" />
     <ClCompile Include="src\engine\Math.cpp" />
     <ClCompile Include="src\engine\Parallax.cpp" />
     <ClCompile Include="src\engine\SceneManager.cpp" />
@@ -264,6 +265,7 @@
     <ClInclude Include="src\engine\CloseUp.h" />
     <ClInclude Include="src\engine\Collisions.h" />
     <ClInclude Include="src\engine\Error.h" />
+    <ClInclude Include="src\engine\GameManager.h" />
     <ClInclude Include="src\engine\Layout.h" />
     <ClInclude Include="src\engine\Math.h" />
     <ClInclude Include="src\engine\Parallax.h" />
