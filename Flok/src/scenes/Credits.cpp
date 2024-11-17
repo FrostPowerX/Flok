@@ -108,6 +108,7 @@ static void Draw() {
     }
   }
 
+  DrawText("Exit = Escape", 10, g_ScreenHeight - 30, 10, BLACK);
   DrawText("(Click on credits for more information)", 10, g_ScreenHeight - 20, 10, BLACK);
 
   EndDrawing();
