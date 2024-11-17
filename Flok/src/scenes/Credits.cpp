@@ -1,6 +1,8 @@
 #include "Credits.h"
 
+#include "Constants.h"
 #include "actors/PlayerClass.h"
+#include "engine/Collisions.h"
 #include "engine/SceneManager.h"
 
 namespace Game {
@@ -50,9 +52,47 @@ static void Init() {
   InitTexts();
 }
 
+static bool IsMouseOnText(int X, int Y, int k_Fontsize, std::string Text) {
+
+  Rectangle f_Text;
+  f_Text.x = X;
+  f_Text.y = Y;
+  f_Text.width = MeasureText(Text.c_str(), k_Fontsize);
+  f_Text.height = k_Fontsize;
+
+  return Collisions::IsRectMouse(f_Text);
+}
+
 static void InputButton() {
   if (IsKeyReleased(KEY_ESCAPE)) {
     Exit = true;
+  }
+
+  for (int I = 0; I < k_MaxTexts; I++) {
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) &&
+        IsMouseOnText(f_Texts[I].f_X, f_Texts[I].f_Y, f_Texts[I].f_FontSize, f_Texts[I].f_Text)) {
+      switch (I) {
+        case 0:
+          OpenURL("https://projectbifron.itch.io/");
+          break;
+
+        case 1:
+          OpenURL("https://frostpower.itch.io/");
+          break;
+
+        case 2:
+          OpenURL("https://im-dagon.itch.io/");
+          break;
+
+        case 3:
+          OpenURL("https://tinyurl.com/toxic-frog");
+          break;
+
+        case 4:
+          OpenURL("https://tinyurl.com/ForestTitleSet");
+          break;
+      }
+    }
   }
 }
 
