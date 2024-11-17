@@ -20,19 +20,20 @@ namespace Scene {
 using namespace UI;
 using namespace Actors;
 
-static const int k_maxButtons = 2;
+static const int k_MaxButtons = 2;
+static const int k_MaxWalls = 5;
 
 static PlayerType f_Player1;
 static PlayerType f_Player2;
 
-static Button PauseMenu[k_maxButtons];
+static Button PauseMenu[k_MaxButtons];
 
 static constexpr int k_Fontsize = 32;
 static int Hovering = 1;
 
 static bool Exit = false;
 static constexpr float k_PlayerUpwardPush = 500.0F;
-static constexpr float k_WallTimer = 3.0F;
+static constexpr float k_WallTimer = 5.0F;
 static constexpr float k_WallSpeed = 400.0F;
 static float WallTime = 0;
 
@@ -42,7 +43,7 @@ static bool Multiplayer = false;
 static void WallManager(std::list<WallType*>& Walls, std::stack<WallType*>& HiddenWalls) {
   // TODO
   //  logic to manage level and speed of walls
-
+  for (int i = 0; i < k_MaxWalls; i++) {
   WallType* NewWall = nullptr;
   WallTime += GetFrameTime();
 
@@ -53,7 +54,7 @@ static void WallManager(std::list<WallType*>& Walls, std::stack<WallType*>& Hidd
       NewWall = HiddenWalls.top();
       HiddenWalls.pop();
     } else {
-      NewWall = new WallType(MakeWall(k_WallSpeed));
+      NewWall = new WallType(MakeWall(k_WallSpeed / k_MaxWalls));
     }
   }
 
@@ -65,7 +66,7 @@ static void WallManager(std::list<WallType*>& Walls, std::stack<WallType*>& Hidd
       NewWall = nullptr;
     } else {
       if (Wall && Wall->f_Position <= -Wall->f_WallWidth) {
-        ResetWall(*Wall, k_WallSpeed);
+        ResetWall(*Wall, k_WallSpeed / k_MaxWalls);
         HiddenWalls.push(Wall);
         Wall = nullptr;
       } else if (Wall) {
@@ -76,6 +77,7 @@ static void WallManager(std::list<WallType*>& Walls, std::stack<WallType*>& Hidd
 
   if (NewWall) {
     Walls.push_back(NewWall);
+  }
   }
 }
 
@@ -101,7 +103,7 @@ static void Init() {
 
   std::string Text;
 
-  for (int I = 0; I < k_maxButtons; I++) {
+  for (int I = 0; I < k_MaxButtons; I++) {
 
     switch (I) {
       case 0:
@@ -121,7 +123,7 @@ static void InputButton() {
     Pause = !Pause;
 
   if (Pause) {
-    UI::InputButton(PauseMenu, Hovering, k_maxButtons);
+    UI::InputButton(PauseMenu, Hovering, k_MaxButtons);
 
     if (IsKeyReleased(KEY_ENTER)) {
       switch (Hovering) {
@@ -161,6 +163,8 @@ static bool CheckForPlayerWallCollision(PlayerType Player, const std::list<WallT
                                              .y = Wall->f_GapStart + Wall->f_GapSize,
                                              .width = Wall->f_WallWidth,
                                              .height = g_ScreenHeight - (Wall->f_GapStart + Wall->f_GapSize)});
+      if (Collided)
+        return Collided;
     }
   }
 
@@ -229,7 +233,7 @@ static void Draw(const std::list<WallType*>& Walls) {
     }
 
     if (Pause)
-      RenderButtons(PauseMenu, k_maxButtons);
+      RenderButtons(PauseMenu, k_MaxButtons);
 
     Parallax::DrawFrontground();
   }
