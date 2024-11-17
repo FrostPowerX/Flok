@@ -51,6 +51,8 @@ static std::string CreateJSONString() {
   k_Json << "\"TotalLose\":" << f_TotalLose;
   k_Json << "}";
 
+  std::cout << "Save: " << k_Json.str() << "\n";
+
   return k_Json.str();
 }
 
@@ -82,6 +84,8 @@ static void ParseJSONString(const std::string& k_JsonString) {
   f_TotalScore = GetValue("TotalScore");
   f_TotalJumps = GetValue("TotalJumps");
   f_TotalLose = GetValue("TotalLose");
+
+  std::cout << "Load: " << k_JsonString << "\n";
 }
 
 static void SaveInfo() {

@@ -175,7 +175,7 @@ static bool CheckForPlayerWallCollision(PlayerType Player, const std::list<WallT
   return Collided;
 }
 
-static void CheckLoseCondition(PlayerType Player, std::list<WallType*>& Walls) {
+static void CheckLoseCondition(PlayerType& Player, std::list<WallType*>& Walls) {
 
   bool HitsWall = CheckForPlayerWallCollision(Player, Walls);
   bool HitsBorder = Collisions::IsRectBorder(GetBoundingBoxPlayer(Player));
@@ -183,7 +183,7 @@ static void CheckLoseCondition(PlayerType Player, std::list<WallType*>& Walls) {
   // in case it hits roof
   if (HitsBorder) {
     if (GetBoundingBoxPlayer(Player).y < GetBoundingBoxPlayer(Player).height) {
-      MovePlayer(Player, 10);
+      MovePlayer(Player, abs(GetBoundingBoxPlayer(Player).y * 2));
     } else {
 
       AddLose(Multiplayer);
@@ -204,9 +204,9 @@ static void CheckPointOnPassWall(PlayerType Player, std::list<WallType*>& Walls)
 
       if (!Wall->f_checked) {
 
-        if (Wall->f_Position < Bb.y) {
+        if (Wall->f_Position < Bb.x) {
 
-          AddScore();
+          AddScore(Multiplayer);
           Wall->f_checked = true;
         }
       }
@@ -260,10 +260,16 @@ static void Draw(const std::list<WallType*>& Walls) {
       DrawPlayer(f_Player2);
     }
 
-    if (Pause)
-      RenderButtons(PauseMenu, k_MaxButtons);
+    const std::string k_Score = "Score: " + std::to_string(GetScore(Multiplayer));
 
     Parallax::DrawFrontground();
+
+    DrawText(k_Score.c_str(), 20, 10, 20, WHITE);
+
+    if (Pause) {
+      DrawRectangle(0, 0, g_ScreenWidth, g_ScreenHeight, Color{0, 0, 0, 150});
+      RenderButtons(PauseMenu, k_MaxButtons);
+    }
   }
   EndDrawing();
 }
