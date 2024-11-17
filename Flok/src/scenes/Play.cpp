@@ -268,6 +268,20 @@ static void Draw(const std::list<WallType*>& Walls) {
 
     if (Pause) {
       DrawRectangle(0, 0, g_ScreenWidth, g_ScreenHeight, Color{0, 0, 0, 150});
+
+      if (Multiplayer) {
+      
+        DrawText("Jump P1 = Space", 10, g_ScreenHeight - 60, 10, WHITE);
+        DrawText("Jump P2 = Space", 10, g_ScreenHeight - 50, 10, WHITE);
+      } else {
+      
+        DrawText("Jump = Space", 10, g_ScreenHeight - 50, 10, WHITE);
+      }
+
+      DrawText("Select = KeyUp / KeyDown", 10, g_ScreenHeight - 40, 10, WHITE);
+      DrawText("Enter = Enter", 10, g_ScreenHeight - 30, 10, WHITE);
+      DrawText("Pause/Despause = Escape", 10, g_ScreenHeight - 20, 10, WHITE);
+
       RenderButtons(PauseMenu, k_MaxButtons);
     }
   }
