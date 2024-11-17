@@ -11,7 +11,7 @@ constexpr int k_MaxGapH = 300;
 
 // TODO
 //  Replace with player width
-constexpr int k_MinGapH = 120;
+constexpr int k_MinGapH = 160;
 
 int UniqueId = 0;
 
