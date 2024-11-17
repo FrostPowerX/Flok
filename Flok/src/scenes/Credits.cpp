@@ -51,7 +51,7 @@ static void Init() {
 }
 
 static void InputButton() {
-  if (IsKeyReleased(KEY_ENTER)) {
+  if (IsKeyReleased(KEY_ESCAPE)) {
     Exit = true;
   }
 }

@@ -66,6 +66,11 @@ static void Unload() {
 }
 
 static void InputButton() {
+
+  if (IsKeyReleased(KEY_ESCAPE)) {
+    Exit = true;
+  }
+
   UI::InputButton(MainMenuButtons, Hovering, k_Amount);
 
   if (IsKeyReleased(KEY_ENTER)) {
