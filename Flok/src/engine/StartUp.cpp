@@ -18,6 +18,8 @@ void Load() {
 
   InitAudioDevice();
 
+  HideCursor();
+
   if (!IsAudioDeviceReady()) {
     std::cerr << "Error setting up Audio device" << '\n';
   }
