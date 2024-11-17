@@ -10,10 +10,15 @@ void CreateButton(Button& f_Button, std::string Text, Margin k_Margin, Padding k
 
   Font k_DefFont = {.baseSize = 0, .glyphCount = 0, .glyphPadding = 0, .texture = k_Def, .recs = nullptr, .glyphs = nullptr};
 
-  f_Button = {.f_BoundingBox = {.x = (g_ScreenWidth - static_cast<float>(MeasureText(Text.c_str(), k_Fontsize))) / 2.0F,
-              .y = g_ScreenHeight / 2.0F + k_Margin.f_Top * static_cast<float>(Index + 1),
-              .width = static_cast<float>(MeasureText(Text.c_str(), k_Fontsize)) + k_Padding.f_Top,
-              .height = static_cast<float>(k_Fontsize)},
+  Rectangle k_Box;
+
+  k_Box.x = (g_ScreenWidth - static_cast<float>(MeasureText(Text.c_str(), k_Fontsize))) / 2.0F;
+  k_Box.y = g_ScreenHeight / 2.0F + k_Margin.f_Top * static_cast<float>(Index + 1);
+
+  k_Box.width = static_cast<float>(MeasureText(Text.c_str(), k_Fontsize)) + k_Padding.f_Top;
+  k_Box.height = static_cast<float>(k_Fontsize);
+
+  f_Button = {.f_BoundingBox = k_Box,
               .f_Padding = k_Padding,
               .f_Margin = k_Padding,
               .f_Sprite = k_Def,
@@ -27,34 +32,37 @@ void CreateButton(Button& f_Button, std::string Text, Margin k_Margin, Padding k
 
 }
 
-void RenderButtons(Button UI[], const int Amount) {
+void RenderButtons(Button Buttons[], const int Amount) {
 
   for (int I = 0; I < Amount; I++) {
 
     // DrawTexturePro()
-    if (UI[I].f_IsHover) {
-      DrawRectangleRec(UI[I].f_BoundingBox, RED);
+    if (Buttons[I].f_IsHover) {
+      DrawRectangleRec(Buttons[I].f_BoundingBox, RED);
     } else {
-      DrawRectangleRec(UI[I].f_BoundingBox, BLACK);
+      DrawRectangleRec(Buttons[I].f_BoundingBox, BLACK);
     }
 
-    float f_ButtonBoxX = UI[I].f_BoundingBox.x + UI[I].f_Padding.f_Left + UI[I].f_BoundingBox.width / 2;
-    float f_ButtonTextX = UI[I].f_IsTextCenter ? static_cast<float>(MeasureText(UI[I].f_Text.c_str(), UI[I].f_FontSize)) / 2.0F : 0;
+    float k_ButtonBoxX = Buttons[I].f_BoundingBox.x + Buttons[I].f_Padding.f_Left + Buttons[I].f_BoundingBox.width / 2;
+    float k_ButtonTextX = Buttons[I].f_IsTextCenter
+                              ? static_cast<float>(MeasureText(Buttons[I].f_Text.c_str(), Buttons[I].f_FontSize)) / 2.0F
+                              : 0;
 
-    float f_ButtonBoxY = UI[I].f_BoundingBox.y + UI[I].f_Padding.f_Top + UI[I].f_BoundingBox.height / 2;
-    float f_ButtonTextY = UI[I].f_Margin.f_Top - (UI[I].f_IsTextCenter ? static_cast<float>(UI[I].f_FontSize) : 0);
+    float k_ButtonBoxY = Buttons[I].f_BoundingBox.y + Buttons[I].f_Padding.f_Top + Buttons[I].f_BoundingBox.height / 2;
+    float k_ButtonTextY =
+        Buttons[I].f_Margin.f_Top - (Buttons[I].f_IsTextCenter ? static_cast<float>(Buttons[I].f_FontSize) : 0);
 
-    int f_PosX = static_cast<int>(f_ButtonBoxX - f_ButtonTextX);
-    int f_PosY = static_cast<int>(f_ButtonBoxY + f_ButtonTextY);
+    int k_PosX = static_cast<int>(k_ButtonBoxX - k_ButtonTextX);
+    int k_PosY = static_cast<int>(k_ButtonBoxY + k_ButtonTextY);
 
     // DrawTextPro();
-    DrawText(UI[I].f_Text.c_str(), f_PosX, f_PosY, UI[I].f_FontSize, UI[I].f_TextColor);
+    DrawText(Buttons[I].f_Text.c_str(), k_PosX, k_PosY, Buttons[I].f_FontSize, Buttons[I].f_TextColor);
   }
 }
 
-void InputButton(Button UI[], int& Hovering, const int Amount) {
+void InputButton(Button Buttons[], int& Hovering, const int Amount) {
 
-  UI[Hovering - 1].f_IsHover = false;
+  Buttons[Hovering - 1].f_IsHover = false;
 
   if (IsKeyReleased(KEY_DOWN)) {
     if (Hovering == Amount) {
@@ -70,7 +78,7 @@ void InputButton(Button UI[], int& Hovering, const int Amount) {
     }
   }
 
-  UI[Hovering - 1].f_IsHover = true;
+  Buttons[Hovering - 1].f_IsHover = true;
 
 }
 

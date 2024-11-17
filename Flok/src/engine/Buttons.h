@@ -26,8 +26,8 @@ struct Button {
 
 void CreateButton(Button& f_Button, std::string Text, Margin k_Margin,Padding k_Padding, int k_Fontsize, int Index);
 
-void RenderButtons(Button UI[], int Amount);
+void RenderButtons(Button Buttons[], int Amount);
 
-void InputButton(Button UI[], int& Hovering, int Amount);
+void InputButton(Button Buttons[], int& Hovering, int Amount);
 
 } // namespace UI
