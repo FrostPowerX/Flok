@@ -55,10 +55,10 @@ static void Init() {
 static bool IsMouseOnText(int X, int Y, int k_Fontsize, std::string Text) {
 
   Rectangle f_Text;
-  f_Text.x = X;
-  f_Text.y = Y;
-  f_Text.width = MeasureText(Text.c_str(), k_Fontsize);
-  f_Text.height = k_Fontsize;
+  f_Text.x = static_cast<float>(X);
+  f_Text.y = static_cast<float>(Y);
+  f_Text.width = static_cast<float>(MeasureText(Text.c_str(), k_Fontsize));
+  f_Text.height = static_cast<float>(k_Fontsize);
 
   return Collisions::IsRectMouse(f_Text);
 }
