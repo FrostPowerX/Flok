@@ -67,7 +67,10 @@ void UpdatePlayer(PlayerType& Player) {
 
 void DrawPlayer(PlayerType& Player) {
 
+#ifndef _DEBUG
   DrawRectangleLinesEx(Player.f_BoundingBox, 2, GREEN);
+#endif // !_Debug
+
 
   Rectangle k_Source;
   k_Source.x = GetCenterPlayer(Player).x;
