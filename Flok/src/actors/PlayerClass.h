@@ -34,4 +34,7 @@ void MovePlayer(PlayerType& Player, float Height);
 
 float GetSpeedPlayer(PlayerType& Player);
 
+Vector2 GetCenterPlayer(PlayerType Player);
+
+Vector2 GetScaledSizePlayer(PlayerType Player);
 }

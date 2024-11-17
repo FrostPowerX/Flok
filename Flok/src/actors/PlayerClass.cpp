@@ -69,12 +69,20 @@ void DrawPlayer(PlayerType& Player) {
 
   DrawRectangleLinesEx(Player.f_BoundingBox, 2, GREEN);
 
-  DrawTexturePro(Player.f_Sprite, {.x = 48 * (Player.f_Frame * 2 + 1), .y = 8, .width = 48, .height = 32},
-                 {.x = Player.f_BoundingBox.x + Player.f_BoundingBox.width / 2.0F,
-                  .y = Player.f_BoundingBox.y + Player.f_BoundingBox.height / 2.0F,
-                  .width = Player.f_BoundingBox.width * k_Scale,
-                  .height = Player.f_BoundingBox.height * k_Scale},
-                 {.x = Player.f_BoundingBox.width * k_Scale / 2.0F, .y = Player.f_BoundingBox.height * k_Scale / 2.0F},
+  Rectangle k_Source;
+  k_Source.x = GetCenterPlayer(Player).x;
+  k_Source.y = GetCenterPlayer(Player).y;
+  k_Source.width = GetScaledSizePlayer(Player).x;
+  k_Source.height = GetScaledSizePlayer(Player).y;
+
+  Vector2 k_Origin;
+  k_Origin.x = GetScaledSizePlayer(Player).x * 0.5f;
+  k_Origin.y = GetScaledSizePlayer(Player).y * 0.5f;
+
+  DrawTexturePro(Player.f_Sprite, 
+                 {.x = 48 * (Player.f_Frame * 2 + 1), .y = 8, .width = 48, .height = 32}, 
+                 k_Source,
+                 k_Origin,
                  0.0F, WHITE);
 
 }
@@ -82,6 +90,28 @@ void DrawPlayer(PlayerType& Player) {
 Rectangle GetBoundingBoxPlayer(PlayerType& Player) {
 
   return Player.f_BoundingBox;
+
+}
+
+Vector2 GetCenterPlayer(PlayerType Player) {
+
+  Vector2 center;
+
+  center.x = Player.f_BoundingBox.x + Player.f_BoundingBox.width * 0.5f;
+  center.y = Player.f_BoundingBox.y + Player.f_BoundingBox.height * 0.5f;
+
+  return center;
+
+}
+
+Vector2 GetScaledSizePlayer(PlayerType Player) {
+
+  Vector2 scaledSize;
+
+  scaledSize.x = Player.f_BoundingBox.width * k_Scale;
+  scaledSize.y = Player.f_BoundingBox.height * k_Scale;
+
+  return scaledSize;
 
 }
 
