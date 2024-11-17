@@ -46,13 +46,10 @@ void UnloadParallax() {
 
 void UpdateParallax(const float Speed) {
 
-  f_Scrollingback -= 0.0f;
   f_Scrollingmid -= Speed * 0.25f * GetFrameTime();
   f_Scrollingmid2 -= Speed * 0.5f * GetFrameTime();
   f_Scrollingfront -= Speed * GetFrameTime();
 
-  if (f_Scrollingback <= -Background.width)
-    f_Scrollingback = 0;
   if (f_Scrollingmid <= -Midground.width)
     f_Scrollingmid = 0;
   if (f_Scrollingmid2 <= -Midground2.width)
