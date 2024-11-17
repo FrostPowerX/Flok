@@ -107,6 +107,9 @@ static void Draw() {
       DrawText(f_Texts[i].f_Text.c_str(), f_Texts[i].f_X, f_Texts[i].f_Y, f_Texts[i].f_FontSize, f_Texts[i].f_Color);
     }
   }
+
+  DrawText("(Click on credits for more information)", 10, g_ScreenHeight - 20, 10, BLACK);
+
   EndDrawing();
 }
 

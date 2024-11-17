@@ -32,8 +32,7 @@ static void Draw() {
     DrawText("\t Player 2: Jump = Arrow Up", 100, 220, 20, BLACK);
     DrawText("\t\t Player 2 frog: Green", 100, 240, 20, BLACK);
 
-    DrawText("Pause = Escape", 100, 300, 20, BLACK);
-
+    DrawText("Pause/Back = Escape", 100, 300, 20, BLACK);
   }
   EndDrawing();
 

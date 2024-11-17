@@ -93,6 +93,10 @@ static void Draw() {
 
   DrawText(k_GameVer.c_str(), 10, 10, 10, BLACK);
 
+  DrawText("Select = KeyUp / KeyDown", 10, g_ScreenHeight - 40, 10, BLACK);
+  DrawText("Enter = Enter", 10, g_ScreenHeight - 30, 10, BLACK);
+  DrawText("Exit = Escape", 10, g_ScreenHeight - 20, 10, BLACK);
+
   EndDrawing();
 }
 
