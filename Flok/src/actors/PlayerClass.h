@@ -4,7 +4,6 @@
 
 #include "raylib.h"
 
-
 namespace Actors {
 
 struct PlayerType {
@@ -37,4 +36,5 @@ float GetSpeedPlayer(PlayerType& Player);
 Vector2 GetCenterPlayer(PlayerType Player);
 
 Vector2 GetScaledSizePlayer(PlayerType Player);
-}
+
+} // namespace Actors

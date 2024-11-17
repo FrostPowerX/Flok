@@ -10,7 +10,6 @@ void Error::Unhandled(const int Line, const std::string& File) {
 #ifdef _DEBUG
   abort();
 #endif
-
 }
 
 void Error::ResourceNotReady(const std::string& Name) {
@@ -29,4 +28,4 @@ void Error::UnknownResource(const std::string& Name) {
 #endif
 }
 
-}
+} // namespace Error

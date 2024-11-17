@@ -13,7 +13,6 @@ using Rads = float;
 float RadianCast(const Rads Degree) {
 
   return Degree * 180.0F / PI;
-
 }
 
 float GetRotation(const Vector2& A) {
@@ -41,9 +40,6 @@ float GetRotation(const Vector2& A) {
       Degree = atan(-A.y / A.x);
       break;
 
-    case 2:
-      break;
-
     case 3:
       Degree = PI + atan(-A.y / A.x);
       break;
@@ -53,12 +49,12 @@ float GetRotation(const Vector2& A) {
       break;
 
     default:
-      cerr << "Err Math.cpp:54" << "\n";
+      cerr << "Err Math.cpp:54"
+           << "\n";
       break;
   }
 
   return RadianCast(Degree);
-
 }
 
 Vector2 Rotate(const Vector2& A, float Angle) {
@@ -77,73 +73,48 @@ Vector2 Rotate(const Vector2& A, float Angle) {
 
   OgAngle += Angle;
 
-  //rotation Matrix
+  // rotation Matrix
   return {A.x * cos(OgAngle) - A.y * sin(OgAngle), A.x * sin(OgAngle) + A.y * cos(OgAngle)};
-
 }
-
-
 
 Vector2 Subtract(const Vector2& A, const Vector2& B) {
 
   return {(A.x - B.x), (A.y - B.y)};
-
 }
-
-
 
 Vector2 Add(const Vector2& A, const Vector2& B) {
 
   return {(B.x + A.x), (B.y + A.y)};
-
 }
-
-
 
 Vector2 Normalize(const Vector2& A, const float Mag) {
 
   return {A.x / Mag, A.y / Mag};
-
 }
-
-
 
 Vector2 Multiply(const Vector2& A, const float K) {
 
   return {A.x * K, A.y * K};
-
 }
-
-
 
 float GetMag(const Vector2& A) {
 
   return sqrtf(powf(A.x, 2) + powf(A.y, 2));
-
 }
-
-
 
 bool IsEqual(const Vector2& A, const Vector2& B) {
 
   return IsEqual(A.x, B.x) && IsEqual(A.y, B.y);
-
 }
-
-
 
 bool IsEqual(const float A, const float B) {
 
   return A >= B - FLT_EPSILON && A <= B + FLT_EPSILON;
-
 }
-
-
 
 bool IsInRect(const Rectangle& Rect, const Vector2 Pos) {
 
   return Pos.x > Rect.x && Pos.x <= Rect.width + Rect.x && Pos.y > Rect.y && Pos.y < Rect.y + Rect.height;
-
 }
 
-}
+} // namespace Math

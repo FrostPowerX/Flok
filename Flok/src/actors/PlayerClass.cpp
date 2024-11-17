@@ -62,7 +62,6 @@ void UpdatePlayer(PlayerType& Player) {
       Player.f_Frame = 0;
     }
   }
-
 }
 
 void DrawPlayer(PlayerType& Player) {
@@ -70,7 +69,6 @@ void DrawPlayer(PlayerType& Player) {
 #ifndef _DEBUG
   DrawRectangleLinesEx(Player.f_BoundingBox, 2, GREEN);
 #endif // !_Debug
-
 
   Rectangle k_Source;
   k_Source.x = GetCenterPlayer(Player).x;
@@ -82,18 +80,13 @@ void DrawPlayer(PlayerType& Player) {
   k_Origin.x = GetScaledSizePlayer(Player).x * 0.5f;
   k_Origin.y = GetScaledSizePlayer(Player).y * 0.5f;
 
-  DrawTexturePro(Player.f_Sprite, 
-                 {.x = 48 * (Player.f_Frame * 2 + 1), .y = 8, .width = 48, .height = 32}, 
-                 k_Source,
-                 k_Origin,
-                 0.0F, WHITE);
-
+  DrawTexturePro(Player.f_Sprite, {.x = 48 * (Player.f_Frame * 2 + 1), .y = 8, .width = 48, .height = 32}, k_Source,
+                 k_Origin, 0.0F, WHITE);
 }
 
 Rectangle GetBoundingBoxPlayer(PlayerType& Player) {
 
   return Player.f_BoundingBox;
-
 }
 
 Vector2 GetCenterPlayer(PlayerType Player) {
@@ -104,7 +97,6 @@ Vector2 GetCenterPlayer(PlayerType Player) {
   center.y = Player.f_BoundingBox.y + Player.f_BoundingBox.height * 0.5f;
 
   return center;
-
 }
 
 Vector2 GetScaledSizePlayer(PlayerType Player) {
@@ -115,26 +107,22 @@ Vector2 GetScaledSizePlayer(PlayerType Player) {
   scaledSize.y = Player.f_BoundingBox.height * k_Scale;
 
   return scaledSize;
-
 }
 
 void SetPositionPlayer(PlayerType& Player, float X, float Y) {
 
   Player.f_BoundingBox.x = X;
   Player.f_BoundingBox.y = Y;
-
 }
 
 void MovePlayer(PlayerType& Player, float Height) {
 
   Player.f_BoundingBox.y += Height;
-
 }
 
 float GetSpeedPlayer(PlayerType& Player) {
 
   return Player.f_Speed;
-
 }
 
 } // namespace Actors

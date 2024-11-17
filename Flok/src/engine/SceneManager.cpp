@@ -2,7 +2,6 @@
 
 #include "CloseUp.h"
 #include "Error.h"
-
 #include "scenes/Controls.h"
 #include "scenes/Credits.h"
 #include "scenes/MainMenu.h"

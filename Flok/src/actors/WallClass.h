@@ -20,4 +20,4 @@ void UpdateWalls(WallType& Wall);
 
 void DrawWalls(const WallType& Wall);
 
-}
+} // namespace Actors

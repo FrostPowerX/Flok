@@ -10,4 +10,4 @@ void Close() {
   CloseWindow();
 }
 
-}
+} // namespace Game

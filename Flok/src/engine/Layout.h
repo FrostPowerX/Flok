@@ -11,4 +11,4 @@ struct Padding {
 
 using Margin = Padding;
 
-}
+} // namespace Layout

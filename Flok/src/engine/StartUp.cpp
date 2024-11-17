@@ -5,7 +5,6 @@
 #include "raylib.h"
 
 #include "Constants.h"
-
 #include "SceneManager.h"
 
 namespace Game {

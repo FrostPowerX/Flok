@@ -4,12 +4,7 @@
 
 namespace Collisions {
 
-enum class WhereCollides {
-  Up,
-  Down,
-  Left,
-  Right
-};
+enum class WhereCollides { Up, Down, Left, Right };
 
 bool IsCircleCircle(const Vector2& APosition, float ARadius, const Vector2& BPosition, float BRadius);
 
@@ -23,4 +18,4 @@ bool IsRectBorder(const Rectangle& A);
 
 bool IsRectMouse(const Rectangle& A);
 
-}
+} // namespace Collisions

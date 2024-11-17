@@ -8,7 +8,8 @@ void CreateButton(Button& f_Button, std::string Text, Margin k_Margin, Padding k
 
   Texture2D k_Def = {.id = 0, .width = 0, .height = 0, .mipmaps = 0, .format = 0};
 
-  Font k_DefFont = {.baseSize = 0, .glyphCount = 0, .glyphPadding = 0, .texture = k_Def, .recs = nullptr, .glyphs = nullptr};
+  Font k_DefFont = {
+      .baseSize = 0, .glyphCount = 0, .glyphPadding = 0, .texture = k_Def, .recs = nullptr, .glyphs = nullptr};
 
   Rectangle k_Box;
 
@@ -29,7 +30,6 @@ void CreateButton(Button& f_Button, std::string Text, Margin k_Margin, Padding k
               .f_FontSize = k_Fontsize,
               .f_IsHover = false,
               .f_IsTextCenter = true};
-
 }
 
 void RenderButtons(Button Buttons[], const int Amount) {
@@ -79,7 +79,6 @@ void InputButton(Button Buttons[], int& Hovering, const int Amount) {
   }
 
   Buttons[Hovering - 1].f_IsHover = true;
-
 }
 
-}
+} // namespace UI

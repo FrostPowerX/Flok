@@ -24,7 +24,7 @@ struct Button {
   bool f_IsTextCenter;
 };
 
-void CreateButton(Button& f_Button, std::string Text, Margin k_Margin,Padding k_Padding, int k_Fontsize, int Index);
+void CreateButton(Button& f_Button, std::string Text, Margin k_Margin, Padding k_Padding, int k_Fontsize, int Index);
 
 void RenderButtons(Button Buttons[], int Amount);
 

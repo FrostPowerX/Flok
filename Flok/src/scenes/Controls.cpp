@@ -1,5 +1,4 @@
 #include "Credits.h"
-
 #include "actors/PlayerClass.h"
 #include "engine/SceneManager.h"
 
@@ -14,15 +13,14 @@ static void InputButton() {
   if (IsKeyReleased(KEY_ESCAPE)) {
     Exit = true;
   }
-
 }
 
 static void Draw() {
+
   // TODO
   // improve this
   BeginDrawing();
   {
-
     ClearBackground(RAYWHITE);
 
     DrawText("Controls: ", 100, 140, 20, BLACK);
@@ -35,7 +33,6 @@ static void Draw() {
     DrawText("Pause/Back = Escape", 100, 300, 20, BLACK);
   }
   EndDrawing();
-
 }
 
 void Controls() {
@@ -45,7 +42,6 @@ void Controls() {
     InputButton();
 
     Draw();
-
   }
 
   Exit = false;

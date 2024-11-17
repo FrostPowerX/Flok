@@ -9,4 +9,4 @@ void ResourceNotReady(const std::string& Name);
 
 void UnknownResource(const std::string& Name);
 
-};
+}; // namespace Error
