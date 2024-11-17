@@ -38,9 +38,6 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\scenes\PlayMP.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="src\engine\Parallax.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -90,9 +87,6 @@
     </ClInclude>
     <ClInclude Include="src\engine\StartUp.h">
       <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\scenes\PlayMP.h">
-      <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\Parallax.h">
       <Filter>Engine</Filter>

@@ -23,6 +23,7 @@ using namespace Actors;
 static const int k_maxButtons = 2;
 
 static PlayerType f_Player1;
+static PlayerType f_Player2;
 
 static Button PauseMenu[k_maxButtons];
 
@@ -36,6 +37,7 @@ static constexpr float k_WallSpeed = 400.0F;
 static float WallTime = 0;
 
 static bool Pause = false;
+static bool Multiplayer = false;
 
 static void WallManager(std::list<WallType*>& Walls, std::stack<WallType*>& HiddenWalls) {
   // TODO
@@ -82,6 +84,18 @@ static void Init() {
 
   Parallax::InitParallax();
 
+  InitPlayer(f_Player1, "res/ToxicFrog/BlueBlue/ToxicFrogBlueBlue_Hop.png");
+  float x = GetBoundingBoxPlayer(f_Player1).x - GetBoundingBoxPlayer(f_Player1).width * 0.5f;
+  SetPositionPlayer(f_Player1, x, GetBoundingBoxPlayer(f_Player1).y);
+
+  if (Multiplayer) {
+
+    InitPlayer(f_Player2, "res/ToxicFrog/GreenBlue/ToxicFrogGreenBlue_Hop.png");
+    x = GetBoundingBoxPlayer(f_Player2).x + GetBoundingBoxPlayer(f_Player2).width * 0.5f;
+    SetPositionPlayer(f_Player2, x, GetBoundingBoxPlayer(f_Player2).y);
+
+  }
+
   constexpr Margin k_Margin = {.f_Top = 40, .f_Bottom = 0, .f_Left = 0, .f_Right = 0};
   constexpr Padding k_Padding = {.f_Top = 10, .f_Bottom = 0, .f_Left = 0, .f_Right = 0};
 
@@ -127,14 +141,20 @@ static void InputButton() {
     if (IsKeyPressed(KEY_SPACE)) {
       PushPlayer(f_Player1, {0, -1}, k_PlayerUpwardPush + GetSpeedPlayer(f_Player1));
     }
+
+    if (IsKeyPressed(KEY_UP) && Multiplayer) {
+      PushPlayer(f_Player2, {0, -1}, k_PlayerUpwardPush + GetSpeedPlayer(f_Player2));
+    }
   }
 }
 
-static bool CheckForPlayerWallCollision(const std::list<WallType*>& Walls) {
+static bool CheckForPlayerWallCollision(PlayerType Player, const std::list<WallType*>& Walls) {
+
   bool Collided = false;
+
   for (const auto Wall : Walls) {
     if (Wall) {
-      Rectangle const Bb = GetBoundingBoxPlayer(f_Player1);
+      Rectangle const Bb = GetBoundingBoxPlayer(Player);
       Collided = Collisions::IsRectRect(
                      Bb, {.x = Wall->f_Position, .y = 0, .width = Wall->f_WallWidth, .height = Wall->f_GapStart}) ||
                  Collisions::IsRectRect(Bb, {.x = Wall->f_Position,
@@ -143,12 +163,13 @@ static bool CheckForPlayerWallCollision(const std::list<WallType*>& Walls) {
                                              .height = g_ScreenHeight - (Wall->f_GapStart + Wall->f_GapSize)});
     }
   }
+
   return Collided;
 }
 
 static void CheckLoseCondition(PlayerType Player, std::list<WallType*>& Walls) {
 
-  bool HitsWall = CheckForPlayerWallCollision(Walls);
+  bool HitsWall = CheckForPlayerWallCollision(Player, Walls);
   bool HitsBorder = Collisions::IsRectBorder(GetBoundingBoxPlayer(Player));
 
   // in case it hits roof
@@ -170,9 +191,18 @@ static void Update(std::list<WallType*>& Walls, std::stack<WallType*>& HiddenWal
     Parallax::UpdateParallax(k_WallSpeed);
 
     UpdatePlayer(f_Player1);
+
+    if (Multiplayer) {
+      UpdatePlayer(f_Player2);
+    }
+
     WallManager(Walls, HiddenWalls);
 
     CheckLoseCondition(f_Player1, Walls);
+
+    if (Multiplayer) {
+      CheckLoseCondition(f_Player2, Walls);
+    }
   }
 }
 
@@ -193,31 +223,42 @@ static void Draw(const std::list<WallType*>& Walls) {
     }
 
     DrawPlayer(f_Player1);
+
+    if (Multiplayer) {
+      DrawPlayer(f_Player2);
+    }
+
+    if (Pause)
+      RenderButtons(PauseMenu, k_maxButtons);
+
+    Parallax::DrawFrontground();
   }
-
-  if (Pause)
-    RenderButtons(PauseMenu, k_maxButtons);
-
-  Parallax::DrawFrontground();
-
   EndDrawing();
 }
 
 static void Unload() {
+
   Exit = false;
+
   UnloadPlayer(f_Player1);
+
+  if (Multiplayer) {
+    UnloadPlayer(f_Player2);
+  }
+
   Parallax::UnloadParallax();
 }
 
-void Play() {
+void Play(const bool k_MultiP) {
   // BUG:
   //  it feels awful and the collision is very imprecise
 
   std::list<WallType*> Walls;
   std::stack<WallType*> HiddenWalls;
 
+  Multiplayer = k_MultiP;
+
   Init();
-  InitPlayer(f_Player1, "res/ToxicFrog/BlueBlue/ToxicFrogBlueBlue_Hop.png");
 
   while (!Exit && !WindowShouldClose()) {
     InputButton();

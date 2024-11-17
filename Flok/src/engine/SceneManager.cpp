@@ -7,7 +7,6 @@
 #include "scenes/Credits.h"
 #include "scenes/MainMenu.h"
 #include "scenes/Play.h"
-#include "scenes/PlayMP.h"
 
 namespace Game {
 
@@ -19,21 +18,27 @@ static void SceneLoop(const Scenes SelectedScene) {
     case Scenes::MainMenu:
       Scene::Menu();
       break;
+
     case Scenes::Play:
       Scene::Play();
       break;
+
     case Scenes::Multiplayer:
-      Scene::PlayMP();
+      Scene::Play(true);
       break;
+
     case Scenes::Controls:
       Scene::Controls();
       break;
+
     case Scenes::Credits:
       Scene::Credits();
       break;
+
     case Scenes::Exit:
       Close();
       break;
+
     default:
       Close();
       Error::Unhandled(__LINE__, __FILE__);

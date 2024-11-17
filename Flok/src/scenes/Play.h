@@ -4,7 +4,7 @@ namespace Game {
 
 namespace Scene {
 
-void Play();
+void Play(bool MultiP = false);
 
 }
 
