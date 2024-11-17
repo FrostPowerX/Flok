@@ -7,6 +7,7 @@
 
 #include "Constants.h"
 #include "engine/Buttons.h"
+#include "engine/GameManager.h"
 #include "engine/Layout.h"
 #include "engine/SceneManager.h"
 
@@ -83,11 +84,28 @@ static void Draw() {
 
   constexpr int k_FontSizeTitle = 32;
 
+  const std::string k_MaxScoreShow = "Max Socre: " + std::to_string(GetMaxScore());
+  const std::string k_MaxScoreShowMP = "Max SocreMP: " + std::to_string(GetMaxScore(true));
+
   BeginDrawing();
 
   ClearBackground(RAYWHITE);
 
   DrawText("Flok", (g_ScreenWidth - MeasureText("Flok", k_FontSizeTitle)) / 2, 64, k_FontSizeTitle, BLACK);
+
+  if (GetMaxScore() > 0) {
+
+    DrawText(k_MaxScoreShow.c_str(),
+             (g_ScreenWidth - MeasureText(k_MaxScoreShow.c_str(), k_FontSizeTitle / 2)) / 2, 104,
+             k_FontSizeTitle / 2, BLACK);
+  }
+
+  if (GetMaxScore(true) > 0) {
+
+    DrawText(k_MaxScoreShowMP.c_str(),
+             (g_ScreenWidth - MeasureText(k_MaxScoreShowMP.c_str(), k_FontSizeTitle / 2)) / 2, 144,
+             k_FontSizeTitle / 2, BLACK);
+  }
 
   RenderButtons(MainMenuButtons, k_Amount);
 
