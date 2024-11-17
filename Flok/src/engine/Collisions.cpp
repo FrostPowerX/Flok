@@ -16,7 +16,6 @@ bool IsCircleCircle(const Vector2& APosition, const float ARadius, const Vector2
   // Sum(Radius)^2 >= Dist^2
   // saves the necessity of a sqrt
   return k_Radii >= k_Dist;
-
 }
 
 bool IsBorderCircle(const Vector2& Position, const float Radius, WhereCollides& CollisionPlace) {
@@ -40,7 +39,6 @@ bool IsBorderCircle(const Vector2& Position, const float Radius, WhereCollides& 
     CollisionPlace = WhereCollides::Down;
   }
   return Collides;
-
 }
 
 bool IsDotBorder(const Vector2& Position, WhereCollides& CollisionPlace) {
@@ -65,7 +63,6 @@ bool IsDotBorder(const Vector2& Position, WhereCollides& CollisionPlace) {
   }
 
   return Collides;
-
 }
 
 bool IsRectRect(const Rectangle& A, const Rectangle& B) {
@@ -77,14 +74,23 @@ bool IsRectRect(const Rectangle& A, const Rectangle& B) {
   }
 
   return false;
-
 }
 
 bool IsRectBorder(const Rectangle& A) {
 
   return A.x <= 0 || A.x + A.width >= static_cast<float>(g_ScreenWidth) || A.y <= 0 ||
          A.y + A.height >= static_cast<float>(g_ScreenHeight);
-
 }
 
+bool IsRectMouse(const Rectangle& A) {
+
+  if ((GetMousePosition().x >= A.x && GetMousePosition().x <= A.x + A.width)) {
+    if ((GetMousePosition().y >= A.y && GetMousePosition().y <= A.y + A.height)) {
+      return true;
+    }
+  }
+
+  return false;
 }
+
+} // namespace Collisions

@@ -21,4 +21,6 @@ bool IsRectRect(const Rectangle& A, const Rectangle& B);
 
 bool IsRectBorder(const Rectangle& A);
 
+bool IsRectMouse(const Rectangle& A);
+
 }
