@@ -21,7 +21,7 @@ static void Init() {
 
   f_IsMP = false;
 
-  Parallax::InitParallax();
+  Parallax::RestartParallax();
 }
 
 static void InputButton() {

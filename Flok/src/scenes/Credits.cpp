@@ -29,7 +29,7 @@ static bool IsMouseOnText(int X, int Y, int k_Fontsize, std::string Text);
 
 static void Init() {
 
-  Parallax::InitParallax();
+  Parallax::RestartParallax();
 
   ShowCursor();
   InitTexts();

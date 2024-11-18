@@ -11,7 +11,7 @@ static bool Exit = false;
 
 static void Init() {
 
-  Parallax::InitParallax();
+  Parallax::RestartParallax();
 }
 
 static void InputButton() {

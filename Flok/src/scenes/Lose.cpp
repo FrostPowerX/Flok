@@ -30,7 +30,7 @@ static bool Exit = false;
 static void Init() {
   Hovering = 1;
 
-  Parallax::InitParallax();
+  Parallax::RestartParallax();
 
   f_SelectedScene = SceneManager::Scenes::MainMenu;
 

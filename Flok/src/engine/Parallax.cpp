@@ -1,7 +1,6 @@
 #include "Parallax.h"
 
 #include "Constants.h"
-
 #include "SpriteManager.h"
 
 namespace Parallax {
@@ -34,6 +33,14 @@ void InitParallax() {
 
   Frontground.height = g_ScreenHeight;
   Frontground.width = g_ScreenWidth;
+}
+
+void RestartParallax() {
+
+  f_Scrollingback = 0.0f;
+  f_Scrollingmid = 0.0f;
+  f_Scrollingmid2 = 0.0f;
+  f_Scrollingfront = 0.0f;
 }
 
 void UpdateParallax(const float Speed) {

@@ -52,7 +52,7 @@ static void Init() {
   Hovering = 1;
   f_Menu = false;
 
-  Parallax::InitParallax();
+  Parallax::RestartParallax();
 
   InitPlayer(f_Player1, "Player1");
   float x = GetBoundingBoxPlayer(f_Player1).x - GetBoundingBoxPlayer(f_Player1).width * 0.5f;

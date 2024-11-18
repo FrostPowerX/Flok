@@ -10,6 +10,7 @@
 #include "engine/GameManager.h"
 #include "engine/SpriteManager.h"
 #include "engine/SoundManager.h"
+#include "engine/Parallax.h"
 
 namespace Game {
 
@@ -25,6 +26,7 @@ void Load() {
 
   SpriteManager::LoadSprites();
   SoundManager::LoadSounds();
+  Parallax::InitParallax();
 
   InitGManager();
 

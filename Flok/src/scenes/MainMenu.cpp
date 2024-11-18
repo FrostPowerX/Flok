@@ -36,7 +36,7 @@ static void Init() {
   Exit = false;
   Hovering = 1;
 
-  Parallax::InitParallax();
+  Parallax::RestartParallax();
 
   constexpr Margin k_Margin = {.f_Top = 40, .f_Bottom = 0, .f_Left = 0, .f_Right = 0};
   constexpr Padding k_Padding = {.f_Top = 10, .f_Bottom = 0, .f_Left = 0, .f_Right = 0};
