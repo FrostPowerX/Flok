@@ -142,7 +142,7 @@
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Link>
     <PostBuildEvent>
-      <Command>"$(SolutionDir)scripts/ForRelease.bat" "$(SolutionDir)" "$(SolutionDir)bin\Debug"</Command>
+      <Command>"$(SolutionDir)scripts/ForRelease.bat" "$(SolutionDir)" "$(SolutionDir)bin\Debug" "0"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -230,7 +230,7 @@
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);raylib.lib;winmm.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>"$(SolutionDir)scripts/ForRelease.bat" "$(SolutionDir)" "$(SolutionDir)bin\Release"</Command>
+      <Command>"$(SolutionDir)scripts/ForRelease.bat" "$(SolutionDir)" "$(SolutionDir)bin\Release" "1"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
