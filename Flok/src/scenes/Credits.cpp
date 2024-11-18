@@ -114,6 +114,14 @@ static void Draw() {
   EndDrawing();
 }
 
+static void Unload() {
+
+  HideCursor();
+
+  Exit = false;
+  ChangeScene(SceneManager::Scenes::MainMenu);
+}
+
 void Credits() {
 
   Init();
@@ -123,7 +131,8 @@ void Credits() {
     Draw();
   }
 
-  HideCursor();
+  Unload();
+}
 
   Exit = false;
   ChangeScene(SceneManager::Scenes::MainMenu);

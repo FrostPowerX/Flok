@@ -62,10 +62,6 @@ static void Init() {
   }
 }
 
-static void Unload() {
-  // TODO
-}
-
 static void InputButton() {
 
   if (IsKeyReleased(KEY_ESCAPE)) {
@@ -118,6 +114,11 @@ static void Draw() {
   EndDrawing();
 }
 
+static void Unload() {
+
+  ChangeScene(SelectedScene);
+}
+
 void Menu() {
   Init();
 
@@ -127,7 +128,6 @@ void Menu() {
   }
 
   Unload();
-  ChangeScene(SelectedScene);
 }
 
 } // namespace Scene

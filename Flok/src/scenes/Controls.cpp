@@ -35,6 +35,13 @@ static void Draw() {
   EndDrawing();
 }
 
+static void Unload() {
+
+  Exit = false;
+
+  ChangeScene(SceneManager::Scenes::MainMenu);
+}
+
 void Controls() {
 
   while (!Exit && !WindowShouldClose()) {
@@ -44,9 +51,7 @@ void Controls() {
     Draw();
   }
 
-  Exit = false;
-
-  ChangeScene(SceneManager::Scenes::MainMenu);
+  Unload();
 }
 
 } // namespace Scene
