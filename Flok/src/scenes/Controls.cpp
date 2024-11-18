@@ -1,5 +1,6 @@
 #include "Credits.h"
 #include "actors/PlayerClass.h"
+#include "engine/Parallax.h"
 #include "engine/SceneManager.h"
 
 namespace Game {
@@ -7,6 +8,11 @@ namespace Game {
 namespace Scene {
 
 static bool Exit = false;
+
+static void Init() {
+
+  Parallax::InitParallax();
+}
 
 static void InputButton() {
 
@@ -23,11 +29,13 @@ static void Draw() {
   {
     ClearBackground(RAYWHITE);
 
+    Parallax::DrawBackground();
+
     DrawText("Controls: ", 100, 140, 20, BLACK);
     DrawText("\t Player 1: Jump = Space", 100, 160, 20, BLACK);
     DrawText("\t\t Player 1 frog: Blue", 100, 180, 20, BLACK);
 
-    DrawText("\t Player 2: Jump = Arrow Up", 100, 220, 20, BLACK);
+    DrawText("\t Player 2: Jump = ArrowUp", 100, 220, 20, BLACK);
     DrawText("\t\t Player 2 frog: Green", 100, 240, 20, BLACK);
 
     DrawText("Pause/Back = Escape", 100, 300, 20, BLACK);
@@ -37,12 +45,16 @@ static void Draw() {
 
 static void Unload() {
 
+  Parallax::UnloadParallax();
+
   Exit = false;
 
   ChangeScene(SceneManager::Scenes::MainMenu);
 }
 
 void Controls() {
+
+  Init();
 
   while (!Exit && !WindowShouldClose()) {
 

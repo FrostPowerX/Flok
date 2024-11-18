@@ -9,6 +9,7 @@
 #include "engine/Buttons.h"
 #include "engine/GameManager.h"
 #include "engine/Layout.h"
+#include "engine/Parallax.h"
 #include "engine/SceneManager.h"
 
 namespace Game {
@@ -17,19 +18,25 @@ namespace Scene {
 
 using namespace UI;
 
-static const std::string k_GameVer = "v0.4";
 static constexpr int k_Amount = 6;
 static constexpr int k_Fontsize = 32;
 
 static Button MainMenuButtons[k_Amount];
-static bool Exit;
-static auto SelectedScene = SceneManager::Scenes::Exit;
+static const std::string k_GameVer = "v0.4";
+
 static int Hovering = 1;
 
+static auto SelectedScene = SceneManager::Scenes::Exit;
+
+static bool Exit;
+
 static void Init() {
+
   SelectedScene = SceneManager::Scenes::Exit;
   Exit = false;
   Hovering = 1;
+
+  Parallax::InitParallax();
 
   constexpr Margin k_Margin = {.f_Top = 40, .f_Bottom = 0, .f_Left = 0, .f_Right = 0};
   constexpr Padding k_Padding = {.f_Top = 10, .f_Bottom = 0, .f_Left = 0, .f_Right = 0};
@@ -97,27 +104,27 @@ static void Draw() {
 
   ClearBackground(RAYWHITE);
 
+  Parallax::DrawBackground();
+
   DrawText("Flok", (g_ScreenWidth - MeasureText("Flok", k_FontSizeTitle)) / 2, 64, k_FontSizeTitle, BLACK);
 
   if (GetMaxScore() > 0) {
 
-    DrawText(k_MaxScoreShow.c_str(),
-             (g_ScreenWidth - MeasureText(k_MaxScoreShow.c_str(), k_FontSizeTitle / 2)) / 2, 104,
-             k_FontSizeTitle / 2, BLACK);
+    DrawText(k_MaxScoreShow.c_str(), (g_ScreenWidth - MeasureText(k_MaxScoreShow.c_str(), k_FontSizeTitle / 2)) / 2,
+             104, k_FontSizeTitle / 2, BLACK);
   }
 
   if (GetMaxScore(true) > 0) {
 
-    DrawText(k_MaxScoreShowMP.c_str(),
-             (g_ScreenWidth - MeasureText(k_MaxScoreShowMP.c_str(), k_FontSizeTitle / 2)) / 2, 144,
-             k_FontSizeTitle / 2, BLACK);
+    DrawText(k_MaxScoreShowMP.c_str(), (g_ScreenWidth - MeasureText(k_MaxScoreShowMP.c_str(), k_FontSizeTitle / 2)) / 2,
+             144, k_FontSizeTitle / 2, BLACK);
   }
 
   RenderButtons(MainMenuButtons, k_Amount);
 
   DrawText(k_GameVer.c_str(), 10, 10, 10, BLACK);
 
-  DrawText("Select = KeyUp / KeyDown", 10, g_ScreenHeight - 40, 10, BLACK);
+  DrawText("Select = ArrowUp / ArrowDown", 10, g_ScreenHeight - 40, 10, BLACK);
   DrawText("Enter = Enter", 10, g_ScreenHeight - 30, 10, BLACK);
   DrawText("Exit = Escape", 10, g_ScreenHeight - 20, 10, BLACK);
 
@@ -125,6 +132,9 @@ static void Draw() {
 }
 
 static void Unload() {
+  // TODO
+
+  Parallax::UnloadParallax();
 
   ChangeScene(SelectedScene);
 }

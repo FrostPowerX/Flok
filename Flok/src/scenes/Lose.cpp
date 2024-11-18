@@ -6,9 +6,10 @@
 
 #include "Constants.h"
 #include "engine/Buttons.h"
-#include "engine/GameManager.h"
 #include "engine/Layout.h"
+#include "engine/GameManager.h"
 #include "engine/SceneManager.h"
+#include "engine/Parallax.h"
 
 namespace Game {
 
@@ -28,6 +29,8 @@ static bool Exit = false;
 
 static void Init() {
   Hovering = 1;
+
+  Parallax::InitParallax();
 
   f_SelectedScene = SceneManager::Scenes::MainMenu;
 
@@ -90,10 +93,20 @@ static void Draw() {
     DrawText("Game Over", (g_ScreenWidth - MeasureText("Game Over", 50)) / 2, 64, 50, BLACK);
     DrawText(k_MaxScoreShow.c_str(), (g_ScreenWidth - MeasureText(k_MaxScoreShow.c_str(), 20)) / 2, 124, 20, BLACK);
 
-    DrawText("Select = KeyUp / KeyDown", 10, g_ScreenHeight - 30, 10, BLACK);
+    DrawText("Select = ArrowUp / ArrowDown", 10, g_ScreenHeight - 30, 10, BLACK);
     DrawText("Enter = Enter", 10, g_ScreenHeight - 20, 10, BLACK);
   }
   EndDrawing();
+}
+
+static void Unload() {
+
+  HideCursor();
+
+  ResetScore(f_IsMP);
+
+  Exit = false;
+  ChangeScene(f_SelectedScene);
 }
 
 void Lose(bool IsMP) {
@@ -107,10 +120,7 @@ void Lose(bool IsMP) {
     Draw();
   }
 
-  HideCursor();
-
-  Exit = false;
-  ChangeScene(f_SelectedScene);
+  Unload();
 }
 
 } // namespace Scene

@@ -3,6 +3,7 @@
 #include "Constants.h"
 #include "actors/PlayerClass.h"
 #include "engine/Collisions.h"
+#include "engine/Parallax.h"
 #include "engine/SceneManager.h"
 
 namespace Game {
@@ -23,44 +24,15 @@ static Text f_Buttons[k_MaxButtons];
 
 static bool Exit = false;
 
-static void InitTexts() {
-  f_Buttons[0].f_Text = "Made by Nicolas Gallardo";
-  f_Buttons[0].f_Y = 140;
-
-  f_Buttons[1].f_Text = "\t Collaborate Emanuel Parajon";
-  f_Buttons[1].f_Y = 160;
-
-  f_Buttons[2].f_Text = "Art by Eduardo Scarpato (https://im-dagon.itch.io/)";
-  f_Buttons[2].f_Y = 200;
-
-  f_Buttons[3].f_Text = "\t Toxic Frog https://tinyurl.com/toxic-frog";
-  f_Buttons[3].f_Y = 260;
-
-  f_Buttons[4].f_Text = "\t Forest Tileset https://tinyurl.com/ForestTitleSet";
-  f_Buttons[4].f_Y = 320;
-
-  for (int i = 0; i < k_MaxButtons; i++) {
-    f_Buttons[i].f_X = 100;
-    f_Buttons[i].f_FontSize = 20;
-    f_Buttons[i].f_Color = BLACK;
-  }
-}
+static void InitTexts();
+static bool IsMouseOnText(int X, int Y, int k_Fontsize, std::string Text);
 
 static void Init() {
 
+  Parallax::InitParallax();
+
   ShowCursor();
   InitTexts();
-}
-
-static bool IsMouseOnText(int X, int Y, int k_Fontsize, std::string Text) {
-
-  Rectangle f_Text;
-  f_Text.x = static_cast<float>(X);
-  f_Text.y = static_cast<float>(Y);
-  f_Text.width = static_cast<float>(MeasureText(Text.c_str(), k_Fontsize));
-  f_Text.height = static_cast<float>(k_Fontsize);
-
-  return Collisions::IsRectMouse(f_Text);
 }
 
 static void InputButton() {
@@ -103,20 +75,24 @@ static void Draw() {
   {
     ClearBackground(RAYWHITE);
 
+    Parallax::DrawBackground();
+
     for (int i = 0; i < k_MaxButtons; i++) {
-      DrawText(f_Buttons[i].f_Text.c_str(), f_Buttons[i].f_X, f_Buttons[i].f_Y, f_Buttons[i].f_FontSize, f_Buttons[i].f_Color);
+      DrawText(f_Buttons[i].f_Text.c_str(), f_Buttons[i].f_X, f_Buttons[i].f_Y, f_Buttons[i].f_FontSize,
+               f_Buttons[i].f_Color);
     }
+
+    DrawText("Back = Escape", 10, g_ScreenHeight - 30, 10, BLACK);
+    DrawText("(Click on credits for more information)", 10, g_ScreenHeight - 20, 10, BLACK);
   }
-
-  DrawText("Exit = Escape", 10, g_ScreenHeight - 30, 10, BLACK);
-  DrawText("(Click on credits for more information)", 10, g_ScreenHeight - 20, 10, BLACK);
-
   EndDrawing();
 }
 
 static void Unload() {
 
   HideCursor();
+
+  Parallax::UnloadParallax();
 
   Exit = false;
   ChangeScene(SceneManager::Scenes::MainMenu);
@@ -134,8 +110,38 @@ void Credits() {
   Unload();
 }
 
-  Exit = false;
-  ChangeScene(SceneManager::Scenes::MainMenu);
+static void InitTexts() {
+  f_Buttons[0].f_Text = "Made by Nicolas Gallardo";
+  f_Buttons[0].f_Y = 140;
+
+  f_Buttons[1].f_Text = "\t Collaborate Emanuel Parajon";
+  f_Buttons[1].f_Y = 160;
+
+  f_Buttons[2].f_Text = "Art by Eduardo Scarpato (https://im-dagon.itch.io/)";
+  f_Buttons[2].f_Y = 200;
+
+  f_Buttons[3].f_Text = "\t Toxic Frog https://tinyurl.com/toxic-frog";
+  f_Buttons[3].f_Y = 260;
+
+  f_Buttons[4].f_Text = "\t Forest Tileset https://tinyurl.com/ForestTitleSet";
+  f_Buttons[4].f_Y = 320;
+
+  for (int i = 0; i < k_MaxButtons; i++) {
+    f_Buttons[i].f_X = 100;
+    f_Buttons[i].f_FontSize = 20;
+    f_Buttons[i].f_Color = BLACK;
+  }
+}
+
+static bool IsMouseOnText(int X, int Y, int k_Fontsize, std::string Text) {
+
+  Rectangle f_Text;
+  f_Text.x = static_cast<float>(X);
+  f_Text.y = static_cast<float>(Y);
+  f_Text.width = static_cast<float>(MeasureText(Text.c_str(), k_Fontsize));
+  f_Text.height = static_cast<float>(k_Fontsize);
+
+  return Collisions::IsRectMouse(f_Text);
 }
 
 } // namespace Scene
