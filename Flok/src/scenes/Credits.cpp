@@ -17,32 +17,32 @@ struct Text {
   Color f_Color;
 };
 
-static const int k_MaxTexts = 5;
+static const int k_MaxButtons = 5;
 
-static Text f_Texts[k_MaxTexts];
+static Text f_Buttons[k_MaxButtons];
 
 static bool Exit = false;
 
 static void InitTexts() {
-  f_Texts[0].f_Text = "Made by Nicolas Gallardo";
-  f_Texts[0].f_Y = 140;
+  f_Buttons[0].f_Text = "Made by Nicolas Gallardo";
+  f_Buttons[0].f_Y = 140;
 
-  f_Texts[1].f_Text = "\t Collaborate Emanuel Parajon";
-  f_Texts[1].f_Y = 160;
+  f_Buttons[1].f_Text = "\t Collaborate Emanuel Parajon";
+  f_Buttons[1].f_Y = 160;
 
-  f_Texts[2].f_Text = "Art by Eduardo Scarpato (https://im-dagon.itch.io/)";
-  f_Texts[2].f_Y = 200;
+  f_Buttons[2].f_Text = "Art by Eduardo Scarpato (https://im-dagon.itch.io/)";
+  f_Buttons[2].f_Y = 200;
 
-  f_Texts[3].f_Text = "\t Toxic Frog https://tinyurl.com/toxic-frog";
-  f_Texts[3].f_Y = 260;
+  f_Buttons[3].f_Text = "\t Toxic Frog https://tinyurl.com/toxic-frog";
+  f_Buttons[3].f_Y = 260;
 
-  f_Texts[4].f_Text = "\t Forest Tileset https://tinyurl.com/ForestTitleSet";
-  f_Texts[4].f_Y = 320;
+  f_Buttons[4].f_Text = "\t Forest Tileset https://tinyurl.com/ForestTitleSet";
+  f_Buttons[4].f_Y = 320;
 
-  for (int i = 0; i < k_MaxTexts; i++) {
-    f_Texts[i].f_X = 100;
-    f_Texts[i].f_FontSize = 20;
-    f_Texts[i].f_Color = BLACK;
+  for (int i = 0; i < k_MaxButtons; i++) {
+    f_Buttons[i].f_X = 100;
+    f_Buttons[i].f_FontSize = 20;
+    f_Buttons[i].f_Color = BLACK;
   }
 }
 
@@ -68,9 +68,9 @@ static void InputButton() {
     Exit = true;
   }
 
-  for (int I = 0; I < k_MaxTexts; I++) {
+  for (int I = 0; I < k_MaxButtons; I++) {
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) &&
-        IsMouseOnText(f_Texts[I].f_X, f_Texts[I].f_Y, f_Texts[I].f_FontSize, f_Texts[I].f_Text)) {
+        IsMouseOnText(f_Buttons[I].f_X, f_Buttons[I].f_Y, f_Buttons[I].f_FontSize, f_Buttons[I].f_Text)) {
       switch (I) {
         case 0:
           OpenURL("https://projectbifron.itch.io/");
@@ -103,8 +103,8 @@ static void Draw() {
   {
     ClearBackground(RAYWHITE);
 
-    for (int i = 0; i < k_MaxTexts; i++) {
-      DrawText(f_Texts[i].f_Text.c_str(), f_Texts[i].f_X, f_Texts[i].f_Y, f_Texts[i].f_FontSize, f_Texts[i].f_Color);
+    for (int i = 0; i < k_MaxButtons; i++) {
+      DrawText(f_Buttons[i].f_Text.c_str(), f_Buttons[i].f_X, f_Buttons[i].f_Y, f_Buttons[i].f_FontSize, f_Buttons[i].f_Color);
     }
   }
 
