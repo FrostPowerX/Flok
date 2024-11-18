@@ -257,6 +257,7 @@
     <ClCompile Include="src\scenes\Lose.cpp" />
     <ClCompile Include="src\scenes\MainMenu.cpp" />
     <ClCompile Include="src\scenes\Play.cpp" />
+    <ClCompile Include="src\scenes\Statistics.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\actors\PlayerClass.h" />
@@ -277,6 +278,7 @@
     <ClInclude Include="src\scenes\Lose.h" />
     <ClInclude Include="src\scenes\MainMenu.h" />
     <ClInclude Include="src\scenes\Play.h" />
+    <ClInclude Include="src\scenes\Statistics.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

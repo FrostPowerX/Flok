@@ -6,6 +6,7 @@
 #include "scenes/Credits.h"
 #include "scenes/MainMenu.h"
 #include "scenes/Play.h"
+#include "scenes/Statistics.h"
 
 namespace Game {
 
@@ -24,6 +25,10 @@ static void SceneLoop(const Scenes SelectedScene) {
 
     case Scenes::Multiplayer:
       Scene::Play(true);
+      break;
+
+    case Scenes::Statistics:
+      Scene::Statistics();
       break;
 
     case Scenes::Controls:

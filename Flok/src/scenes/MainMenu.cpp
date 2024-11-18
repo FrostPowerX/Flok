@@ -18,7 +18,7 @@ namespace Scene {
 using namespace UI;
 
 static const std::string k_GameVer = "v0.4";
-static constexpr int k_Amount = 5;
+static constexpr int k_Amount = 6;
 static constexpr int k_Fontsize = 32;
 
 static Button MainMenuButtons[k_Amount];
@@ -39,21 +39,31 @@ static void Init() {
   for (int I = 0; I < k_Amount; I++) {
 
     switch (I) {
+
       case 0:
-        Text = "Play";
+        Text = "Singleplayer";
         break;
+
       case 1:
         Text = "Multiplayer";
         break;
+
       case 2:
+        Text = "Statistics";
+        break;
+
+      case 3:
         Text = "Controls";
         break;
-      case 3:
+
+      case 4:
         Text = "Credits";
         break;
-      case 4:
+
+      case 5:
         Text = "Exit";
         break;
+
       default:
         Text = "NULL";
     }
