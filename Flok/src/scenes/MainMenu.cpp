@@ -134,8 +134,6 @@ static void Draw() {
 static void Unload() {
   // TODO
 
-  Parallax::UnloadParallax();
-
   ChangeScene(SelectedScene);
 }
 

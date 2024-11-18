@@ -17,8 +17,6 @@ struct PlayerType {
 
 void InitPlayer(PlayerType& Player, std::string TextPath);
 
-void UnloadPlayer(PlayerType& Player);
-
 void PushPlayer(PlayerType& Player, const Vector2& Direction, float Force);
 
 void UpdatePlayer(PlayerType& Player);

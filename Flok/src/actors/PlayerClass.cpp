@@ -1,6 +1,8 @@
 ﻿#include "PlayerClass.h"
 
 #include "Constants.h"
+
+#include "engine/SpriteManager.h"
 #include "engine/Collisions.h"
 #include "engine/Math.h"
 
@@ -10,18 +12,12 @@ constexpr float k_SpeedLimit = 50000.0F;
 constexpr float k_FramesHop = 7.0F;
 constexpr int k_Scale = 2;
 
-void InitPlayer(PlayerType& Player, std::string TextPath) {
+void InitPlayer(PlayerType& Player, std::string SpriteName) {
   Player.f_BoundingBox = {.x = 51.0F, .y = g_ScreenHeight / 2.0F, .width = 48.0F, .height = 48.0F};
   Player.f_Direction = {.x = 1, .y = 0};
-  Player.f_Sprite = LoadTexture(TextPath.c_str());
+  Player.f_Sprite = Game::SpriteManager::GetSprite(SpriteName)->texture;
   Player.f_FrameTimer = 0;
   Player.f_Speed = 0;
-}
-
-void UnloadPlayer(PlayerType& Player) {
-  if (IsTextureReady(Player.f_Sprite)) {
-    UnloadTexture(Player.f_Sprite);
-  }
 }
 
 void PushPlayer(PlayerType& Player, const Vector2& Direction, float Force) {

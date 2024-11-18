@@ -8,6 +8,8 @@
 #include "SceneManager.h"
 
 #include "engine/GameManager.h"
+#include "engine/SpriteManager.h"
+#include "engine/SoundManager.h"
 
 namespace Game {
 
@@ -20,6 +22,9 @@ void Load() {
   InitAudioDevice();
 
   HideCursor();
+
+  SpriteManager::LoadSprites();
+  SoundManager::LoadSounds();
 
   InitGManager();
 

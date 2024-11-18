@@ -54,13 +54,13 @@ static void Init() {
 
   Parallax::InitParallax();
 
-  InitPlayer(f_Player1, "res/ToxicFrog/BlueBlue/ToxicFrogBlueBlue_Hop.png");
+  InitPlayer(f_Player1, "Player1");
   float x = GetBoundingBoxPlayer(f_Player1).x - GetBoundingBoxPlayer(f_Player1).width * 0.5f;
   SetPositionPlayer(f_Player1, x, GetBoundingBoxPlayer(f_Player1).y);
 
   if (Multiplayer) {
 
-    InitPlayer(f_Player2, "res/ToxicFrog/GreenBlue/ToxicFrogGreenBlue_Hop.png");
+    InitPlayer(f_Player2, "Player2");
     x = GetBoundingBoxPlayer(f_Player2).x + GetBoundingBoxPlayer(f_Player2).width * 0.5f;
     SetPositionPlayer(f_Player2, x, GetBoundingBoxPlayer(f_Player2).y);
   }
@@ -200,15 +200,7 @@ static void Unload() {
 
   Exit = false;
 
-  UnloadPlayer(f_Player1);
-
-  if (Multiplayer) {
-    UnloadPlayer(f_Player2);
-  }
-
   UnloadGManager();
-
-  Parallax::UnloadParallax();
 }
 
 void Play(const bool k_MultiP) {

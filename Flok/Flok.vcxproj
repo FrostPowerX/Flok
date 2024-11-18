@@ -250,6 +250,8 @@
     <ClCompile Include="src\engine\Math.cpp" />
     <ClCompile Include="src\engine\Parallax.cpp" />
     <ClCompile Include="src\engine\SceneManager.cpp" />
+    <ClCompile Include="src\engine\SoundManager.cpp" />
+    <ClCompile Include="src\engine\SpriteManager.cpp" />
     <ClCompile Include="src\engine\StartUp.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\scenes\Controls.cpp" />
@@ -272,6 +274,8 @@
     <ClInclude Include="src\engine\Math.h" />
     <ClInclude Include="src\engine\Parallax.h" />
     <ClInclude Include="src\engine\SceneManager.h" />
+    <ClInclude Include="src\engine\SoundManager.h" />
+    <ClInclude Include="src\engine\SpriteManager.h" />
     <ClInclude Include="src\engine\StartUp.h" />
     <ClInclude Include="src\scenes\Controls.h" />
     <ClInclude Include="src\scenes\Credits.h" />

@@ -6,8 +6,6 @@ namespace Parallax {
 
 void InitParallax();
 
-void UnloadParallax();
-
 void UpdateParallax(const float Speed);
 
 void DrawBackground();

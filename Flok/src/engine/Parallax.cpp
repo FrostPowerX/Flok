@@ -2,6 +2,8 @@
 
 #include "Constants.h"
 
+#include "SpriteManager.h"
+
 namespace Parallax {
 
 Texture2D Background;
@@ -16,10 +18,10 @@ float f_Scrollingfront = 0.0f;
 
 void InitParallax() {
 
-  Background = LoadTexture("res/JungleTileset/ParallaxBackground/Back.png");
-  Midground = LoadTexture("res/JungleTileset/ParallaxBackground/Back2.png");
-  Midground2 = LoadTexture("res/JungleTileset/ParallaxBackground/Back3.png");
-  Frontground = LoadTexture("res/JungleTileset/ParallaxBackground/BushFront.png");
+  Background = Game::SpriteManager::GetSprite("BackGround")->texture;
+  Midground = Game::SpriteManager::GetSprite("MidGround")->texture;
+  Midground2 = Game::SpriteManager::GetSprite("MidGround2")->texture;
+  Frontground = Game::SpriteManager::GetSprite("FrontGround")->texture;
 
   Background.height = g_ScreenHeight;
   Background.width = g_ScreenWidth;
@@ -32,14 +34,6 @@ void InitParallax() {
 
   Frontground.height = g_ScreenHeight;
   Frontground.width = g_ScreenWidth;
-}
-
-void UnloadParallax() {
-
-  UnloadTexture(Background);
-  UnloadTexture(Midground);
-  UnloadTexture(Midground2);
-  UnloadTexture(Frontground);
 }
 
 void UpdateParallax(const float Speed) {

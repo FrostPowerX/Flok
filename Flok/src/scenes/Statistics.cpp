@@ -64,8 +64,6 @@ static void Draw() {
 
 static void Unload() {
 
-  Parallax::UnloadParallax();
-
   Exit = false;
   ChangeScene(SceneManager::Scenes::MainMenu);
 }

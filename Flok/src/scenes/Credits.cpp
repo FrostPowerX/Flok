@@ -92,8 +92,6 @@ static void Unload() {
 
   HideCursor();
 
-  Parallax::UnloadParallax();
-
   Exit = false;
   ChangeScene(SceneManager::Scenes::MainMenu);
 }
