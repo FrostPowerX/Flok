@@ -107,17 +107,7 @@ void StopM(std::string name) {
 }
 
 void LoadSounds() {
-  AddSound("Dmg", "res/Audio/Dmg.wav");
-  AddSound("DmgRec", "res/Audio/DmgRec.wav");
-  AddSound("PickUp", "res/Audio/PickUp.wav");
-  AddSound("Button", "res/Audio/Button.wav");
-  AddSound("Explocion", "res/Audio/Explocion.wav");
-  AddSound("Shoot", "res/Audio/Shoot.wav");
-  AddSound("Move", "res/Audio/Move.wav");
-  AddSound("Lose", "res/Audio/Lose.wav");
 
-  AddMusic("MenuM", "res/Music/Menu.wav");
-  AddMusic("GamePlayM", "res/Music/GamePlay.wav");
 }
 
 void UnloadSounds() {
