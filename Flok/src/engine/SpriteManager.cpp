@@ -45,6 +45,9 @@ void LoadSprites() {
 void UnloadSprites() {
   int size = sprites.size();
 
+  if (size <= 0)
+      return;
+
   for (int i = 0; i < size; i++) {
     UnloadTexture(sprites[i]->texture);
   }
