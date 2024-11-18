@@ -20,7 +20,7 @@ static int f_TotalJumps = 0;
 static int f_TotalLose = 0;
 
 static const std::string k_SaveFile = "data.json";
-static const std::string k_EncryptationKey = "WOLOOOO";
+static const std::string k_EncryptationKey = "WOLOOLOO";
 
 static std::string EncryptDecrypt(const std::string& k_Data, const std::string& k_Key) {
 
