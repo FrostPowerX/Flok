@@ -7,30 +7,31 @@
 namespace Game {
 namespace SoundManager {
 struct SoundBox {
-  Sound music;
-  std::string name;
+  Sound f_Music;
+  std::string f_Name;
 
-  bool loop;
+  bool f_Loop;
 };
 
 struct MusicBox {
-  Music music;
-  std::string name;
+  Music f_Music;
+  std::string f_Name;
 
-  bool loop;
+  bool f_Loop;
 };
 
-extern float volume;
+extern float f_Volume;
 
 void Update();
 
-void PlayS(std::string name);
-void StopS(std::string name);
+void PlayS(std::string Name);
+void StopS(std::string Name);
 
-void PlayM(std::string name);
-void StopM(std::string name);
+void PlayM(std::string Name);
+void StopM(std::string Name);
 
 void LoadSounds();
 void UnloadSounds();
+
 } // namespace SoundManager
 } // namespace Game

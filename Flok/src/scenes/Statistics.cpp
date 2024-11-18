@@ -9,6 +9,7 @@
 #include "engine/Parallax.h"
 #include "engine/GameManager.h"
 #include "engine/SceneManager.h"
+#include "engine/SoundManager.h"
 
 namespace Game {
 namespace Scene {
@@ -27,10 +28,14 @@ static void Init() {
 static void InputButton() {
 
   if (IsKeyReleased(KEY_ESCAPE)) {
+
+    Game::SoundManager::PlayS("Back");
     Exit = true;
   }
 
   if (IsKeyReleased(KEY_R)) {
+
+    Game::SoundManager::PlayS("Enter");
     f_IsMP = !f_IsMP;
   }
 }

@@ -11,6 +11,7 @@
 #include "engine/Layout.h"
 #include "engine/Parallax.h"
 #include "engine/SceneManager.h"
+#include "engine/SoundManager.h"
 
 namespace Game {
 
@@ -88,6 +89,9 @@ static void InputButton() {
   UI::InputButton(MainMenuButtons, Hovering, k_Amount);
 
   if (IsKeyReleased(KEY_ENTER)) {
+
+    Game::SoundManager::PlayS("Enter");
+
     SelectedScene = static_cast<SceneManager::Scenes>(Hovering);
     Exit = true;
   }

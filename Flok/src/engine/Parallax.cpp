@@ -17,10 +17,10 @@ float f_Scrollingfront = 0.0f;
 
 void InitParallax() {
 
-  Background = Game::SpriteManager::GetSprite("BackGround")->texture;
-  Midground = Game::SpriteManager::GetSprite("MidGround")->texture;
-  Midground2 = Game::SpriteManager::GetSprite("MidGround2")->texture;
-  Frontground = Game::SpriteManager::GetSprite("FrontGround")->texture;
+  Background = Game::SpriteManager::GetSprite("BackGround")->f_Texture;
+  Midground = Game::SpriteManager::GetSprite("MidGround")->f_Texture;
+  Midground2 = Game::SpriteManager::GetSprite("MidGround2")->f_Texture;
+  Frontground = Game::SpriteManager::GetSprite("FrontGround")->f_Texture;
 
   Background.height = g_ScreenHeight;
   Background.width = g_ScreenWidth;

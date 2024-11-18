@@ -2,30 +2,30 @@
 
 namespace Game {
 namespace SpriteManager {
-std::vector<Sprite*> sprites;
+std::vector<Sprite*> f_Sprites;
 
-void AddSprite(std::string name, std::string path, bool reescale = false);
+void AddSprite(std::string Name, std::string Path, bool Reescale = false);
 
-void AddSprite(std::string name, std::string path, bool reescale) {
-  Sprite* newSp = new Sprite();
-  newSp->name = name;
-  newSp->texture = LoadTexture(path.c_str());
+void AddSprite(std::string Name, std::string Path, bool Reescale) {
+  Sprite* NewSp = new Sprite();
+  NewSp->f_Name = Name;
+  NewSp->f_Texture = LoadTexture(Path.c_str());
 
-  if (reescale) {
-    newSp->texture.width = 32;
-    newSp->texture.height = 32;
+  if (Reescale) {
+    NewSp->f_Texture.width = 32;
+    NewSp->f_Texture.height = 32;
   }
 
-  sprites.push_back(newSp);
+  f_Sprites.push_back(NewSp);
 }
 
-Sprite* GetSprite(std::string name) {
-  if (sprites.size() <= 0)
+Sprite* GetSprite(std::string Name) {
+  if (f_Sprites.size() <= 0)
     return nullptr;
 
-  for (int i = 0; i < static_cast<int>(sprites.size()); i++) {
-    if (name == sprites[i]->name)
-      return sprites[i];
+  for (int i = 0; i < static_cast<int>(f_Sprites.size()); i++) {
+    if (Name == f_Sprites[i]->f_Name)
+      return f_Sprites[i];
   }
 
   return nullptr;
@@ -43,17 +43,17 @@ void LoadSprites() {
 }
 
 void UnloadSprites() {
-  int size = sprites.size();
+  int Size = f_Sprites.size();
 
-  if (size <= 0)
+  if (Size <= 0)
       return;
 
-  for (int i = 0; i < size; i++) {
-    UnloadTexture(sprites[i]->texture);
+  for (int i = 0; i < Size; i++) {
+    UnloadTexture(f_Sprites[i]->f_Texture);
   }
 
-  for (int i = 0; i < size; i++) {
-    delete sprites[i];
+  for (int i = 0; i < Size; i++) {
+    delete f_Sprites[i];
   }
 }
 

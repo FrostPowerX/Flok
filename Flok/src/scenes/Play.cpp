@@ -13,6 +13,7 @@
 #include "engine/GameManager.h"
 #include "engine/Parallax.h"
 #include "engine/SceneManager.h"
+#include "engine/SoundManager.h"
 #include "scenes/Lose.h"
 
 namespace Game {
@@ -47,6 +48,7 @@ static void WallManager(std::list<WallType*>& Walls, std::stack<WallType*>& Hidd
 static bool CheckForPlayerWallCollision(PlayerType Player, const std::list<WallType*>& Walls);
 static void CheckLoseCondition(PlayerType& Player, std::list<WallType*>& Walls);
 static void CheckPointOnPassWall(PlayerType Player, std::list<WallType*>& Walls);
+static void RandomPointSound();
 
 static void Init() {
   Hovering = 1;
@@ -86,13 +88,18 @@ static void Init() {
 
 static void InputButton() {
 
-  if (IsKeyPressed(KEY_ESCAPE))
+  if (IsKeyPressed(KEY_ESCAPE)) {
+
+    (f_Pause) ? Game::SoundManager::PlayS("UnPause") : Game::SoundManager::PlayS("Pause");
     f_Pause = !f_Pause;
+  }
 
   if (f_Pause) {
     UI::InputButton(PauseMenu, Hovering, k_MaxButtons);
 
     if (IsKeyReleased(KEY_ENTER)) {
+
+      Game::SoundManager::PlayS("Enter");
       switch (Hovering) {
 
         case 1:
@@ -232,7 +239,6 @@ void Play(const bool k_MultiP) {
 
   if (f_Menu) {
 
-
     ResetScore(Multiplayer);
     SceneManager::ChangeScene();
   } else {
@@ -314,11 +320,13 @@ static void CheckLoseCondition(PlayerType& Player, std::list<WallType*>& Walls) 
       MovePlayer(Player, abs(GetBoundingBoxPlayer(Player).y * 2));
     } else {
 
+      Game::SoundManager::PlayS("Fall");
       AddLose(Multiplayer);
       Exit = true;
     }
   } else if (HitsWall) {
 
+      Game::SoundManager::PlayS("Crash");
     AddLose(Multiplayer);
     Exit = true;
   }
@@ -334,12 +342,22 @@ static void CheckPointOnPassWall(PlayerType Player, std::list<WallType*>& Walls)
 
         if (Wall->f_Position < Bb.x) {
 
+          RandomPointSound();
           AddScore(Multiplayer);
           Wall->f_checked = true;
         }
       }
     }
   }
+}
+
+static void RandomPointSound() {
+
+  int Rand = GetRandomValue(1, 3);
+
+  std::string soundName = "Point" + std::to_string(Rand);
+
+  Game::SoundManager::PlayS(soundName);
 }
 
 } // namespace Scene

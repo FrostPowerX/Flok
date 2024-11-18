@@ -2,6 +2,7 @@
 #include "actors/PlayerClass.h"
 #include "engine/Parallax.h"
 #include "engine/SceneManager.h"
+#include "engine/SoundManager.h"
 
 namespace Game {
 
@@ -17,6 +18,7 @@ static void Init() {
 static void InputButton() {
 
   if (IsKeyReleased(KEY_ESCAPE)) {
+    Game::SoundManager::PlayS("Back");
     Exit = true;
   }
 }

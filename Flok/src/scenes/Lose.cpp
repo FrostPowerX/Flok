@@ -6,10 +6,11 @@
 
 #include "Constants.h"
 #include "engine/Buttons.h"
-#include "engine/Layout.h"
 #include "engine/GameManager.h"
-#include "engine/SceneManager.h"
+#include "engine/Layout.h"
 #include "engine/Parallax.h"
+#include "engine/SceneManager.h"
+#include "engine/SoundManager.h"
 
 namespace Game {
 
@@ -62,6 +63,9 @@ static void InputButton() {
   UI::InputButton(f_Buttons, Hovering, k_MaxButtons);
 
   if (IsKeyReleased(KEY_ENTER)) {
+
+    Game::SoundManager::PlayS("Enter");
+
     switch (Hovering) {
 
       case 1:

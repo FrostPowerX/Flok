@@ -5,6 +5,7 @@
 #include "engine/Collisions.h"
 #include "engine/Parallax.h"
 #include "engine/SceneManager.h"
+#include "engine/SoundManager.h"
 
 namespace Game {
 
@@ -18,9 +19,9 @@ struct Text {
   Color f_Color;
 };
 
-static const int k_MaxButtons = 5;
+static const int k_MaxTexts = 6;
 
-static Text f_Buttons[k_MaxButtons];
+static Text f_Buttons[k_MaxTexts];
 
 static bool Exit = false;
 
@@ -37,10 +38,12 @@ static void Init() {
 
 static void InputButton() {
   if (IsKeyReleased(KEY_ESCAPE)) {
+
+    Game::SoundManager::PlayS("Back");
     Exit = true;
   }
 
-  for (int I = 0; I < k_MaxButtons; I++) {
+  for (int I = 0; I < k_MaxTexts; I++) {
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) &&
         IsMouseOnText(f_Buttons[I].f_X, f_Buttons[I].f_Y, f_Buttons[I].f_FontSize, f_Buttons[I].f_Text)) {
       switch (I) {
@@ -63,6 +66,10 @@ static void InputButton() {
         case 4:
           OpenURL("https://tinyurl.com/ForestTitleSet");
           break;
+
+        case 5:
+          OpenURL("https://sfbgames.itch.io/chiptone");
+          break;
       }
     }
   }
@@ -77,7 +84,7 @@ static void Draw() {
 
     Parallax::DrawBackground();
 
-    for (int i = 0; i < k_MaxButtons; i++) {
+    for (int i = 0; i < k_MaxTexts; i++) {
       DrawText(f_Buttons[i].f_Text.c_str(), f_Buttons[i].f_X, f_Buttons[i].f_Y, f_Buttons[i].f_FontSize,
                f_Buttons[i].f_Color);
     }
@@ -115,16 +122,19 @@ static void InitTexts() {
   f_Buttons[1].f_Text = "\t Collaborate Emanuel Parajon";
   f_Buttons[1].f_Y = 160;
 
-  f_Buttons[2].f_Text = "Art by Eduardo Scarpato (https://im-dagon.itch.io/)";
+  f_Buttons[2].f_Text = "Art by Eduardo Scarpato: (https://im-dagon.itch.io/)";
   f_Buttons[2].f_Y = 200;
 
-  f_Buttons[3].f_Text = "\t Toxic Frog https://tinyurl.com/toxic-frog";
+  f_Buttons[3].f_Text = "\t Toxic Frog: https://tinyurl.com/toxic-frog";
   f_Buttons[3].f_Y = 260;
 
-  f_Buttons[4].f_Text = "\t Forest Tileset https://tinyurl.com/ForestTitleSet";
+  f_Buttons[4].f_Text = "\t Forest Tileset: https://tinyurl.com/ForestTitleSet";
   f_Buttons[4].f_Y = 320;
 
-  for (int i = 0; i < k_MaxButtons; i++) {
+  f_Buttons[5].f_Text = "ChipTone: https://sfbgames.itch.io/chiptone";
+  f_Buttons[5].f_Y = 380;
+
+  for (int i = 0; i < k_MaxTexts; i++) {
     f_Buttons[i].f_X = 100;
     f_Buttons[i].f_FontSize = 20;
     f_Buttons[i].f_Color = BLACK;

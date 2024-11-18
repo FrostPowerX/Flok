@@ -1,6 +1,7 @@
 ﻿#include "Buttons.h"
 
 #include "Constants.h"
+#include "SoundManager.h"
 
 namespace UI {
 
@@ -65,12 +66,18 @@ void InputButton(Button Buttons[], int& Hovering, const int Amount) {
   Buttons[Hovering - 1].f_IsHover = false;
 
   if (IsKeyReleased(KEY_DOWN)) {
+
+    Game::SoundManager::PlayS("Select");
+
     if (Hovering == Amount) {
       Hovering = 1;
     } else {
       Hovering++;
     }
   } else if (IsKeyReleased(KEY_UP)) {
+
+    Game::SoundManager::PlayS("Select");
+
     if (Hovering == 1) {
       Hovering = Amount;
     } else {
