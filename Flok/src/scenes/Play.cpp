@@ -13,6 +13,7 @@
 #include "engine/GameManager.h"
 #include "engine/Parallax.h"
 #include "engine/SceneManager.h"
+#include "scenes/Lose.h"
 
 namespace Game {
 
@@ -332,7 +333,7 @@ void Play(const bool k_MultiP) {
 
   Unload();
 
-  ChangeScene(SceneManager::Scenes::MainMenu);
+  Lose(Multiplayer);
 }
 
 } // namespace Scene

@@ -47,6 +47,9 @@
     <ClCompile Include="src\engine\GameManager.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="src\scenes\Lose.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\actors\PlayerClass.h">
@@ -99,6 +102,9 @@
     </ClInclude>
     <ClInclude Include="src\engine\GameManager.h">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\Lose.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
