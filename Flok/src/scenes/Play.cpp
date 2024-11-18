@@ -54,6 +54,9 @@ static void Init() {
   Hovering = 1;
   f_Menu = false;
 
+  SoundManager::StopM("Menu");
+  SoundManager::PlayM("GamePlay");
+
   Parallax::RestartParallax();
 
   InitPlayer(f_Player1, "Player1");
@@ -130,6 +133,8 @@ static void InputButton() {
 }
 
 static void Update(std::list<WallType*>& Walls, std::stack<WallType*>& HiddenWalls) {
+
+  Game::SoundManager::Update();
 
   if (!f_Pause) {
 
@@ -326,7 +331,7 @@ static void CheckLoseCondition(PlayerType& Player, std::list<WallType*>& Walls) 
     }
   } else if (HitsWall) {
 
-      Game::SoundManager::PlayS("Crash");
+    Game::SoundManager::PlayS("Crash");
     AddLose(Multiplayer);
     Exit = true;
   }

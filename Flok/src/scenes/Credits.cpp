@@ -19,7 +19,7 @@ struct Text {
   Color f_Color;
 };
 
-static const int k_MaxTexts = 6;
+static const int k_MaxTexts = 9;
 
 static Text f_Buttons[k_MaxTexts];
 
@@ -70,6 +70,18 @@ static void InputButton() {
         case 5:
           OpenURL("https://sfbgames.itch.io/chiptone");
           break;
+
+        case 6:
+          OpenURL("https://pixabay.com/es/users/calvinclavier-16027823/");
+          break;
+
+        case 7:
+          OpenURL("https://pixabay.com/es/music/clasico-moderno-relaxing-piano-music-259727/");
+          break;
+
+        case 8:
+          OpenURL("https://pixabay.com/es/music/clasico-moderno-relaxing-piano-music-255028/");
+          break;
       }
     }
   }
@@ -109,6 +121,7 @@ void Credits() {
 
   while (!Exit && !WindowShouldClose()) {
     InputButton();
+    Game::SoundManager::Update();
     Draw();
   }
 
@@ -131,8 +144,17 @@ static void InitTexts() {
   f_Buttons[4].f_Text = "\t Forest Tileset: https://tinyurl.com/ForestTitleSet";
   f_Buttons[4].f_Y = 320;
 
-  f_Buttons[5].f_Text = "ChipTone: https://sfbgames.itch.io/chiptone";
+  f_Buttons[5].f_Text = "Sounds: ChipTone: https://sfbgames.itch.io/chiptone";
   f_Buttons[5].f_Y = 380;
+
+  f_Buttons[6].f_Text = "Music: CalvinClavier: https://pixabay.com/es/users/calvinclavier-16027823/";
+  f_Buttons[6].f_Y = 440;
+
+  f_Buttons[7].f_Text = "\t Menu: https://pixabay.com/es/music/clasico-moderno-relaxing-piano-music-259727/";
+  f_Buttons[7].f_Y = 460;
+
+  f_Buttons[8].f_Text = "\t GamePlay: https://pixabay.com/es/music/clasico-moderno-relaxing-piano-music-255028/";
+  f_Buttons[8].f_Y = 480;
 
   for (int i = 0; i < k_MaxTexts; i++) {
     f_Buttons[i].f_X = 100;

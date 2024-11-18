@@ -37,6 +37,9 @@ static void Init() {
   Exit = false;
   Hovering = 1;
 
+  //SoundManager::StopM("GamePlay");
+  SoundManager::PlayM("Menu");
+
   Parallax::RestartParallax();
 
   constexpr Margin k_Margin = {.f_Top = 40, .f_Bottom = 0, .f_Left = 0, .f_Right = 0};
@@ -146,6 +149,7 @@ void Menu() {
 
   while (!Exit && !WindowShouldClose()) {
     InputButton();
+    Game::SoundManager::Update();
     Draw();
   }
 

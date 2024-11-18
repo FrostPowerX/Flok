@@ -23,10 +23,10 @@ void AddSound(std::string Name, std::string Path, bool Loop) {
   f_Sounds.push_back(NewS);
 }
 
-void AddMusic(std::string Name, std::string path, bool Loop) {
+void AddMusic(std::string Name, std::string Path, bool Loop) {
   MusicBox* NewM = new MusicBox();
   NewM->f_Name = Name;
-  NewM->f_Music = LoadMusicStream(path.c_str());
+  NewM->f_Music = LoadMusicStream(Path.c_str());
   NewM->f_Loop = Loop;
 
   f_Musics.push_back(NewM);
@@ -126,6 +126,9 @@ void LoadSounds() {
 
   AddSound("Select", "res/Sounds/Select.wav");
   AddSound("Back", "res/Sounds/Back.wav");
+
+  AddMusic("Menu", "res/Music/Menu.wav", true);
+  AddMusic("GamePlay", "res/Music/GamePlay.wav", true);
 }
 
 void UnloadSounds() {

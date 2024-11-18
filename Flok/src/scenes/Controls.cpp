@@ -59,7 +59,7 @@ void Controls() {
   while (!Exit && !WindowShouldClose()) {
 
     InputButton();
-
+    Game::SoundManager::Update();
     Draw();
   }
 

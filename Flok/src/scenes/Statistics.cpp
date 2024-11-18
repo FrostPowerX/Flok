@@ -80,7 +80,7 @@ void Statistics() {
   while (!Exit && !WindowShouldClose()) {
 
     InputButton();
-
+    Game::SoundManager::Update();
     Draw();
   }
 

@@ -121,6 +121,7 @@ void Lose(bool IsMP) {
 
   while (!Exit && !WindowShouldClose()) {
     InputButton();
+    Game::SoundManager::Update();
     Draw();
   }
 
