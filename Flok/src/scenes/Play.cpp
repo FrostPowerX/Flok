@@ -85,6 +85,8 @@ static void WallManager(std::list<WallType*>& Walls, std::stack<WallType*>& Hidd
 static void Init() {
   Hovering = 1;
 
+  ResetScore(Multiplayer);
+
   Parallax::InitParallax();
 
   InitPlayer(f_Player1, "res/ToxicFrog/BlueBlue/ToxicFrogBlueBlue_Hop.png");
@@ -298,7 +300,6 @@ static void Unload() {
     UnloadPlayer(f_Player2);
   }
 
-  ResetScore(Multiplayer);
   UnloadGManager();
 
   Parallax::UnloadParallax();
