@@ -30,6 +30,18 @@ void StopS(std::string Name);
 void PlayM(std::string Name);
 void StopM(std::string Name);
 
+void AddSoundVolume();
+void RemoveSoundVolume();
+
+void AddMusicVolume();
+void RemoveMusicVolume();
+
+int GetSoundVolume();
+int GetMusicVolume();
+
+void SetSoundVolume(int Volume);
+void SetMusicVolume(int Volume);
+
 void LoadSounds();
 void UnloadSounds();
 

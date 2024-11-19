@@ -4,7 +4,9 @@
 
 namespace Game {
 namespace SoundManager {
-float f_Volume = 1;
+
+static float f_SoundVolume = 1;
+static float f_MusicVolume = 0.5f;
 
 std::vector<SoundBox*> f_Sounds;
 std::vector<MusicBox*> f_Musics;
@@ -33,6 +35,8 @@ void AddMusic(std::string Name, std::string Path, bool Loop) {
 }
 
 void Update() {
+
+  SetMusicVolume(f_CurrentMusic, f_MusicVolume);
   UpdateMusicStream(f_CurrentMusic);
 }
 
@@ -51,7 +55,7 @@ void PlayS(std::string Name) {
   // if (!IsSoundPlaying(Sound))
   PlaySound(Sound);
 
-  SetSoundVolume(Sound, f_Volume);
+  SetSoundVolume(Sound, f_SoundVolume);
 }
 
 void StopS(std::string Name) {
@@ -86,7 +90,7 @@ void PlayM(std::string Name) {
 
   f_CurrentMusic = f_Music;
 
-  SetMusicVolume(f_Music, f_Volume);
+  SetMusicVolume(f_Music, f_MusicVolume);
 }
 
 void StopM(std::string Name) {
@@ -104,6 +108,46 @@ void StopM(std::string Name) {
   StopMusicStream(f_Music);
 
   f_CurrentMusic = Music();
+}
+
+void AddSoundVolume() {
+
+  f_SoundVolume = (f_SoundVolume < 1.f) ? f_SoundVolume + 0.1f : 1.f;
+}
+
+void RemoveSoundVolume() {
+
+  f_SoundVolume = (f_SoundVolume > 0.f) ? f_SoundVolume - 0.1f : 0.f;
+}
+
+void AddMusicVolume() {
+
+  f_MusicVolume = (f_MusicVolume < 1.f) ? f_MusicVolume + 0.1f : 1.f;
+}
+
+void RemoveMusicVolume() {
+
+  f_MusicVolume = (f_MusicVolume > 0.f) ? f_MusicVolume - 0.1f : 0.f;
+}
+
+int GetSoundVolume() {
+
+  return static_cast<int>(f_SoundVolume * 100);
+}
+
+int GetMusicVolume() {
+
+  return static_cast<int>(f_MusicVolume * 100);
+}
+
+void SetSoundVolume(int Volume) {
+
+  f_SoundVolume = Volume / 100.f;
+}
+
+void SetMusicVolume(int Volume) {
+
+  f_MusicVolume = Volume / 100.f;
 }
 
 void LoadSounds() {
@@ -156,5 +200,6 @@ void UnloadSounds() {
     }
   }
 }
+
 } // namespace SoundManager
 } // namespace Game

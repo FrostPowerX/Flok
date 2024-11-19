@@ -29,7 +29,11 @@ static int Hovering = 1;
 
 static auto SelectedScene = SceneManager::Scenes::Exit;
 
+static bool f_SoundVolume;
+
 static bool Exit;
+
+static void DrawTexts();
 
 static void Init() {
 
@@ -37,7 +41,7 @@ static void Init() {
   Exit = false;
   Hovering = 1;
 
-  //SoundManager::StopM("GamePlay");
+  // SoundManager::StopM("GamePlay");
   SoundManager::PlayM("Menu");
 
   Parallax::RestartParallax();
@@ -98,20 +102,40 @@ static void InputButton() {
     SelectedScene = static_cast<SceneManager::Scenes>(Hovering);
     Exit = true;
   }
+
+  if (IsKeyReleased(KEY_KP_ADD)) {
+
+    (f_SoundVolume) ? SoundManager::AddSoundVolume() : SoundManager::AddMusicVolume();
+  } else if (IsKeyReleased(KEY_KP_SUBTRACT)) {
+
+    (f_SoundVolume) ? SoundManager::RemoveSoundVolume() : SoundManager::RemoveMusicVolume();
+  }
+
+  if (IsKeyReleased(KEY_R)) {
+
+    f_SoundVolume = !f_SoundVolume;
+  }
 }
 
 static void Draw() {
-
-  constexpr int k_FontSizeTitle = 32;
-
-  const std::string k_MaxScoreShow = "Max Socre: " + std::to_string(GetMaxScore());
-  const std::string k_MaxScoreShowMP = "Max SocreMP: " + std::to_string(GetMaxScore(true));
 
   BeginDrawing();
 
   ClearBackground(RAYWHITE);
 
   Parallax::DrawBackground();
+
+  DrawTexts();
+
+  EndDrawing();
+}
+
+static void DrawTexts() {
+
+  constexpr int k_FontSizeTitle = 32;
+
+  const std::string k_MaxScoreShow = "Max Socre: " + std::to_string(GetMaxScore());
+  const std::string k_MaxScoreShowMP = "Max SocreMP: " + std::to_string(GetMaxScore(true));
 
   DrawText("Flok", (g_ScreenWidth - MeasureText("Flok", k_FontSizeTitle)) / 2, 64, k_FontSizeTitle, BLACK);
 
@@ -131,11 +155,20 @@ static void Draw() {
 
   DrawText(k_GameVer.c_str(), 10, 10, 10, BLACK);
 
+  std::string TypeVolume = (f_SoundVolume) ? "Sound Volume" : "Music Volume";
+  std::string SoundVol = "(-) " + std::to_string(SoundManager::GetSoundVolume()) + " (+)";
+  std::string MusicVol = "(-) " + std::to_string(SoundManager::GetMusicVolume()) + " (+)";
+
+  std::string ShowTypeVol = (f_SoundVolume) ? SoundVol : MusicVol;
+
+  DrawText("(Only Menu)", 100 - MeasureText("(Only Menu)", 25) / 2, g_ScreenHeight / 3 - 45, 25, BLACK);
+  DrawText("Press R to Switch", 100 - MeasureText("Press R to Switch", 10) / 2, g_ScreenHeight / 3 - 20, 10, BLACK);
+  DrawText(TypeVolume.c_str(), 100 - MeasureText(TypeVolume.c_str(), 20) / 2, g_ScreenHeight / 3, 20, BLACK);
+  DrawText(ShowTypeVol.c_str(), 100 - MeasureText(ShowTypeVol.c_str(), 20) / 2, g_ScreenHeight / 3 + 20, 20, BLACK);
+
   DrawText("Select = ArrowUp / ArrowDown", 10, g_ScreenHeight - 40, 10, BLACK);
   DrawText("Enter = Enter", 10, g_ScreenHeight - 30, 10, BLACK);
   DrawText("Exit = Escape", 10, g_ScreenHeight - 20, 10, BLACK);
-
-  EndDrawing();
 }
 
 static void Unload() {

@@ -1,11 +1,15 @@
 #include "GameManager.h"
 
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <sstream>
 #include <string>
 
+#include "SoundManager.h"
+
 namespace Game {
+
+using namespace SoundManager;
 
 static int f_MaxScoreMP = 0;
 static int f_CurrentScoreMP = 0;
@@ -49,7 +53,10 @@ static std::string CreateJSONString() {
   k_Json << "\"CurrentScore\":" << f_CurrentScore << ",";
   k_Json << "\"TotalScore\":" << f_TotalScore << ",";
   k_Json << "\"TotalJumps\":" << f_TotalJumps << ",";
-  k_Json << "\"TotalLose\":" << f_TotalLose;
+  k_Json << "\"TotalLose\":" << f_TotalLose << ",";
+
+  k_Json << "\"SoundVolume\":" << GetSoundVolume() << ",";
+  k_Json << "\"MusicVolume\":" << GetMusicVolume();
   k_Json << "}";
 
   std::cout << "Save: " << k_Json.str() << "\n";
@@ -85,6 +92,9 @@ static void ParseJSONString(const std::string& k_JsonString) {
   f_TotalScore = GetValue("TotalScore");
   f_TotalJumps = GetValue("TotalJumps");
   f_TotalLose = GetValue("TotalLose");
+
+  SetSoundVolume(GetValue("SoundVolume"));
+  SetMusicVolume(GetValue("MusicVolume"));
 
   std::cout << "Load: " << k_JsonString << "\n";
 }
