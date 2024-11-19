@@ -13,6 +13,7 @@ struct PlayerType {
   float f_FrameTimer;
   float f_Frame;
   Texture2D f_Sprite;
+  bool f_RunAnimation;
 };
 
 void InitPlayer(PlayerType& Player, std::string TextPath);

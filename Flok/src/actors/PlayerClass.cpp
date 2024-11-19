@@ -9,7 +9,7 @@
 namespace Actors {
 
 constexpr float k_SpeedLimit = 50000.0F;
-constexpr float k_FramesHop = 7.0F;
+constexpr float k_FramesHop = 4.0F;
 constexpr int k_Scale = 2;
 
 static void RandomJump() {
@@ -26,7 +26,9 @@ void InitPlayer(PlayerType& Player, std::string SpriteName) {
   Player.f_Direction = {.x = 1, .y = 0};
   Player.f_Sprite = Game::SpriteManager::GetSprite(SpriteName)->f_Texture;
   Player.f_FrameTimer = 0;
+  Player.f_Frame = 2;
   Player.f_Speed = 0;
+  Player.f_RunAnimation = false;
 }
 
 void PushPlayer(PlayerType& Player, const Vector2& Direction, float Force) {
@@ -42,7 +44,12 @@ void PushPlayer(PlayerType& Player, const Vector2& Direction, float Force) {
   if (Player.f_Speed < k_SpeedLimit && Direction.y > 0) {
     Player.f_Speed += Player.f_Direction.y + Force * GetFrameTime();
   } else if (Player.f_Speed < k_SpeedLimit) {
+
     RandomJump();
+
+    Player.f_Frame = 0;
+    Player.f_RunAnimation = true;
+
     Player.f_Speed += Player.f_Direction.y + (-Force);
   } else {
     Player.f_Speed = k_SpeedLimit;
@@ -59,13 +66,14 @@ void UpdatePlayer(PlayerType& Player) {
 
   Player.f_FrameTimer += GetFrameTime();
 
-  if (Player.f_FrameTimer >= g_Second / k_FramesHop) {
+  if (Player.f_FrameTimer >= g_Second / k_FramesHop && Player.f_RunAnimation) {
 
     Player.f_FrameTimer = 0;
     Player.f_Frame++;
 
     if (Player.f_Frame > k_FramesHop) {
-      Player.f_Frame = 0;
+      Player.f_Frame = 2;
+      Player.f_RunAnimation = false;
     }
   }
 }
