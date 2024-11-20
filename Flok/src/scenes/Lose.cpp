@@ -56,9 +56,6 @@ static void Init() {
 }
 
 static void InputButton() {
-  if (IsKeyReleased(KEY_ESCAPE)) {
-    Exit = true;
-  }
 
   UI::InputButton(f_Buttons, Hovering, k_MaxButtons);
 
