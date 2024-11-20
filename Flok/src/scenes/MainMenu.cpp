@@ -23,7 +23,7 @@ static constexpr int k_Amount = 6;
 static constexpr int k_Fontsize = 32;
 
 static Button MainMenuButtons[k_Amount];
-static const std::string k_GameVer = "v0.4";
+static const std::string k_GameVer = "v1.0";
 
 static int Hovering = 1;
 
