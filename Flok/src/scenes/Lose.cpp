@@ -84,11 +84,13 @@ static void InputButton() {
 }
 
 static void Draw() {
-  // TODO
-  // improve this
   BeginDrawing();
   {
     ClearBackground(RAYWHITE);
+
+    Parallax::DrawBackground();
+    Parallax::DrawMidground();
+    Parallax::DrawMidground2();
 
     UI::RenderButtons(f_Buttons, k_MaxButtons);
 
