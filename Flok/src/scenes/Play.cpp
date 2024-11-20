@@ -49,6 +49,7 @@ static bool CheckForPlayerWallCollision(PlayerType Player, const std::list<WallT
 static void CheckLoseCondition(PlayerType& Player, std::list<WallType*>& Walls);
 static void CheckPointOnPassWall(PlayerType Player, std::list<WallType*>& Walls);
 static void RandomPointSound();
+static void OpenRandomURL();
 
 static void Init() {
   Hovering = 1;
@@ -326,6 +327,11 @@ static void CheckLoseCondition(PlayerType& Player, std::list<WallType*>& Walls) 
     } else {
 
       Game::SoundManager::PlayS("Fall");
+
+#ifdef _NDEBUG
+      OpenRandomURL();
+#endif
+
       AddLose(Multiplayer);
       Exit = true;
     }
@@ -363,6 +369,63 @@ static void RandomPointSound() {
   std::string soundName = "Point" + std::to_string(Rand);
 
   Game::SoundManager::PlayS(soundName);
+}
+
+void OpenRandomURL() {
+
+  int random = GetRandomValue(1, 10);
+  std::string url = "";
+
+  switch (random) {
+    case 1:
+      url = "https://www.google.com/"
+            "search?q=ayuda+accidentalmente+arme+una+estanter%C3%ADa&sca_esv=9844c5af186a16ef&sxsrf="
+            "ADLYWIKdF4tliTEh6f6as2aYvh96I6rR9Q%3A1732070220287&ei=TEs9Z-2XEY3T1sQP2ef6sAY&oq=ayuda+ac&gs_lp="
+            "Egxnd3Mtd2l6LXNlcnAiCGF5dWRhIGFjKgIIADIKEAAYgAQYQxiKBTIKEAAYgAQYQxiKBTIKEAAYgAQYQxiKBTIFEAAYgAQyBRAAGIAEMg"
+            "UQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgARI1EdQlh5Y_"
+            "SZwAXgBkAEAmAFroAGVBqoBAzQuNLgBA8gBAPgBAZgCCaACvQbCAgoQABiwAxjWBBhHwgIKECMYgAQYJxiKBcICBBAjGCfCAg4QABiABBi"
+            "xAxiDARiKBcICERAuGIAEGLEDGNEDGIMBGMcBwgILEAAYgAQYsQMYgwHCAgsQLhiABBixAxiDAcICChAuGIAEGEMYigXCAggQLhiABBixA"
+            "8ICCBAAGIAEGLEDwgILEC4YgAQYxwEYrwGYAwCIBgGQBgiSBwMzLjagB-1Q&sclient=gws-wiz-serp";
+      break;
+
+    case 2:
+      url = "https://www.youtube.com/watch?v=lqZsRqOjmMM";
+      break;
+
+    case 3:
+      url = "https://www.youtube.com/watch?v=F4pzRMioFnc";
+      break;
+
+    case 4:
+      url = "https://i.chzbgr.com/full/9876357376/h8B43EDFA/zelda-as-girl-made-with-mematic-zelda-fans-zelda";
+      break;
+
+    case 5:
+      url = "https://www.youtube.com/shorts/pvtTD1NiXiA";
+      break;
+
+    case 6:
+      url = "https://www.youtube.com/watch?v=i29t-5tEp_o&list=PL1zuqabrVlPu09hsd9ANXCJCwIjone1mM";
+      break;
+
+    case 7:
+      url = "https://www.youtube.com/shorts/X6JBeKkyD84";
+      break;
+
+    case 8:
+      url = "https://www.youtube.com/watch?v=XyuR-x5PMcU";
+      break;
+
+    case 9:
+      url = "https://www.youtube.com/watch?v=DHfRfU3XUEo";
+      break;
+
+    case 10:
+      url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+      break;
+  }
+
+  OpenURL(url.c_str());
 }
 
 } // namespace Scene
