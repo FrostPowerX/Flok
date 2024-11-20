@@ -216,9 +216,11 @@
       <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
       <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
       <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_UNICODE;UNICODE;_NDEBUG;</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
