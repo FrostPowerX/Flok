@@ -39,7 +39,7 @@ void LoadSprites() {
 
   AddSprite("Player1", "res/ToxicFrog/BlueBlue/ToxicFrogBlueBlue_Hop.png");
   AddSprite("Player2", "res/ToxicFrog/GreenBlue/ToxicFrogGreenBlue_Hop.png");
-  //AddSprite("Tube", "");
+  AddSprite("Log", "res/Log.png");
 }
 
 void UnloadSprites() {

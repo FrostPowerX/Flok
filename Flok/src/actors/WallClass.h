@@ -1,15 +1,21 @@
 ﻿#pragma once
 
+#include "raylib.h"
+
 namespace Actors {
 
 struct WallType {
+  Texture2D f_Sprite;
+
   float f_Position;
   float f_GapStart;
   float f_GapSize;
   float f_Speed;
-  bool f_IsHidden;
-  int f_UniqueId;
   float f_WallWidth;
+
+  int f_UniqueId;
+
+  bool f_IsHidden;
   bool f_checked;
 };
 
