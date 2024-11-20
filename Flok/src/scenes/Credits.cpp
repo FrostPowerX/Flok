@@ -19,7 +19,7 @@ struct Text {
   Color f_Color;
 };
 
-static const int k_MaxTexts = 9;
+static const int k_MaxTexts = 10;
 
 static Text f_Buttons[k_MaxTexts];
 
@@ -81,6 +81,10 @@ static void InputButton() {
 
         case 8:
           OpenURL("https://pixabay.com/es/music/clasico-moderno-relaxing-piano-music-255028/");
+          break;
+
+        case 9:
+          OpenURL("https://www.piskelapp.com/");
           break;
       }
     }
@@ -155,6 +159,9 @@ static void InitTexts() {
 
   f_Buttons[8].f_Text = "\t GamePlay: https://pixabay.com/es/music/clasico-moderno-relaxing-piano-music-255028/";
   f_Buttons[8].f_Y = 480;
+
+  f_Buttons[9].f_Text = "Piskel: https://www.piskelapp.com/";
+  f_Buttons[9].f_Y = 520;
 
   for (int i = 0; i < k_MaxTexts; i++) {
     f_Buttons[i].f_X = 100;
