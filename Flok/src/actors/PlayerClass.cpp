@@ -80,7 +80,7 @@ void UpdatePlayer(PlayerType& Player) {
 
 void DrawPlayer(PlayerType& Player) {
 
-#ifndef _DEBUG
+#ifndef _NDEBUG
   DrawRectangleLinesEx(Player.f_BoundingBox, 2, GREEN);
 #endif // !_Debug
 
